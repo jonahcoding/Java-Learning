@@ -419,6 +419,8 @@ public static void getElement(Collection<?> coll){}
 
 > 注：**泛型不存在继承关系** ：Collection<Object> list = new ArrayList<String>();（错误）
 
+
+
 #### 3.4.2 受限泛型
 
 **受限泛型 :**  指定一个泛型的**上限**和**下限**。
