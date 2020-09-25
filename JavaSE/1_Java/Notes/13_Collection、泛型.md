@@ -12,12 +12,20 @@
 - [ ] 集合与数组的区别
 - [ ] Collection集合的常用功能
 - [ ] 使用迭代器对集合进行取元素
+<<<<<<< HEAD
 - [ ] 说出集合的使用细节
+=======
+- [ ] 集合的使用细节
+>>>>>>> 5a8bbaacef88bf015980b799ec5169b98b2eaf5d
 - [ ] 使用集合存储自定义类型
 - [ ] 使用foreach循环遍历集合
 - [ ] 使用泛型定义集合对象
 - [ ] 理解泛型上下限
+<<<<<<< HEAD
 - [ ] 阐述泛型通配符的作用
+=======
+- [ ] 泛型通配符的作用
+>>>>>>> 5a8bbaacef88bf015980b799ec5169b98b2eaf5d
 
 
 
@@ -25,6 +33,7 @@
 
 ## 1.1 集合概述
 
+<<<<<<< HEAD
 **集合**：容器，存储多个数据。
 
 <u>***【集合与数组的区别是什么？】***</u>
@@ -56,9 +65,35 @@
 - `java.util.HashSet`
 - `java.util.TreeSet`
 
+=======
+**集合**：容器，可以用来存储多个数据。
+
+集合与数组的区别？
+
+* 数组长度固定，容器长度可变。
+* 数组存储同类型元素（基本数据类型+引用类型），容器存储对象（可以不同类型）。
+
+## 1.2  集合框架
+
+集合分类（按存储结构）：
+* 单列集合`java.util.Collection`
+* 双列集合`java.util.Map`。
+
+* **Collection**：单列集合类的根接口（存放在java.util包中），用于存储一系列符合某种规则的元素，子接口如下。
+** `List`：元素有序、可重复。
+** `Set`：元素无序，不可重复。
+
+*** `List`接口的主要实现类：`java.util.ArrayList`和`java.util.LinkedList`。
+*** `Set`接口的主要实现类：`java.util.HashSet`和`java.util.TreeSet`。
+
+![](https://github.com/jonahcoding/Java-Learning/blob/master/JavaSE/1_Java/Notes/IMG/13_01_%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6.bmp)
+>>>>>>> 5a8bbaacef88bf015980b799ec5169b98b2eaf5d
 
 
+<<<<<<< HEAD
 集合本身是一个工具，它。在`Collection`接口定义着单列集合框架中最最共性的内容。
+=======
+>>>>>>> 5a8bbaacef88bf015980b799ec5169b98b2eaf5d
 
 ## 1.3 Collection 常用功能
 
