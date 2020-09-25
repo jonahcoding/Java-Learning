@@ -1,13 +1,6 @@
 # 13_Collection、泛型
 
-目录
-
-- Collection集合
-- 迭代器
-- 增强for
-- 泛型
-
-## 知识点
+## 相关问题
 
 1. 集合与数组的区别
 2. Collection集合的常用功能
@@ -20,9 +13,9 @@
 9. 理解泛型上下限
 10. 阐述泛型通配符的作用
 11. 泛型通配符的作用
-### 一、Collection集合
+## 一、Collection集合
 
-#### 1.1 集合概述
+### 1.1 集合概述
 
 **集合**：容器，存储多个数据。
 
@@ -31,7 +24,7 @@
 1. 数组长度固定，集合长度可变。
 2. 数组中存储的是同一类型的元素（基本数据类型+对象）。集合存储仅对象（可不同类型）。
 
-#### 1.2  集合框架
+### 1.2  Collection集合框架
 
 集合分类（按照存储结构）：
 
@@ -40,27 +33,26 @@
 
 **Collection接口**：单列集合类的根接口（存放在java.util包中），定义单列集合框架共性内容。
 
-**Collection的子接口**：
+**Collection的子接口及其实现类**：
 
-- `java.util.List` <!--元素有序、可重复、有索引（for遍历）。-->
-  - `java.util.ArrayList`
-  - `java.util.LinkedList`
+- `java.util.List` （元素有序、可重复、有索引（for遍历））
+  - `java.util.ArrayList`（底层数组实现：查询快，增删满。）
+  - `java.util.LinkedList`（底层链表实现：查询慢，增删快。）
 
-- `java.util.Set` <!--元素无序、不重复、无索引。-->
-  - `java.util.HashSet`
-  - `java.util.TreeSet`
+- `java.util.Set` （元素无序、不重复、无索引）
+  - `java.util.HashSet`（底层哈希表（+红黑树））
+  - `java.util.LinkedHashSet`（底层哈希表+链表：存取有序）
+  - `java.util.TreeSet`（底层二叉树：用于排序）
 
-#### 1.3 Collection 常用功能
+### 1.3 Collection集合常用方法
 
-Collection是所有单列集合的父接口，因此在Collection中定义了单列集合(List和Set)通用的一些方法，这些方法可用于操作所有的单列集合。方法如下：
-
-* `public boolean add(E e)`：  把给定的对象添加到当前集合中 。
-* `public void clear()` :清空集合中所有的元素。
-* `public boolean remove(E e)`: 把给定的对象在当前集合中删除。
-* `public boolean contains(E e)`: 判断当前集合中是否包含给定的对象。
-* `public boolean isEmpty()`: 判断当前集合是否为空。
-* `public int size()`: 返回集合中元素的个数。
-* `public Object[] toArray()`: 把集合中的元素，存储到数组中。
+* `public boolean add(E e)`：  添加元素 。
+* `public void clear()` :清空元素。
+* `public boolean remove(E e)`: 删除元素。
+* `public boolean contains(E e)`: 是否包含指定元素。
+* `public boolean isEmpty()`: 当前集合是否为空。
+* `public int size()`: 集合元素个数。
+* `public Object[] toArray()`: 把集合中的元素存储到数组。
 
 方法演示：
 
@@ -68,45 +60,29 @@ Collection是所有单列集合的父接口，因此在Collection中定义了单
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Demo1Collection {
+public class CollectionTest {
     public static void main(String[] args) {
-		// 创建集合对象 
-    	// 使用多态形式
-    	Collection<String> coll = new ArrayList<String>();
-    	// 使用方法
-    	// 添加功能  boolean  add(String s)
-    	coll.add("小李广");
-    	coll.add("扫地僧");
-    	coll.add("石破天");
-    	System.out.println(coll);
 
-    	// boolean contains(E e) 判断o是否在集合中存在
-    	System.out.println("判断  扫地僧 是否在集合中"+coll.contains("扫地僧"));
-
-    	//boolean remove(E e) 删除在集合中的o元素
-    	System.out.println("删除石破天："+coll.remove("石破天"));
-    	System.out.println("操作之后集合中元素:"+coll);
-    	
-    	// size() 集合中有几个元素
-		System.out.println("集合中有"+coll.size()+"个元素");
-
-		// Object[] toArray()转换成一个Object数组
-    	Object[] objects = coll.toArray();
-    	// 遍历数组
-    	for (int i = 0; i < objects.length; i++) {
-			System.out.println(objects[i]);
-		}
-
-		// void  clear() 清空集合
-		coll.clear();
-		System.out.println("集合中内容为："+coll);
-		// boolean  isEmpty()  判断是否为空
-		System.out.println(coll.isEmpty());  	
-	}
+        Collection<String> collAL = new ArrayList<String>();
+        collAL.add("Teemo");
+        collAL.add("Yasuo");
+        collAL.add("ZOE");
+        System.out.println("Print ArrayList: "+collAL);
+        System.out.println("Yasuo in the ArrayList? "+collAL.contains("Yasuo"));
+        System.out.println("Remove Yasuo："+collAL.remove("Yasuo"));
+        System.out.println("Print ArrayList: "+collAL);
+        System.out.println("Size of ArrayList: "+collAL.size());
+        Object[] objects = collAL.toArray();
+        System.out.println("ArrayList to Arrray: ");
+        for (int i = 0; i < objects.length; i++) {
+            System.out.println(objects[i]);
+        }
+        collAL.clear();
+        System.out.println("Print ArrayList: "+collAL);
+        System.out.println("Is Empty? "+collAL.isEmpty());
+    }
 }
 ~~~
-
-> tips: 有关Collection中的方法可不止上面这些，其他方法可以自行查看API学习。
 
 ## 第二章 Iterator迭代器
 
