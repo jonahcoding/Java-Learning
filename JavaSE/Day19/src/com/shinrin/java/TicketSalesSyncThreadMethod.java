@@ -1,15 +1,15 @@
 package com.shinrin.java;
 //同步方法 + Thread
-public class TicketSalesSyncMethodThread {
+public class TicketSalesSyncThreadMethod {
     public static void main(String[] args) {
         //同步方法 Thread
         Windows4 win_1 = new Windows4();
         Windows4 win_2 = new Windows4();
         Windows4 win_3 = new Windows4();
 
-        win_1.setName("售票口B1");
-        win_2.setName("售票口B2");
-        win_3.setName("售票口B3");
+        win_1.setName("售票口D1");
+        win_2.setName("售票口D2");
+        win_3.setName("售票口D3");
 
         win_1.start();
         win_2.start();

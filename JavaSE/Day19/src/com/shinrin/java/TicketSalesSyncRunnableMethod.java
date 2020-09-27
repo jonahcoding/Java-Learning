@@ -1,6 +1,6 @@
 package com.shinrin.java;
 //同步方法 + Runnable
-public class TicketSalesSyncMethodRunnable {
+public class TicketSalesSyncRunnableMethod {
     public static void main(String[] args) {
 //        同步代码块 Runnable
         Windows3 win = new Windows3();
@@ -8,9 +8,9 @@ public class TicketSalesSyncMethodRunnable {
         Thread t2 = new Thread(win);
         Thread t3 = new Thread(win);
 
-        t1.setName("售票口A1");
-        t2.setName("售票口A2");
-        t3.setName("售票口A3");
+        t1.setName("售票口C1");
+        t2.setName("售票口C2");
+        t3.setName("售票口C3");
 
         t1.start();
         t2.start();

@@ -6,7 +6,7 @@ package com.shinrin.java;
     多个线程同时对一个数据修改，如何保证线程安全？
     通过同步机制，使同一时间仅有一个线程可对数据操作。
 
-线程同步
+线程安全（同步）的解决方法（共三种）
 实现方式一：同步代码块
      synchronized(同步监视器){
         //需要被同步的代码
@@ -28,7 +28,7 @@ package com.shinrin.java;
 */
 
 //同步代码块 + Runnable
-public class TicketSalesSyncCodeBlockRunnable {
+public class TicketSalesSyncRunnableCodeBlock {
     public static void main(String[] args) {
 //        同步代码块 Runnable
         Windows1 win = new Windows1();

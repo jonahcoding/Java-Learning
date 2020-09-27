@@ -1,6 +1,6 @@
 package com.shinrin.java;
 //同步代码块 + Thread
-public class TicketSalesSyncCodeBlockThread {
+public class TicketSalesSyncThreadCodeBlock {
     public static void main(String[] args) {
         //同步代码块 Thread
         Windows2 win_1 = new Windows2();
