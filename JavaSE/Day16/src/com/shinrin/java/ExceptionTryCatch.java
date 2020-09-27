@@ -29,7 +29,11 @@ import org.junit.Test;
     3.匹配成功，进行处理。处理完成后跳出try-catch。
     4.catch中异常类有继承关系时，子类在前，父类在后。
     5.常用异常对象处理方法：e.getMessage() 和  e.printStackTrace()
-    6.try结构中变量为外部无效。
+    6.try结构中变量仅在内部有效。
+    7.try-catch结构可嵌套。
+    8.处理异常后的代码仍会执行。
+    9.工作中，仅对编译时异常进行处理。
+
 
 --------------------
  */
@@ -45,6 +49,8 @@ public class ExceptionTryCatch {
         }catch (NumberFormatException e){
             System.out.println(e.getMessage());
             e.printStackTrace();
+        }finally{
+            System.out.println("发生了什么？");
         }
         System.out.println("异常处理后！");
     }
