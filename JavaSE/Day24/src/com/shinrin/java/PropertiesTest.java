@@ -10,7 +10,7 @@ public class PropertiesTest {
         FileInputStream file = null;
         try {
             Properties pros = new Properties();
-            file = new FileInputStream("./Day23/src/com/shinrin/java/jdbc.properties");
+            file = new FileInputStream("./Day24/src/com/shinrin/java/jdbc.properties");
             pros.load(file);
             String name = pros.getProperty("Name");
             String password = pros.getProperty("PassWord");
