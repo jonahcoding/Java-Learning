@@ -13,7 +13,7 @@ import java.util.Set;
     |----Collection接口：单列集合，用来存储一个一个的对象
         |----Set接口：存储无序、元素不可重复（以下为实现类）
             |----HashSet：线程不安全；可以存储null值
-                |----LinkedHashSet：HashSet的子类；内部存储有序，遍历性能优于HashSet。
+                |----LinkedHashSet：HashSet的子类；内部存储无序，遍历（有序，通过链表）性能优于HashSet。
             |----TreeSet：可按元素对象的指定属性，进行排序。
 
 二、Set说明
@@ -66,7 +66,7 @@ public class SetTest {
     }
 
     //LinkedHashSet的使用
-    //LinkedHashSet作为HashSet的子类，在添加数据的同时，每个数据还维护了两个引用，记录此数据前一个数据和后一个数据。
+    //LinkedHashSet作为HashSet的子类，在添加数据（无序）的同时，每个数据还维护了两个引用，记录此数据前一个数据和后一个数据（遍历有序）。
     //优点：对于频繁的遍历操作，LinkedHashSet效率高于HashSet
     @Test
     public void test2(){

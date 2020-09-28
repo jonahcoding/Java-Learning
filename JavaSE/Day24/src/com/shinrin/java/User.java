@@ -56,19 +56,20 @@ public class User implements Comparable{
     }
 
     //按照姓名从大到小排列,年龄从小到大排列
-
     @Override
     public int compareTo(Object o) {
-        if (o instanceof User){
+        if(o instanceof User){
             User user = (User)o;
+//            return -this.name.compareTo(user.name);
             int compare = -this.name.compareTo(user.name);
-            if (compare != 0){
+            if(compare != 0){
                 return compare;
-            }else {
-                return Integer.compare(this.age, user.age);
+            }else{
+                return Integer.compare(this.age,user.age);
             }
-        }else {
-            throw new RuntimeException("输入类型不匹配!");
+        }else{
+            throw new RuntimeException("输入的类型不匹配");
         }
+
     }
 }

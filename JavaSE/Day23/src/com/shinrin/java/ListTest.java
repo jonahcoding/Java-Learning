@@ -11,7 +11,7 @@ import java.util.*;
         |----List接口：存储有序、元素可重复。（以下为实现类）
             |----ArrayList：查找快，增删慢，线程不安全的，应用于查询数据；底层使用Object[] elementData存储（数组）
             |----LinkedList：查找慢，增删快，应用于首尾增删数据；底层使用双向链表存储
-            |----Vector：线程安全，效率低；底层使用Object[] elementData存储（数组）
+            |----Vector：(Old)线程安全，效率低；底层使用Object[] elementData存储（数组）
 
 二、ArrayList的源码分析：
     JDK7：
