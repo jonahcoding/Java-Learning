@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Day06(Array)/Day06(Array).iml" filepath="$PROJECT_DIR$/Day06(Array)/Day06(Array).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day07(Array)/Day07(Array).iml" filepath="$PROJECT_DIR$/Day07(Array)/Day07(Array).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day16(Exception)/Day16(Exception).iml" filepath="$PROJECT_DIR$/Day16(Exception)/Day16(Exception).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day18(Thread)/Day18(Thread).iml" filepath="$PROJECT_DIR$/Day18(Thread)/Day18(Thread).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day19(Thread)/Day19(Thread).iml" filepath="$PROJECT_DIR$/Day19(Thread)/Day19(Thread).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day22(Annotation_Enum)/Day22(Annotation_Enum).iml" filepath="$PROJECT_DIR$/Day22(Annotation_Enum)/Day22(Annotation_Enum).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day23(Collection)/Day23(Collection).iml" filepath="$PROJECT_DIR$/Day23(Collection)/Day23(Collection).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day24(Map)/Day24(Map).iml" filepath="$PROJECT_DIR$/Day24(Map)/Day24(Map).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Day25(Generic)/Day25(Generic).iml" filepath="$PROJECT_DIR$/Day25(Generic)/Day25(Generic).iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaSE_Proj.iml" filepath="$PROJECT_DIR$/JavaSE_Proj.iml" />
+    </modules>
+  </component>
+</project>
