@@ -32,6 +32,16 @@ package com.shinrin.java;
         }
 
 四、类型通配符
+    1.通配符：?
+        注：如果类A是类B的父类，则G<A>与G<B>无关，二者共同父类是G<?>
+        添加（写入）：对于List<?>无法添加内容（除null之外）。
+        获取（读取）：读取的数据类型为Object类型。
+    2.有限制条件的通配符：
+        ? extends A
+            G<? extends A> 可以作为G<A>和G<B>的父类，其中B是A的子类。
+        ? super A
+            G<? super A> 可以作为G<A>和G<B>的父类，其中B是A的父类。
+        可以写入或读取数据。
 
 
 五、类型推断
@@ -112,5 +122,50 @@ public class GenericTest {
             Integer value = e.getValue();
             System.out.println(key + "----" + value);
         }
+    }
+
+    //通配符
+    @Test
+    public void test4(){
+        List<Object> list1 = null;
+        List<String> list2 = null;
+        List<?> list = null;
+
+//        list = list1;
+//        list = list2;
+//        print(list1);
+//        print(list2);
+
+        List<String> list3 = new ArrayList<>();
+        list3.add("AA");
+        list3.add("BB");
+        list3.add("CC");
+        list = list3;
+        //添加（写入）：对于List<?>无法添加内容（除null之外）
+        //list.add("DD");
+        list.add(null);
+        //获取（读取）：读取的数据类型为Object类型。
+        Object o = list.get(0);
+        System.out.println(o);
+    }
+
+    public void print(List<?> list){
+        Iterator<?> iterator = list.iterator();
+        while (iterator.hasNext()){
+            Object object = iterator.next();
+            System.out.println(object);
+        }
+    }
+
+    //限制通配符
+    public void test5(){
+        List<? extends Person> list1 = null;
+        List<? super Person> list2 = null;
+
+        List<Person> list3 = null;
+        List<Object> list4 = null;
+
+
+
     }
 }
