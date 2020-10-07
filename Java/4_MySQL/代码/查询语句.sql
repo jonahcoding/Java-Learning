@@ -49,6 +49,9 @@ CREATE TABLE `student`(
 INSERT INTO `student`(`StudentNo`,`LoginPwd`,`StudentName`,`Sex`,`GradeId`,`Phone`,`Address`,`BornDate`,`Email`,`IdentityCard`) 
 VALUES (1001,'123456','Teemo','1',1,'0966188','China','2000-01-01 00:00:00','Teemo@qq.com','00250001');
 
+INSERT INTO `student`(`StudentNo`,`LoginPwd`,`StudentName`,`Sex`,`GradeId`,`Phone`,`Address`,`BornDate`,`Email`,`IdentityCard`) 
+VALUES (1002,'123456','YaSuo','1',1,'0966128','China','2000-01-01 00:00:00','YaSuo@qq.com','00250002');
+
 
 -- 查询全部的学生 
 SELECT * FROM student;
@@ -308,3 +311,48 @@ ALTER TABLE school.student ADD FULLTEXT INDEX `studentName`(`studentName`);
 EXPLAIN SELECT * FROM student; -- 非全文索引
 
 SELECT * FROM student WHERE MATCH(studentName) AGAINST('Teemo');
+
+
+CREATE DATABASE app;
+USE app;
+
+
+
+-- 测试索引 建表并用函数插入100万条数据
+CREATE TABLE `app_user`(
+`id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+`name` VARCHAR(50) DEFAULT '' COMMENT '用户昵称',
+`email` VARCHAR(50) NOT NULL COMMENT '用户邮箱',
+`phone` VARCHAR(20) DEFAULT '' COMMENT '手机号',
+`gender` TINYINT(4) UNSIGNED DEFAULT '0' COMMENT '性别 0男  1女',
+`password` VARCHAR(100) NOT NULL COMMENT '密码',
+`age` TINYINT(4) DEFAULT '0' COMMENT '年龄',
+`create_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
+`update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`)
+)ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COMMENT = 'app用户表'
+
+SET GLOBAL log_bin_trust_function_creators=TRUE;
+-- 插入100万条数据
+DELIMITER $$
+CREATE FUNCTION mock_data_version2()
+RETURNS INT 
+BEGIN
+	DECLARE num INT DEFAULT 1000000;
+	DECLARE i INT DEFAULT 0;
+	WHILE i<num DO
+	  INSERT INTO `app_user` (`name`,email,phone,gender,`password`,age)VALUES    (CONCAT('用户',i),'123456@qq.com',
+		CONCAT('13',FLOOR(RAND()*((999999999-100000000)+100000000))),
+		FLOOR(RAND()*2),
+		UUID(),
+		FLOOR(RAND()*100));
+	SET i = i+1;
+END WHILE;
+RETURN i;
+END;
+SELECT mock_data_version2()
+
+-- 测试索引作用
+SELECT * FROM app_user WHERE `name` = '用户80000'  -- 不使用索引
+CREATE INDEX id_user_app_name ON app_user(`name`)
+SELECT * FROM app_user WHERE `name` = '用户99999'  -- 使用索引

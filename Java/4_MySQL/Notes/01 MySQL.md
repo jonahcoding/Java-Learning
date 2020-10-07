@@ -951,8 +951,6 @@ SET autocommit = 1; -- 开启自动提交
 - 全文索引（FullText）
   - 特定数据库引擎下有，如MyISAM
 
-
-
 ```sql
 -- 索引的使用
 -- 1、创建表的时候给字段增加索引
@@ -970,4 +968,433 @@ EXPLAIN SELECT * FROM student; -- 非全文索引
 
 SELECT * FROM student WHERE MATCH(studentName) AGAINST('Teemo');
 ```
+
+## 7.2 索引测试
+
+```sql
+CREATE DATABASE app;
+USE app;
+
+-- 测试索引 建表并用函数插入100万条数据
+CREATE TABLE `app_user`(
+`id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+`name` VARCHAR(50) DEFAULT '' COMMENT '用户昵称',
+`email` VARCHAR(50) NOT NULL COMMENT '用户邮箱',
+`phone` VARCHAR(20) DEFAULT '' COMMENT '手机号',
+`gender` TINYINT(4) UNSIGNED DEFAULT '0' COMMENT '性别 0男  1女',
+`password` VARCHAR(100) NOT NULL COMMENT '密码',
+`age` TINYINT(4) DEFAULT '0' COMMENT '年龄',
+`create_time` DATETIME DEFAULT CURRENT_TIMESTAMP,
+`update_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY(`id`)
+)ENGINE = INNODB DEFAULT CHARSET = utf8mb4 COMMENT = 'app用户表'
+
+SET GLOBAL log_bin_trust_function_creators=TRUE;
+-- 插入100万条数据
+DELIMITER $$
+CREATE FUNCTION mock_data_version2()
+RETURNS INT 
+BEGIN
+	DECLARE num INT DEFAULT 1000000;
+	DECLARE i INT DEFAULT 0;
+	WHILE i<num DO
+	  INSERT INTO `app_user` (`name`,email,phone,gender,`password`,age)VALUES    (CONCAT('用户',i),'123456@qq.com',
+		CONCAT('13',FLOOR(RAND()*((999999999-100000000)+100000000))),
+		FLOOR(RAND()*2),
+		UUID(),
+		FLOOR(RAND()*100));
+	SET i = i+1;
+END WHILE;
+RETURN i;
+END;
+SELECT mock_data_version2()
+
+-- 测试索引作用
+SELECT * FROM app_user WHERE `name` = '用户80000'  -- 不使用索引
+CREATE INDEX id_user_app_name ON app_user(`name`)
+SELECT * FROM app_user WHERE `name` = '用户99999'  -- 使用索引
+```
+
+## 7.3 索引原则
+
+- 表中数据量较多时使用索引（小数据量表不宜使用）
+- 进程变动数据不能加索引
+- 索引一般加在被查询的字段上
+
+>索引的数据结构
+
+Hash类型的索引
+
+Btree：InnoDB的默认数据结构
+
+文章：http://blog.codinglabs.org/articles/theory-of-mysql-index.html
+
+# 八、权限管理和数据库备份
+
+## 8.1 权限管理
+
+```sql
+-- 创建用户
+CREATE USER shinrin IDENTIFIED BY '123456'
+-- 修改密码（当前用户）
+SET PASSWORD = '123456'
+-- 修改密码（指定用户）
+SET PASSWORD FOR shinrin = '123456'
+-- 修改用户名
+RENAME USER shinrin TO jonah
+-- 用户授权：全部的权限，库，表（该用户无法为其他用户授权）
+GRANT ALL PRIVILEGES ON *.* TO jonah
+-- 查询权限
+SHOW GRANTS FOR jonah
+-- 查询root权限
+SHOW GRANTS FOR root@localhost
+-- 撤销权限：库 用户
+REVOKE ALL PRIVILEGES ON *.* TO jonah
+-- 删除用户
+DROP USER jonah
+```
+
+## 8.2 数据库备份
+
+- 重要数据不丢失
+- 数据迁移
+
+备份方式：
+
+- 拷贝物理文件
+- 可视化工具导出
+- 命令行导出mysqldump
+
+```sql
+-- 命令行使用mysqldump导出
+-- mysqldump 本机 用户名 密码 库 表 >目标文件
+mysqldump -hlocalhost -uroot -p123456 库 表1 表2 >D:/a.sql
+```
+
+- 命令行导入数据库
+
+```sql
+-- 登录 转到要导入的数据库下
+source d:/a.sql
+```
+
+# 九、数据库规约、三大范式
+
+## 9.1 数据库设计的必要性
+
+数据库应避免出现以下缺陷：
+
+- 数据冗余，浪费空间
+
+- 数据库插入和删除困难、异常【屏蔽使用物理外键】
+- 程序性能差
+
+良好的数据库设计：
+
+- 节省内存空间
+- 保证数据库完整性
+- 便于开发系统
+
+软件开发设计：
+
+- 分析需求：分析业务和需要处理的数据库的需求
+- 概要设计：涉及关系图E-R图
+
+设计数据库的步骤：（个人博客）
+
+- 收集信息，分析需求
+  - 用户表（登录注销、个人信息、写博客、创建分类）
+  - 分类表（文章分类、创建者）
+  - 文章表（文章信息）
+  - 评论表
+  - 友链表（友链信息）
+  - 自定义表（系统信息，关键字，主题）key：value
+  - 说说表（心情，ID，内容，创建时间）
+  
+- 标识实体（把需求落地到每个字段）
+
+- 标识实体之间的关系
+
+  - 写博客：user-->blog
+  - 创建分类：user-->category
+  - 关注：user-->userfollow
+  - 友链：links
+  - 评论：user-->user bolg
+
+  阿里：https://pro.ant.design/index-cn
+
+## 9.2 三大范式
+
+数据规范化的必要性：
+
+- 信息重复
+- 更新异常
+- 插入异常
+  - 无法显示正常信息
+- 删除异常
+  - 丢失有效信息
+
+**三大范式：**https://www.cnblogs.com/wsg25/p/9615100.html
+
+- 第一范式：原子性，**要求数据库表的每一列都是不可分割的原子数据项。**
+- 第二范式：满足第一范式，同时每张表只描述一件事物。
+- 第三范式：确保数据表中的每一列数据和主键直接相关（不能间接相关）。
+
+**规范与性能考虑：**关联查询的表不超过三张。
+
+- 考虑商业化的需求和目标，（成本，用户体验！）数据库的性能更为重要。
+- 规范性能的问题时，考虑规范性。
+- 增加冗余字段。（多表查询变为单表查询）
+- 增加计算列。（大数据量的查询降为小数据量的查询：索引）
+
+# 十、JDBC（重点）
+
+## 10.1 数据库驱动
+
+应用程序	<<==	JDBC	<<==	数据库驱动	<<==	数据库。
+
+## 10.2 JDBC
+
+SUN公司为简化开发人员的（对数据库的统一的）操作，提供的规范。
+
+1. 新建数据库数据
+
+```sql
+CREATE DATABASE jdbcStudy CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+USE jdbcStudy;
+
+CREATE TABLE users(
+	id INT PRIMARY KEY,
+	name VARCHAR(40),
+	password VARCHAR(40),
+	email VARCHAR(60),
+	birthday DATE
+);
+
+INSERT INTO users(id,NAME,password,email,birthday)
+VALUES(1,'Teemo','123456','teemo@qq.com','2020-01-01'),
+(2,'YaSuo','123456','YaSuo@qq.com','2020-01-02'),
+(3,'ZhaoXin','123456','ZhaoXin@qq.com','2020-01-03');
+```
+
+2. 新建Java项目JDBC
+3. 导入Jdbc包
+4. 实现类访问数据库
+   - 加载驱动
+   - 连接数据库DriverManager
+   - 执行SQL的对象Statement
+   - 获取返回结果集
+   - 释放连接
+
+```java
+package com.shinrin.java;
+
+import java.sql.*;
+
+public class JdbcFirstDemo {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        //1.加载驱动
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        //2.连接数据库DriverManager
+        //参数：支持中文，utf8编码，安全连接，（时区，否则报错）
+        String url = "jdbc:mysql://localhost:3306/jdbcstudy?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2B8";
+        String username = "root";
+        String password = "123456";
+        Connection connection = DriverManager.getConnection(url,username,password);
+        //3.执行SQL的对象Statement
+        Statement statement = connection.createStatement();
+        String sql = "SELECT * FROM users";
+        ResultSet resultSet = statement.executeQuery(sql);  //链表形式
+        //4.获取返回的结果集
+        while (resultSet.next()){
+            System.out.println("id=" + resultSet.getObject("id"));
+            System.out.println("name=" + resultSet.getObject("name"));
+            System.out.println("password=" + resultSet.getObject("password"));
+            System.out.println("email=" + resultSet.getObject("email"));
+            System.out.println("birthday=" + resultSet.getObject("birthday"));
+        }
+        //5.释放连接
+        resultSet.close();
+        statement.close();
+        connection.close();
+    }
+}
+```
+
+## 10.3 JDBC分析
+
+> DriverManager
+
+```java
+//DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+Class.forName("com.mysql.cj.jdbc.Driver");
+Connection connection = DriverManager.getConnection(url,username,password);
+//connection 即数据库
+connection.rollback();
+connection.commit();
+connection.setAutoCommit(true);
+ 
+```
+
+> URL
+
+```java
+String url = "jdbc:mysql://localhost:3306/jdbcstudy?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2B8";
+//mysql -- 3306
+//协议：//主机地址:端口号//数据库名?参数1&参数2&参数3
+//oracle -- 1521
+//jdbc:oracle:thin:@localhost:1521:sid
+```
+
+> Statement执行SQL的对象，
+
+```java
+String sql = "SELECT * FROM users";	//SQL语句
+statement.executeQuery(sql);    //查询，返回链表
+statement.execute(sql);         //执行任何SQL语句
+statement.executeUpdate(sql);   //更新，插入，删除
+```
+
+>ResultSet查询的结果集：封装了所有的结果
+
+```sql
+resultSet.getObject("未知字段类型");
+resultSet.getInt("字段类型int");
+resultSet.getString("字段类型varchar");
+
+resultSet.beforeFirst();	//移动到首元素前
+resultSet.afterLast();		//移动到尾元素后
+resultSet.next();			//下一元素
+resultSet.previous();   	//移动到前一行
+```
+
+## 10.4 JDBC程序
+
+- 配置文件（驱动、url、账号、密码）
+- 工具类（获取连接、释放连接）
+- 测试类（增删改查）
+
+**db.properrties**
+
+```properties
+# 路径：/src/db.properrties
+# 作用：配置信息
+driver=com.mysql.cj.jdbc.Driver
+url=jdbc:mysql://localhost:3306/jdbcstudy?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=GMT%2B8
+username=root
+password=123456
+```
+
+**JdbcUtils.java**
+
+```java
+//工具类：连接、释放数据库
+package com.shinrin.lesson2.utils;
+
+import java.io.InputStream;
+import java.sql.*;
+import java.util.Properties;
+
+public class JdbcUtils {
+
+    private static String driver = null;
+    private static String url = null;
+    private static String username = null;
+    private static String password = null;
+
+    static {
+        try{
+            InputStream in = JdbcUtils.class.getClassLoader().getResourceAsStream("db.properties");
+            Properties properties = new Properties();
+            properties.load(in);
+            driver = properties.getProperty("driver");
+            System.out.println(driver);
+            url = properties.getProperty("url");
+            username = properties.getProperty("username");
+            password = properties.getProperty("password");
+            Class.forName(driver);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //获取连接
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(url,username,password);
+    }
+    //释放连接资源
+    public static void release(Connection conn, Statement st, ResultSet rs){
+        if (rs != null){
+            try{
+                rs.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        if (st != null){
+            try{
+                st.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        if (conn != null){
+            try{
+                conn.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
+
+**Test.java**
+
+```java
+package com.shinrin.lesson2;
+
+import com.shinrin.lesson2.utils.JdbcUtils;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class TestInsert {
+    public static void main(String[] args) {
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
+
+        try{
+            conn = JdbcUtils.getConnection();
+            st = conn.createStatement();
+            String sql1 = "INSERT INTO users(id,name,password,email,birthday)" +
+                    "VALUES(4,'ZOE','123456','zoe@qq.com','2020-01-04')";
+            String sql2 = "DELETE FROM users WHERE id = 4;";
+            String sql3 = "UPDATE users SET `name` = 'Jerrry',`email` = 'jerry@qq.com' WHERE id = 1;";
+            String sql4 = "SELECT * FROM users WHERE id = 1;";
+            int i = st.executeUpdate(sql1);     //增
+//            int i = st.executeUpdate(sql2);   //删
+//            int i = st.executeUpdate(sql3);   //改
+            rs = st.executeQuery(sql4);   //查
+            while (rs.next()){
+                System.out.println(rs.getString("name"));
+            }
+
+            if (i > 0){
+                System.out.println("更新成功！");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            JdbcUtils.release(conn,st,rs);
+        }
+    }
+}
+```
+
+> SQL注入问题
 
