@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单（登录、注册）</title>
+</head>
+<body>
+
+<h1>注册</h1>
+
+<!--表单form
+action：表单提交位置，网站或请求处理地址。
+method：post，get提交方式。
+    get方式提交：url可以看见密码信息，不安全。
+    post方式提交：安全，可传输大文件。
+-->
+<form action="01_HelloWorld.html" method="post">
+    <!--文本输入框：input type=“text”
+    value=“默认初始值”   默认初始值
+    maxlength=“8”       最多允许输入字符数
+    size=“30”           文本框长度
+    -->
+    <p>名字：<input type="text" name="username"></p>
+    <!--密码框：input type="password"-->
+    <p>密码：<input type="password" name="pwd"></p>
+
+    <!--单选框标签
+    input type="radio"
+    value：单选框的值。
+    name：组名（一组只能有一个处于被选中状态）
+    -->
+    <p>性别：
+        <input type="radio" value="boy" name="sex"/>男
+        <input type="radio" value="girl" name="sex"/>女
+    </p>
+
+    <!--多选框
+    input type="checkbox"
+    -->
+    <p>爱好：
+        <input type="checkbox" value="打游戏" name="hobby">打游戏
+        <input type="checkbox" value="睡觉" name="hobby">睡觉
+        <input type="checkbox" value="码代码" name="hobby">码代码
+        <input type="checkbox" value="发呆" name="hobby">发呆
+    </p>
+
+    <!--按钮
+    input type="button" 普通按钮
+    input type="image"  图片按钮（点击可提交）
+    input type="submit" 提交按钮
+    input type="reset"  重置按钮
+    -->
+    <p>
+        <input type="button" name="btn1" value="点击试一试！">
+    <!--可提交-->
+        <input type="image" src="../resources/image/avatar.jpg" width="50" height="50">
+    </p>
+    <p>
+        <input type="submit">
+        <input type="reset" value="清空表单">
+    </p>
+</form>
+
+</body>
+</html>
