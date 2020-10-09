@@ -384,7 +384,7 @@ height：宽度
 </html>
 ```
 
-# 十、表单与输入选择框
+# 十、表单
 
 - get与post区别是什么？
 
@@ -410,29 +410,39 @@ method：post，get提交方式。
     value=“默认初始值”   默认初始值
     maxlength=“8”       最多允许输入字符数
     size=“30”           文本框长度
+    只读：readonly
+    输入框提示信息：placeholder
+    非空判断：required
+    正则表达式判断：pattern
     -->
-    <p>名字：<input type="text" name="username"></p>
-    <!--密码框：input type="password"-->
-    <p>密码：<input type="password" name="pwd"></p>
+    <p>名字：<input type="text" name="username" placeholder="请输入用户名" required></p>
+    <!--密码框：
+    input type="password"
+    隐藏：hidden
+    -->
+    <p>密码：<input type="password" name="pwd" hidden></p>
 
     <!--单选框标签
     input type="radio"
     value：单选框的值。
     name：组名（一组只能有一个处于被选中状态）
+    默认选择：checked
+    禁用：disabled
     -->
     <p>性别：
-        <input type="radio" value="boy" name="sex"/>男
+        <input type="radio" value="boy" name="sex" checked disabled/>男
         <input type="radio" value="girl" name="sex"/>女
     </p>
 
     <!--多选框
     input type="checkbox"
+    默认选择：checked
     -->
     <p>爱好：
-        <input type="checkbox" value="打游戏" name="hobby">打游戏
-        <input type="checkbox" value="睡觉" name="hobby">睡觉
-        <input type="checkbox" value="码代码" name="hobby">码代码
-        <input type="checkbox" value="发呆" name="hobby">发呆
+        <input type="checkbox" value="PlayDouDou" name="hobby">打豆豆
+        <input type="checkbox" value="Sleep" name="hobby">睡觉
+        <input type="checkbox" value="Coding" name="hobby" checked>码代码
+        <input type="checkbox" value="Daze" name="hobby">发呆
     </p>
 
     <!--按钮
@@ -446,23 +456,81 @@ method：post，get提交方式。
     <!--可提交-->
         <input type="image" src="../resources/image/avatar.jpg" width="50" height="50">
     </p>
+
+    <!--下拉框、列表框
+    默认选择：selected
+    -->
+    <p>国家：
+        <select name="ListName">
+            <option value="Japan">Japan</option>
+            <option value="Korea">Korea</option>
+            <option value="Germany">Germany</option>
+            <option value="China" selected>China</option>
+        </select>
+    </p>
+    
+    <!--文本域-->
+    <p>
+        <textarea name="textarea" id="1" cols="30" rows="10"></textarea>
+    </p>
+
+    <!--文件域
+    input type="file" name="files"
+    -->
+    <p>
+        <input type="file" name="files">
+        <input type="button" value="上传" name="upload">
+    </p>
+
+    <!--邮箱验证-->
+    <p>邮箱：
+        <input type="email" name="email" pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$">
+    </p>
+    
+    <!--URL-->
+    <p>URL：
+        <input type="url" name="url">
+    </p>
+    
+    <!--数字-->
+    <p>商品数量：
+        <input type="number" name="num" max="100" min="0" step="1">
+    </p>
+    
+    <!--滑块-->
+    <p>音量：
+        <input type="range" name="voice" max="100" min="0" step="2"></input>
+    </p>
+    
+    <!--搜索框-->
+    <p>搜索：
+        <input type="search" name="search">
+    </p>
+
+    <p>
+    <!--鼠标可用性-->
+        <label for="mark">点击以定位鼠标到文本输入框：</label>
+        <input type="text" id="mark">
+    </p>
+
+    <!--提交表单-->
     <p>
         <input type="submit">
         <input type="reset" value="清空表单">
     </p>
+
 </form>
 
 </body>
 </html>
 ```
 
-# 
 
 
+# 十一、表单初级验证
 
-
-
-# 五、表单及应用
-
-# 六、表单初级验证
-
+```
+输入框提示信息：placeholder
+非空判断：required
+正则表达式判断：pattern
+```
