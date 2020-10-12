@@ -956,5 +956,255 @@ span a img strong...
 </html>
 ```
 
+## 5.4 父集元素塌陷
+
+clear
+
+```html
+clear:right;右侧不允许有浮动元素
+clear:left;左侧不允许有浮动元素
+clear:both;两侧不允许有浮动元素
+clear:none;
+```
+
+解决方案：
+
+1. 增加父级元素高度
+
+```html
+/*方法一：增加父级元素高度*/
+#father{
+    border: 1px solid red;
+    height: 800px;
+}
+```
+
+2. 增加空的div标签，清除浮动。
+
+```html
+<div class="clear"></div>
+
+.clear{
+    clear: both;
+    margin: 0;
+    padding: 0;
+}
+```
+
+3. overflow
+
+```html
+在父级元素中增加一个overflow属性
+overflow:hidden;
+```
+
+4. 伪类
+
+```
+/*最优解：同2（增加空div）*/
+#father:after{
+	content:'';
+	dispaly:block;
+	clear:both;
+}
+```
+
+总结（重点）：
+
+ 	1.	浮动元素后面增加空div
+     - 简单，但代码中应尽量避免空div
+	2.	设置父元素高度
+    - 简单，但元素假设了固定高度，将被限制。
+	3.	overflow
+    - 简单，但应避免在下拉场景使用。
+	4.	父类增加伪类：after（最优解）
+    - 无需修改源码。
+
+## 5.5 对比
+
+- display：方向不可控
+- float：将脱离标准文档流，需要解决父级边框塌陷问题。
+
+# 六、定位
+
+## 6.1 相对定位
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body{
+            padding: 20px;
+        }
+        div{
+            margin: 10px;
+            padding: 5px;
+            font-size: 12px;
+            line-height: 25px;
+        }
+        #father{
+            border: 1px solid limegreen;
+            padding: 5px;
+        }
+        #first{
+            background-color: #FFCC70;
+            border: 1px solid green;
+            position: relative;/*相对定位：上下左右*/
+            top: -20px;
+            left: 20px;
+
+        }
+        #second{
+            background-color: deepskyblue;
+            border: 1px solid deepskyblue;
+        }
+        #third{
+            background-color: bisque;
+            border: 1px solid orange;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div id="father">
+    <div id="first">盒子一</div>
+    <div id="second">盒子二</div>
+    <div id="third">盒子三</div>
+</div>
+
+</body>
+</html>
+```
+
+相对定位：position:relative
+
+相对原来的位置，进行指定的偏移，原来的文档流中仍然会保留原来的位置。
+
+```
+top:-20px;
+left:20px;
+bottom:-10px;
+right:20px;
+```
 
 
+
+## 6.2 绝对定位
+
+定位：基于xxx定位，上下左右
+
+1. 没有父级元素定位的前提下，相对于浏览器定位。
+2. 假设父级元素定位，相对于父级元素进行偏移。
+
+3. 在父级元素范围内移动，相对于父级或浏览器的位置，进行指定的偏移，绝对定位不在标准文档流中，原来的位置会被覆盖。
+
+```html
+<style>
+    body{
+        padding: 20px;
+    }
+    div{
+        margin: 10px;
+        padding: 5px;
+        font-size: 12px;
+        line-height: 25px;
+    }
+    #father{
+        border: 1px solid limegreen;
+        padding: 5px;
+        position: relative;
+    }
+    #first{
+        background-color: #FFCC70;
+        border: 1px solid green;
+    }
+    #second{
+        background-color: deepskyblue;
+        border: 1px solid deepskyblue;
+        position: absolute;
+        left: 300px;
+    }
+    #third{
+        background-color: bisque;
+        border: 1px solid orange;
+    }
+
+</style>
+```
+
+## 6.3 固定定位
+
+```html
+<style>
+    body{
+        height: 1000px;
+    }
+    div:nth-of-type(1){/*绝对定位：相对于浏览器*/
+        width: 100px;
+        height: 100px;
+        background: orangered;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+    div:nth-of-type(2){/*fixed，固定定位*/
+        width: 50px;
+        height: 50px;
+        background: orange;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+    }
+</style>
+```
+
+应用：网页中的返回顶部。
+
+## 6.4 zindex
+
+z-index：默认为0，最高999（只针对浮动元素）
+
+```css
+#content{
+    width: 378px;
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 25px;
+    border: 1px solid orange;
+}
+ul,li{
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+}
+/*父级元素相对定位*/
+#content ul{
+    position: relative;
+}
+.tipText,.tipBg{
+    position: absolute;
+    width: 378px;
+    top: 195px;
+    height: 25px;
+}
+.tipText{
+    color: white;
+    z-index: 999;
+}
+.tipBg{
+    background: darksalmon;
+    opacity: 0.5;
+}
+```
+
+# 七、动画与视野扩展
+
+runoob.com

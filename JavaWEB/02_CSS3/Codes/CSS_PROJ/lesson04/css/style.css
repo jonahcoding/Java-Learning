@@ -1,0 +1,51 @@
+div{
+    margin: 10px;
+    padding: 5px;
+}
+/*如何解决父级元素塌陷问题*/
+/*方法一：增加父级元素高度*/
+#father{
+    border: 1px solid red;
+    /*height: 800px;*/
+    /*方法三：overflow*/
+    /*overflow: hidden;*/
+}
+/*方法四：父类增加伪类，原理同方法二，但在代码中实现*/
+#father:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.layer01{
+    border: 1px dashed black;
+    display: inline-block;
+    float: left;
+}
+
+.layer02{
+    border: 1px dashed green;
+    display: inline-block;
+    float: left;
+}
+
+.layer03{
+    border: 1px dashed blue;
+    display: inline-block;
+    float: left;
+}
+
+.layer04{
+    border: 1px dashed paleturquoise;
+    font-size: 12px;
+    line-height: 23px;
+    display: inline-block;
+    float: left;
+    clear: both;
+}
+/*方法二：增加空div*/
+/*.clear{*/
+/*    clear: both;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
