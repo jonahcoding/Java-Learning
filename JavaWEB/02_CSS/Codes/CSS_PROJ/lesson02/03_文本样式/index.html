@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--
+    颜色：
+        单词
+        RGB   0~F
+        RGBA  A 0~1
+    text-align:排版，左中右
+    text-indent:缩进
+    line-height：行高
+    text-decoration:下划线、中划线、上划线
+    行高与块的高度一致时，可以实现上下居中。
+    -->
+    <style>
+        h1{
+            color: rgba(0,255,255,0.9);//颜色RGBA
+            text-align: center;//水平居中
+        }
+        .p1{
+            text-indent: 2em;//缩进
+        }
+        .p2{
+            text-align: center;
+        }
+        .p3{
+            color: greenyellow;//颜色
+            background: black;//背景色
+            height: 300px;//高度
+            line-height: 300px;//行高
+            text-align: center;
+        }
+        .p4{
+            text-decoration: underline;//下划线
+        }
+        .p5{
+            text-decoration: line-through;//中划线
+        }
+        .p6{
+            text-decoration: overline;//上划线
+        }
+        img,span{
+            vertical-align: middle;//垂直居中
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <h1>花非花</h1>
+    <p class="p1">
+        花非花，雾非雾，
+        夜半来，天明去。
+    </p>
+    <p class="p2">
+        来如春梦不多时，
+        去似朝云无觅处。
+    </p>
+
+    <p  class="p3">
+        Have a nice day!
+    </p>
+
+    <p  class="p4">
+        Have a nice day!
+    </p>
+
+    <p  class="p5">
+        Have a nice day!
+    </p>
+
+    <p  class="p6">
+        Have a nice day!
+    </p>
+
+    <img src="image/avatar.jpg" width="50" height="50" alt="">
+    <span>应似飞鸿踏雪泥</span>
+
+</body>
+</html>
