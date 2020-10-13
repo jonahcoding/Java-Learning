@@ -91,12 +91,76 @@ JSP/Servlet：
 
 ### 2.3 Tomcat安装
 
-- Java下没有jre文件夹：
+#### 2.3.1 Windows平台安装：
 
-  进入jdk目录
+版本环境
 
-  输入bin\jlink.exe --module-path jmods --add-modules java.desktop --output jre
+- Java版本：1.8.0_261
 
-- 配置JAVA_JRE环境变量
-- 配置CATALINA_HOME环境变量（Tomcat路径）并写入Path
+- Tomcat版本：8.5.59
+
+安装步骤：
+
+1. 配置JAVA_JRE环境变量：
+2. 配置CATALINA_HOME环境变量（Tomcat路径）
+3. 双击startup.bat ，等待启动成功。
+4. 浏览器键入localhost:8080测试。
+
+> 可能存在的问题：Java下没有jre文件夹
+
+解决方案：
+
+1. cmd进入jdk目录
+2. bin\jlink.exe --module-path jmods --add-modules java.desktop --output jre
+
+#### 2.3.2 Linux平台安装
+
+打开centos7网络：
+
+1. `vim /etc/sysconfig/network-scripts/ifcfg-ens33`修改 `ONBOOT=yes`
+2. `service network restart`
+3. 获取IP，远程登录。
+
+安装Java：
+
+1. 解压Jdk压缩包并移动至/usr/loacl/java/目录下
+2. 修改环境变量：`vim /etc/profile`
+
+```
+export JAVA_HOME=/usr/local/java/jdk1.8.0_261
+export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export PATH=$PATH:$JAVA_HOME/bin
+```
+
+3. 配置生效：`source /etc/profile`
+4. 测试：`java -version`
+
+安装Tomcat：https://mirrors.cnnic.cn/apache/tomcat/
+
+1. 解压Tomcat压缩包并移动至/usr/loacl/tomcat/目录下
+
+2. 新建快捷启动方式：
+
+   ```
+   cp /usr/local/tomcat/apache-tomcat-8.5.59/bin/catalina.sh /etc/init.d/tomcat
+   ```
+
+3. 修改脚本权限（所有人）：` chmod 755 /etc/init.d/tomcat `
+
+4. 配置脚本：`vim /etc/init.d/tomcat`
+
+   ```
+   #chkconfig: 2345 10 90
+   #description: tomcat service 
+   export JAVA_HOME=/usr/local/java/jdk1.8.0_261
+   export CATALINA_HOME=/usr/local/tomcat/apache-tomcat-8.5.59
+   ```
+
+5. 设置Tomcat开机启动：` chkconfig tomcat on `
+
+6. 启动\关闭Tomcat：` service tomcat start\stop `
+
+7. 开放8080端口（否则无法访问）： [](https://blog.csdn.net/qq_36473199/article/details/87227661)
+
+8. 测试：服务器ip:8080
 
