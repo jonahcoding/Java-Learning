@@ -64,9 +64,9 @@
 # 设置3306端口
 port=3306
 # 设置mysql的安装目录
-basedir=E:\\App\\mysql-8.0.21
+basedir=E:\\App\\MySQL\\mysql-8.0.21
 # 设置mysql数据库的数据的存放目录(忽略，由系统生成)
-#datadir=E:\\App\\mysql-8.0.21\\Data
+#datadir=E:\\App\\MySQL\\mysql-8.0.21\\Data
 # 允许最大连接数
 max_connections=200
 # 允许连接失败的次数。
@@ -138,7 +138,7 @@ alter user user() identified by "password";
 1. 自建变量：
 
    ```
-   mysql：D:\App\mysql-8.0.21
+   mysql：D:\App\MySQL\mysql-8.0.21
    ```
 
 2. 新增Path：
