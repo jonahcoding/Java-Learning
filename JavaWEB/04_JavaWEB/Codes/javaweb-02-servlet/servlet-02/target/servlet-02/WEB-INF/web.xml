@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                   http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0"
+         metadata-complete="true">
+  <!--配置一些web应用初始化参数-->
+  <context-param>
+    <param-name>url</param-name>
+    <param-value>jdbc:mysql://localhost:3306/mybatis</param-value>
+  </context-param>
+
+  <servlet>
+    <servlet-name>hello</servlet-name>
+    <servlet-class>com.shinrin.servlet.HelloServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>username</servlet-name>
+    <servlet-class>com.shinrin.servlet.GetServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>username</servlet-name>
+    <url-pattern>/username</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>url</servlet-name>
+    <servlet-class>com.shinrin.servlet.ServletDemo03</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>url</servlet-name>
+    <url-pattern>/url</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>geturl</servlet-name>
+    <servlet-class>com.shinrin.servlet.ServletDemo04</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>geturl</servlet-name>
+    <url-pattern>/geturl</url-pattern>
+  </servlet-mapping>
+
+</web-app>

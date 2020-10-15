@@ -711,7 +711,151 @@ Java程序通过浏览器访问，而浏览器需要连接web服务器，需要�
 
 无需多言。
 
+### 5.3 Servlet原理
 
+Servlet由Web服务器调用，Servlet在收到浏览器请求后：
 
+![](JavaWEB.assets/cs-servlet-1602764805876.png)
 
+### 5.4 Mapping问题
+
+1. 一个Servlet可以指定一个映射路径
+
+```xml
+  <servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+```
+
+2. 一个Servlet可以指定多个映射路径
+
+```xml
+  <servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <url-pattern>/hello1</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <url-pattern>/hello2</url-pattern>
+  </servlet-mapping>
+```
+
+3. 一个Servlet可以指定通用映射路径
+
+```xml
+  <servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <url-pattern>/hello/*</url-pattern>
+  </servlet-mapping>
+```
+
+4. 默认请求路径
+
+```xml
+  <servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <url-pattern>/*</url-pattern>
+  </servlet-mapping>
+```
+
+5. 指定前缀或后缀
+
+```xml
+ <!--
+ 注：*前不能加项目映射路径
+ -->
+ <servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <url-pattern>*.shinrin</url-pattern>
+  </servlet-mapping>
+```
+
+6. 优先级问题
+   - 指定了固定的映射关系优先级最高
+
+### 5.5 ServletContext
+
+web容器在启动时，会为每个web程序创建一个对应的ServletContext对象，代表web应用。
+
+#### 5.5.1 共享数据（不同的Servlet之间）
+
+![](JavaWEB.assets/ServletContext.png)
+
+放置数据的类：
+
+```java
+public class HelloServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ServletContext context = this.getServletContext();//Servlet上下文
+        String username = "阿泽";//数据
+        context.setAttribute("username", username);//将一个数据保存在ServletContext中，键为username，值为“阿泽”
+    }
+	...
+}
+```
+
+读取数据的类：
+
+```java
+public class GetServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ServletContext context = this.getServletContext();
+        String username = (String) context.getAttribute("username");
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().print("名字："+username);
+    }
+	...
+}
+```
+
+**注：先存后读，否则结果为null**
+
+#### 5.5.2 获取初始化参数
+
+配置web应用初始化参数：
+
+```xml
+  <!--配置web应用初始化参数-->
+  <context-param>
+    <param-name>url</param-name>
+    <param-value>jdbc:mysql://localhost:3306/mybatis</param-value>
+  </context-param>
+```
+
+读取初始化参数：
+
+```java
+public class ServletDemo03 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ServletContext context = this.getServletContext();
+        String url = context.getInitParameter("url");
+        resp.getWriter().print(url);
+    }
+	...
+}
+```
+
+#### 5.5.3 请求转发
+
+```java
+public class ServletDemo04 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ServletContext context = this.getServletContext();
+        //RequestDispatcher requestDispatcher = context.getRequestDispatcher("/username");//转发的请求路径
+        //requestDispatcher.forward(req,resp);//调用forward实现请求转发(转向/url)
+        context.getRequestDispatcher("/url").forward(req,resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
+}
+```
 
