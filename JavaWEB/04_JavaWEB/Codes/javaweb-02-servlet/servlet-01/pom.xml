@@ -1,42 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Maven版本和头文件-->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <!--配置的GAV-->
+
   <groupId>com.shinrin</groupId>
-  <artifactId>javaweb-01-maven</artifactId>
+  <artifactId>servlet-01</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <!--Packaging：项目打包方式
-  jar：java应用
-  war：web应用
-  -->
   <packaging>war</packaging>
-  <!--项目名称-->
-  <name>javaweb-01-maven Maven Webapp</name>
+
+  <name>servlet-01 Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
-  <!--配置-->
+
   <properties>
-    <!--项目的默认构建编码-->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!--编码版本-->
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
-  <!--项目依赖-->
+
   <dependencies>
-    <!--具体依赖的jar包-->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>javax.servlet.jsp-api</artifactId>
+      <version>2.3.3</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
-  <!--项目构建的插件-->
+
   <build>
-    <finalName>javaweb-01-maven</finalName>
+    <finalName>servlet-01</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>
@@ -70,25 +77,5 @@
         </plugin>
       </plugins>
     </pluginManagement>
-    <!--解决资源导出问题-->
-    <!--忽略对resources和java目录下的xml和properties文件过滤-->
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <excludes>
-          <exclude>**/*.properties</exclude>
-          <exclude>**/*.xml</exclude>
-        </excludes>
-        <filtering>false</filtering>
-      </resource>
-      <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.properties</include>
-          <include>**/*.xml</include>
-        </includes>
-        <filtering>false</filtering>
-      </resource>
-    </resources>
   </build>
 </project>

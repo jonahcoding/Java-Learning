@@ -520,7 +520,7 @@ pom.xml：Maven的核心配置文件
 </dependencies>
 ```
 
-从https://mvnrepository.com/获取目标jar包的dependency粘贴到pom.xml，刷新即可导入。
+**从https://mvnrepository.com/获取目标jar包的dependency粘贴到pom.xml，刷新导入。**
 
 > **Maven资源导出问题**（如规定java目录不能导出xml等文件）
 >
@@ -554,4 +554,164 @@ pom.xml：Maven的核心配置文件
 ```
 
 ### 4.9 常见问题
+
+#### 4.9.1 新建项目默认使用C盘的xml文件：
+
+解决方案：IDEA启动页面-Configure-Settings-Build Tools-Maven-设置默认
+
+`E:\App\Maven\apache-maven-3.6.3\conf\settings.xml`
+
+#### 4.9.2 Maven默认web项目（模板创建）中的web-app\WEB-INF\web.xml版本问题
+
+```xml
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+</web-app>
+```
+
+解决方案：拷贝Tomcat的xml文件头部内容进行替换。
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1"
+         metadata-complete="true">
+
+<display-name>Archetype Created Web Application</display-name>
+<description>
+  Welcome to Tomcat
+</description>
+
+</web-app>
+```
+
+
+
+## 五、Servlet
+
+### 5.1 Servlet简介
+
+- Servlet是Sun公司开发动态web的一门技术
+- Sun在API中提供一个接口：Servlet，开发Servlet程序的步骤：
+  - 编写类，实现Servlet接口
+  - 开发完成的Java类部署到web服务器中
+
+Servlet即是实现了Servlet接口的Java程序。
+
+### 5.2 HelloServlet项目
+
+Servlet接口有两个默认的实现类：
+
+- HttpServlet（继承了GenericServlet）
+- GenericServlet（实现了Servlet）
+
+#### 5.2.1 新建Maven项目
+
+1. 构建一个Maven项目（作为父项目），删除src目录。
+2. 向pom.xml添加**javax.servlet**和**javax.servlet.jsp**依赖。
+3. 新建Maven Module（作为子项目），使用webapp模板，Module名为servlet-01。
+
+#### 5.2.2 关于父子工程的理解
+
+父项目中：
+
+```xml
+    <modules>
+        <module>servlet-01</module>
+    </modules>
+```
+
+子项目中：
+
+```xml
+    <parent>
+        <artifactId>javaweb-01-servlet</artifactId>
+        <groupId>com.shinrin</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+```
+
+对于父项目中的jar包，子项目可以直接使用
+
+#### 5.2.3 Maven环境优化
+
+1. 替换子项目的web.xml为Tomcat对应版本（最新）。
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   
+   <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+            version="3.1"
+            metadata-complete="true">
+   
+     
+   </web-app>
+   ```
+
+2. 将Maven的结构搭建完整
+
+   - java目录
+   - resources目录
+
+#### 5.2.4 编写Servlet程序
+
+1. 编写HelloServlet类
+2. 实现Servlet接口：继承HttpServlet
+
+```java
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HelloServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //ServletOutputStream outputStream = resp.getOutputStream();
+        PrintWriter writer = resp.getWriter();
+        writer.print("Hello Servlet");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
+    }
+}
+```
+
+#### 5.2.5 编写Servlet的映射
+
+Java程序通过浏览器访问，而浏览器需要连接web服务器，需要向web服务中注册编写的Servlet，并提供浏览器可访问的路径。
+
+..\servlet-01\src\main\webapp\WEB-INF\web.xml
+
+```xml
+    <!--注册Servlet-->
+    <servlet>
+        <servlet-name>hello</servlet-name>
+        <servlet-class>com.shinrin.servlet.HelloServlet</servlet-class>
+    </servlet>
+    <!--请求路径-->
+    <servlet-mapping>
+        <servlet-name>hello</servlet-name>
+        <url-pattern>hello</url-pattern>
+    </servlet-mapping>
+```
+
+#### 5.2.6 配置Tomcat
+
+无需多言。
+
+
+
+
 
