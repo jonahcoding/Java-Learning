@@ -97,7 +97,7 @@ JSP/Servlet：
 
 - Java版本：1.8.0_261
 
-- Tomcat版本：8.5.59
+- Tomcat版本：9.0.39
 
 安装步骤：
 
@@ -142,7 +142,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 2. 新建快捷启动方式：
 
    ```
-   cp /usr/local/tomcat/apache-tomcat-8.5.59/bin/catalina.sh /etc/init.d/tomcat
+   cp /usr/local/tomcat/apache-tomcat-9.0.39/bin/catalina.sh /etc/init.d/tomcat
    ```
 
 3. 修改脚本权限（所有人）：` chmod 755 /etc/init.d/tomcat `
@@ -153,7 +153,7 @@ export PATH=$PATH:$JAVA_HOME/bin
    #chkconfig: 2345 10 90
    #description: tomcat service 
    export JAVA_HOME=/usr/local/java/jdk1.8.0_261
-   export CATALINA_HOME=/usr/local/tomcat/apache-tomcat-8.5.59
+   export CATALINA_HOME=/usr/local/tomcat/apache-tomcat-9.0.39
    ```
 
 5. 设置Tomcat开机启动：` chkconfig tomcat on `
@@ -166,7 +166,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 
 #### 2.3.3 Tomcat配置文件
 
-E:\App\Tomcat\apache-tomcat-8.5.59\conf\server.xml
+E:\App\Tomcat\apache-tomcat-9.0.39\conf\server.xml
 
 - 配置端口：Connector（默认为8080）
 
@@ -858,4 +858,32 @@ public class ServletDemo04 extends HttpServlet {
     }
 }
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
