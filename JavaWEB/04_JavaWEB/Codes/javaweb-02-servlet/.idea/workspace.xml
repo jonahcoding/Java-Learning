@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="servlet-02:war" />
+      <artifact name="request:war" />
     </artifacts-to-build>
   </component>
   <component name="BranchesTreeState">
@@ -110,26 +110,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb152dd1-a0a3-444b-87d8-947198349136" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/note.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/servlet-01/src/main/java/com/shinrin/servlet/ErrorServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/servlet-02/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/servlet-02/src/main/java/com/shinrin/servlet/GetServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/servlet-02/src/main/java/com/shinrin/servlet/HelloServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/servlet-02/src/main/java/com/shinrin/servlet/ServletDemo03.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/servlet-02/src/main/java/com/shinrin/servlet/ServletDemo04.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/servlet-02/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/servlet-02/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/src/main/java/com/shinrin/servlet/LoginServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/src/main/webapp/index.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/request/src/main/webapp/success.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/response/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/response/src/main/java/com/shinrin/servlet/FileServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/response/src/main/java/com/shinrin/servlet/ImageServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/response/src/main/java/com/shinrin/servlet/RedirectServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/response/src/main/java/com/shinrin/servlet/RequestTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/response/src/main/resources/avator.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/response/src/main/webapp/success.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/servlet-02/src/main/java/com/shinrin/servlet/PropertiesServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/servlet-02/src/main/java/com/shinrin/servlet/ServletDemo05.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/servlet-02/src/main/java/com/shinrin/servlet/aa.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/servlet-02/src/main/resources/db.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-03-session-cookie/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-03-session-cookie/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-03-session-cookie/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-03-session-cookie/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-03-session-cookie/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-03-session-cookie/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-03-session-cookie/javaweb-03-session-cookie.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-03-session-cookie/note.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-03-session-cookie/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-03-session-cookie/src/main/webapp/index.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javaweb-02-servlet.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servlet-01/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/servlet-01/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servlet-01/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/servlet-01/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servlet-01/target/servlet-01.war" beforeDir="false" afterPath="$PROJECT_DIR$/servlet-01/target/servlet-01.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servlet-01/target/servlet-01/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/servlet-01/target/servlet-01/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servlet-02/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/servlet-02/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servlet-02/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/servlet-02/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servlet-02/target/servlet-02.war" beforeDir="false" afterPath="$PROJECT_DIR$/servlet-02/target/servlet-02.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servlet-02/target/servlet-02/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/servlet-02/target/servlet-02/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Notes/JavaWEB.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Notes/JavaWEB.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -141,6 +155,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JavaScript File" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -164,17 +180,20 @@
     </option>
   </component>
   <component name="ProjectId" id="1iv6g4Jmiggb4c4qeZZNDAxSmep" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/servlet-01/src/main/java/com/shinrin/servlet" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/response/src/main/resources" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -184,17 +203,23 @@
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Workspace\Git\Java-Learning\JavaWEB\04_JavaWEB\Codes\javaweb-02-servlet\response\src\main\webapp" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Workspace\Git\Java-Learning\JavaWEB\04_JavaWEB\Codes\javaweb-02-servlet\response\src\main\resources" />
+      <recent name="E:\Workspace\Git\Java-Learning\JavaWEB\04_JavaWEB\Codes\javaweb-02-servlet\servlet-02\src\main\java\com\shinrin\servlet" />
       <recent name="E:\Workspace\Git\Java-Learning\JavaWEB\04_JavaWEB\Codes\javaweb-02-servlet\servlet-01\src\main\java\com\shinrin\servlet" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 9" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.39" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/request_war/" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="servlet-02:war">
+        <artifact name="request:war">
           <settings>
-            <option name="CONTEXT_PATH" value="/servlet_02" />
+            <option name="CONTEXT_PATH" value="/request_war" />
           </settings>
         </artifact>
       </deployment>
@@ -257,7 +282,7 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="servlet-02:war" />
+          <artifact name="request:war" />
         </option>
       </method>
     </configuration>
@@ -273,6 +298,14 @@
       <option name="presentableId" value="Default" />
       <updated>1602775825697</updated>
       <workItem from="1602775828308" duration="4726000" />
+      <workItem from="1602845896075" duration="552000" />
+      <workItem from="1602847111238" duration="7000" />
+      <workItem from="1602897964802" duration="5220000" />
+      <workItem from="1602903212420" duration="840000" />
+      <workItem from="1602904064282" duration="6801000" />
+      <workItem from="1602910994221" duration="2144000" />
+      <workItem from="1602913152515" duration="887000" />
+      <workItem from="1602914093731" duration="540000" />
     </task>
     <servers />
   </component>
@@ -289,67 +322,75 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602776839649">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602913283946">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1602776839649" />
-    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser" timestamp="1602779711325">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1602913283946" />
+    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser" timestamp="1602910613704">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1602779711325" />
-    <state width="1024" height="209" key="GridCell.Tab.0.bottom" timestamp="1602780557180">
+    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1602910613704" />
+    <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1602914168082">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="209" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602780557180" />
-    <state width="1024" height="209" key="GridCell.Tab.0.center" timestamp="1602780557180">
+    <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1602914168082" />
+    <state width="1493" height="208" key="GridCell.Tab.0.bottom" timestamp="1602914039540">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="209" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1602780557180" />
-    <state width="1024" height="209" key="GridCell.Tab.0.left" timestamp="1602780557180">
+    <state width="1493" height="208" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602914039540" />
+    <state width="1493" height="208" key="GridCell.Tab.0.center" timestamp="1602914039540">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="209" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1602780557180" />
-    <state width="1024" height="209" key="GridCell.Tab.0.right" timestamp="1602780557180">
+    <state width="1493" height="208" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1602914039540" />
+    <state width="1493" height="208" key="GridCell.Tab.0.left" timestamp="1602914039539">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="209" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1602780557180" />
-    <state width="1024" height="209" key="GridCell.Tab.1.bottom" timestamp="1602780557180">
+    <state width="1493" height="208" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1602914039539" />
+    <state width="1493" height="208" key="GridCell.Tab.0.right" timestamp="1602914039540">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="209" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602780557180" />
-    <state width="1024" height="209" key="GridCell.Tab.1.center" timestamp="1602780557180">
+    <state width="1493" height="208" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1602914039540" />
+    <state width="1024" height="205" key="GridCell.Tab.1.bottom" timestamp="1602914039535">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="209" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1602780557180" />
-    <state width="1024" height="209" key="GridCell.Tab.1.left" timestamp="1602780557180">
+    <state width="1024" height="205" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602914039535" />
+    <state width="1024" height="205" key="GridCell.Tab.1.center" timestamp="1602914039534">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="209" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1602780557180" />
-    <state width="1024" height="209" key="GridCell.Tab.1.right" timestamp="1602780557180">
+    <state width="1024" height="205" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1602914039534" />
+    <state width="1024" height="205" key="GridCell.Tab.1.left" timestamp="1602914039534">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="209" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1602780557180" />
-    <state width="1024" height="209" key="GridCell.Tab.2.bottom" timestamp="1602780557180">
+    <state width="1024" height="205" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1602914039534" />
+    <state width="1024" height="205" key="GridCell.Tab.1.right" timestamp="1602914039535">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="209" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602780557180" />
-    <state width="1024" height="209" key="GridCell.Tab.2.center" timestamp="1602780557180">
+    <state width="1024" height="205" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1602914039535" />
+    <state width="1024" height="205" key="GridCell.Tab.2.bottom" timestamp="1602914039535">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="209" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1602780557180" />
-    <state width="1024" height="209" key="GridCell.Tab.2.left" timestamp="1602780557180">
+    <state width="1024" height="205" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1602914039535" />
+    <state width="1024" height="205" key="GridCell.Tab.2.center" timestamp="1602914039535">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="209" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1602780557180" />
-    <state width="1024" height="209" key="GridCell.Tab.2.right" timestamp="1602780557180">
+    <state width="1024" height="205" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1602914039535" />
+    <state width="1024" height="205" key="GridCell.Tab.2.left" timestamp="1602914039535">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1024" height="209" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1602780557180" />
-    <state x="178" y="73" key="new project wizard" timestamp="1602775910544">
+    <state width="1024" height="205" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1602914039535" />
+    <state width="1024" height="205" key="GridCell.Tab.2.right" timestamp="1602914039535">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="178" y="73" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1602775910544" />
+    <state width="1024" height="205" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1602914039535" />
+    <state x="178" y="45" key="new project wizard" timestamp="1602914308263">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="178" y="45" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1602914308263" />
   </component>
 </project>

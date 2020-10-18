@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="javaweb-03-session-cookie:war" />
+    </artifacts-to-build>
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:04_JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:04_JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:Codes" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:04_JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:Codes" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:javaweb-01-maven" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:04_JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:Codes" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:javaweb-02-maven" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:04_JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:Codes" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:javaweb-02-servlet" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:04_JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:Codes" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:javaweb-02-servlet" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:servlet-01" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:04_JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:Codes" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:javaweb-02-servlet" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:servlet-02" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:04_JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:Codes" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:javaweb-03-servlet" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:04_JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:Codes" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:javaweb-03-servlet" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:servlet-01" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:04_JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:Codes" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:javaweb-03-servlet" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:servlet-02" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:04_JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:Codes" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:javaweb-servlet-01" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:04_JavaWEB" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:Codes" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:javaweb-servlet-01" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:servler-01" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e378cb6c-2b3e-4447-9a71-543b430d58ad" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../javaweb-02-servlet/request/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-02-servlet/request/src/main/java/com/shinrin/servlet/LoginServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-02-servlet/request/src/main/webapp/index.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-02-servlet/request/src/main/webapp/success.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-02-servlet/response/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-02-servlet/response/src/main/java/com/shinrin/servlet/FileServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-02-servlet/response/src/main/java/com/shinrin/servlet/ImageServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-02-servlet/response/src/main/java/com/shinrin/servlet/RedirectServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-02-servlet/response/src/main/java/com/shinrin/servlet/RequestTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-02-servlet/response/src/main/resources/avator.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-02-servlet/response/src/main/webapp/success.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-02-servlet/servlet-02/src/main/java/com/shinrin/servlet/PropertiesServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-02-servlet/servlet-02/src/main/java/com/shinrin/servlet/ServletDemo05.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-02-servlet/servlet-02/src/main/java/com/shinrin/servlet/aa.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../javaweb-02-servlet/servlet-02/src/main/resources/db.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javaweb-03-session-cookie.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/note.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shinrin/pojo/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shinrin/servlet/CookieDemo01.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shinrin/servlet/CookieDemo02.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shinrin/servlet/CookieDemo03.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shinrin/servlet/SessionDemo01.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shinrin/servlet/SessionDemo02.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shinrin/servlet/SessionDemo03.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/hello.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../javaweb-02-servlet/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../javaweb-02-servlet/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../javaweb-02-servlet/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../javaweb-02-servlet/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../javaweb-02-servlet/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../javaweb-02-servlet/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../javaweb-02-servlet/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../javaweb-02-servlet/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../javaweb-02-servlet/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../javaweb-02-servlet/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../javaweb-02-servlet/servlet-02/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../javaweb-02-servlet/servlet-02/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../javaweb-02-servlet/servlet-02/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../javaweb-02-servlet/servlet-02/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../javaweb-02-servlet/servlet-02/target/servlet-02.war" beforeDir="false" afterPath="$PROJECT_DIR$/../javaweb-02-servlet/servlet-02/target/servlet-02.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../javaweb-02-servlet/servlet-02/target/servlet-02/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../javaweb-02-servlet/servlet-02/target/servlet-02/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Notes/JavaWEB.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Notes/JavaWEB.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Jsp File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="E:\App\Maven\apache-maven-3.6.3\maven-repo" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../../../../../App/Maven/apache-maven-3.6.3" />
+        <option name="userSettingsFile" value="E:\App\Maven\apache-maven-3.6.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1izdMooHiec2c8dJ5KCCpLg01m8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Workspace\Git\Java-Learning\JavaWEB\04_JavaWEB\Codes\javaweb-03-session-cookie\src\main\webapp" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Tomcat 9" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.39" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/javaweb_03_session_cookie_war/" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="javaweb-03-session-cookie:war">
+          <settings>
+            <option name="CONTEXT_PATH" value="/javaweb_03_session_cookie_war" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_javaweb-03-session-cookie" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="1027" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="javaweb-03-session-cookie:war" />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e378cb6c-2b3e-4447-9a71-543b430d58ad" name="Default Changelist" comment="" />
+      <created>1602914308647</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602914308647</updated>
+      <workItem from="1602914314488" duration="1115000" />
+      <workItem from="1603013014186" duration="11614000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="133" y="80" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603015685865">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="133" y="80" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1603015685865" />
+    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser" timestamp="1603028274536">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1603028274536" />
+    <state x="511" y="265" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1603034843587">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="511" y="265" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1603034843587" />
+    <state width="1024" height="210" key="GridCell.Tab.0.bottom" timestamp="1603035263517">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603035263517" />
+    <state width="1024" height="210" key="GridCell.Tab.0.center" timestamp="1603035263517">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1603035263517" />
+    <state width="1024" height="210" key="GridCell.Tab.0.left" timestamp="1603035263517">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1603035263517" />
+    <state width="1024" height="210" key="GridCell.Tab.0.right" timestamp="1603035263517">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1603035263517" />
+    <state width="1024" height="210" key="GridCell.Tab.1.bottom" timestamp="1603035263517">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603035263517" />
+    <state width="1024" height="210" key="GridCell.Tab.1.center" timestamp="1603035263517">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1603035263517" />
+    <state width="1024" height="210" key="GridCell.Tab.1.left" timestamp="1603035263517">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1603035263517" />
+    <state width="1024" height="210" key="GridCell.Tab.1.right" timestamp="1603035263517">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1603035263517" />
+    <state width="1024" height="210" key="GridCell.Tab.2.bottom" timestamp="1603035263517">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603035263517" />
+    <state width="1024" height="210" key="GridCell.Tab.2.center" timestamp="1603035263517">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1603035263517" />
+    <state width="1024" height="210" key="GridCell.Tab.2.left" timestamp="1603035263517">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1603035263517" />
+    <state width="1024" height="210" key="GridCell.Tab.2.right" timestamp="1603035263517">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1024" height="210" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1603035263517" />
+    <state x="178" y="73" key="new project wizard" timestamp="1603035258132">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="178" y="73" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1603035258132" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1603014987536">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1603014987536" />
+  </component>
+</project>

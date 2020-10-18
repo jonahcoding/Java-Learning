@@ -48,4 +48,13 @@
     <url-pattern>/geturl</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>getUserPWD</servlet-name>
+    <servlet-class>com.shinrin.servlet.ServletDemo05</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getUserPWD</servlet-name>
+    <url-pattern>/getUserPWD</url-pattern>
+  </servlet-mapping>
+
 </web-app>

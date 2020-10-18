@@ -859,6 +859,535 @@ public class ServletDemo04 extends HttpServlet {
 }
 ```
 
+#### 5.5.4 读取资源文件
+
+Properties
+
+- Java目录下新建properties
+- resources目录下新建properties
+
+都被打包到同一路径下：classes（类路径）
+
+文件流：
+
+**db.properties**
+
+```properties
+username=root
+password=123456
+```
+
+**ServletDemo05.java**
+
+```java
+public class ServletDemo05 extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        InputStream is = this.getServletContext().getResourceAsStream("/WEB-INF/classes/db.properties");
+        Properties prop = new Properties();
+        prop.load(is);
+        String user = prop.getProperty("username");
+        String pwd = prop.getProperty("password");
+        resp.getWriter().print(user+ ":" + pwd);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    }
+}
+```
+
+**web.xml**
+
+```xml
+  <servlet>
+    <servlet-name>getUserPWD</servlet-name>
+    <servlet-class>com.shinrin.servlet.ServletDemo05</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getUserPWD</servlet-name>
+    <url-pattern>/getUserPWD</url-pattern>
+  </servlet-mapping>
+```
+
+注：配置pom.xml，防止.properties文件被过滤。
+
+### 5.6 HttpServletResponse
+
+web服务器接收到客户端的http请求，针对这个请求，分别创建一个代表请求的HttpServletRequest对象、一个代表响应的HttpServletResponse对象。
+
+- 获取客户端请求的参数：HttpServletRequest
+- 向客户端响应信息：HttpServletReponse
+
+#### 5.6.1 简单分类
+
+负责向浏览器发送数据的方法：
+
+```java
+    ServletOutputStream getOutputStream() throws IOException;
+
+    PrintWriter getWriter() throws IOException;
+```
+
+负责向浏览器发送响应头的方法：
+
+```java
+    void setCharacterEncoding(String var1);
+    void setContentLength(int var1);
+    void setContentLengthLong(long var1);
+    void setContentType(String var1);
+    void setDateHeader(String var1, long var2);
+    void addDateHeader(String var1, long var2);
+    void setHeader(String var1, String var2);
+    void addHeader(String var1, String var2);
+    void setIntHeader(String var1, int var2);
+    void addIntHeader(String var1, int var2);
+```
+
+响应的状态码：
+
+```
+- 200：请求响应成功	200
+- 3xx：请求重定向
+  - 重定向：
+- 4xx：找不到资源	404
+- 5xx：服务器diamante错误  500    502(网关错误)
+```
+
+#### 5.6.2 常见应用
+
+1. 向浏览器输出消息
+2. 下载文件
+   1. 获取下载文件的路径
+   2. 下载的文件名
+   3. 设置使浏览器支持下载需要的文件
+   4. 获取下载文件的输入流
+   5. 创建缓存区
+   6. 获取OutputStream对象
+   7. 将FileOutputStream流写入到buffer缓冲区
+   8. 使用OutputStream将数据输出到客户端
+
+```java
+public class FileServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //1. 获取下载文件的路径
+        String realPath = this.getServletContext().getRealPath("WEB-INF\\classes\\avator.jpg");
+        System.out.println("下载文件的路径："+realPath);
+        //2. 下载的文件名
+        String fileName = realPath.substring(realPath.lastIndexOf("\\") + 1);
+        //3. 设置使浏览器支持下载需要的文件（支持中文编码）
+        resp.setHeader("Content-Disposition","attachment;filename="+ URLEncoder.encode(fileName,"UTF-8"));
+        //4. 获取下载文件的输入流
+        FileInputStream in = new FileInputStream(realPath);
+        //5. 创建缓存区
+        int len = 0;
+        byte[] buffer = new byte[1024];
+        //6. 获取OutputStream对象
+        ServletOutputStream out = resp.getOutputStream();
+        //7. 将FileOutputStream流写入到buffer缓冲区，使用OutputStream将数据输出到客户端
+        while ((len = in.read(buffer))>0){
+            out.write(buffer,0,len);
+        }
+        out.close();
+        in.close();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    }
+}
+```
+
+3. 验证码
+
+```java
+public class ImageServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //浏览器3秒刷新一次
+        resp.setHeader("refresh","3");
+        //在内存中创建图片
+        BufferedImage image = new BufferedImage(80, 20, BufferedImage.TYPE_INT_RGB);
+        //获取图片
+        Graphics2D g = (Graphics2D)image.getGraphics();
+        //设置图片的背景颜色
+        g.setColor(Color.white);
+        g.fillRect(0,0,80,20);
+        //给图片写数据
+        g.setColor(Color.blue);
+        g.setFont(new Font(null,Font.PLAIN,20));
+        g.drawString(makeNum(),0,20);
+        //请求以图片形式打开
+        resp.setContentType("image/jpeg");
+        //浏览器不缓存图片
+        resp.setDateHeader("expires",-1);
+        resp.setHeader("Cache-Control","no-cache");
+        resp.setHeader("Pragma","no-cache");
+        //图片写给浏览器
+        ImageIO.write(image,"jpg",resp.getOutputStream());
+    }
+
+    //生成随机数
+    private String makeNum(){
+        Random random = new Random();
+        String num = random.nextInt(99999999)+"";
+        StringBuffer sBuf = new StringBuffer();
+        for (int i = 0; i < 7-num.length(); i++) {
+            sBuf.append("0");
+        }
+        num = sBuf.toString()+num;
+        return num;
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    }
+}
+```
+
+4. 实现重定向
+
+web资源B收到客户端A的请求后，通知客户端A访问另一个web资源C。
+
+常见场景：
+
+- 用户登录
+
+```java
+    void sendRedirect(String var1) throws IOException;
+```
+
+实现：
+
+```java
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        //resp.setHeader("Location","/response_war/image");
+        //resp.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+        resp.sendRedirect("/response_war/image");//重定向
+    }
+```
+
+面试题：重定向和转发的区别？
+
+- 相同点：页面都实现跳转
+- 不同点：
+  - 请求转发，url不会发生变化
+  - 重定向，url地址栏会发生变化
+
+![转发与重定向](JavaWEB.assets/转发与重定向-1602908116502.png)
+
+**案例**：登录跳转
+
+Request.java
+
+```java
+public class RequestTest extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //处理请求
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        System.out.println(username+":"+password);
+        resp.sendRedirect("/response_war/success.jsp");
+    }
+}
+```
+
+index.jsp
+
+```jsp
+<html>
+<body>
+<h2>登录</h2>
+<%--提交的路径需要寻找到项目的路径--%>
+<%--${pageContext.request.contextPath}代表当前项目的地址--%>
+
+<form action="${pageContext.request.contextPath}/login" method="get">
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="password" name="password"><br>
+    <input type="submit">
+</form>
+
+</body>
+</html>
+```
+
+success.jsp
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<h1>登入成功！</h1>
+</body>
+</html>
+```
+
+### 5.7 HttpServletRequest
+
+HttpServletRequest代表客户端的请求，用户通过http协议访问服务器。HTTP中的所有信息封装在HttpServletRequest中。
+
+表单登录：
+
+```java
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //解决乱码问题
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        String[] hobbys = req.getParameterValues("hobby");
+        System.out.println("=======================");
+        System.out.println(username);
+        System.out.println(password);
+        System.out.println(Arrays.toString(hobbys));
+        System.out.println("=======================");
+        //通过请求转发
+        req.getRequestDispatcher("/success.jsp").forward(req,resp);
+    }
+```
+
+index.jsp
+
+```jsp
+<html>
+<head>
+    <title>登录</title>
+</head>
+<body>
+<h1>登录</h1>
+<div>
+    <%--以post方式提交--%>
+    <form action="${pageContext.request.contextPath}/login" method="post">
+        用户名：<input type="text" name="username" required><br>
+        密码：<input type="password" name="password" required><br>
+        爱好：
+        <input type="checkbox" name="hobby" value="Girl">Girl
+        <input type="checkbox" name="hobby" value="Coding">Coding
+        <input type="checkbox" name="hobby" value="Music">Music
+        <input type="checkbox" name="hobby" value="Draw">Draw
+        <br>
+        <input type="submit">
+    </form>
+</div>
+</body>
+</html>
+```
+
+## 六、Cookie、Session
+
+### 6.1 会话
+
+会话：用户打开浏览器，点击超链接访问多个web资源，关闭浏览器的过程。
+
+有状态会话：客户端再次连接时，服务端知晓客户端信息。
+
+### 6.2 保存会话的两种技术
+
+cookie
+
+- 客户端技术（响应，请求）
+
+session
+
+- 服务器技术，可以保存用户的会话信息。（信息或技术放在session中）
+
+应用：网站第二次登陆无需验证信息。
+
+### 6.3 Cookie
+
+1. 从请求中拿到cookie
+2. 服务器响应给客户端cookie
+
+```java
+Cookie cookie = cookies[i];//获得cookie
+cookie.getName().equals("LastLoginTime");//获取cookie的Key
+cookie.getValue();//获取cookie的Value
+new Cookie("LastLoginTime",System.currentTimeMillis()+"");//新建一个cookie
+cookie.setMaxAge(24*60*60);//设置cookie的有效期
+resp.addCookie(cookie);//向客户端返回一个cookie
+```
+
+cookie：一般保存在本地用户目录下AppData；
+
+网站cookie：
+
+- 一个Cookie只能保存一个信息。
+- 一个web站点可以给浏览器发送多个cookie，最多存放20个cookie。
+- cookie大小限制最大为4kb。
+- 浏览器cookie上限为300个。
+
+**删除Cookie：**
+
+- 不设置有效期，关闭浏览器，自动失效。
+- 设置有效期为0。
+
+```java
+cookie.setMaxAge(0);
+resp.addCookie(cookie);
+```
+
+**编码与解码：**
+
+```java
+URLEncoder.encode("森林","UTF-8");
+URLDecoder.decode(cookie.getValue(),"UTF-8");
+```
+
+### 6.4 Session（重点）
+
+Session：
+
+- 服务器为每个用户（浏览器）创建一个Session对象。
+- 每个Session独占一个浏览器，直至浏览器关闭。
+- 用户登录后，整个网站都可以访问。
+
+Session与Cookie的区别：
+
+- Cookie将用户数据存储在浏览器（可多个）
+- Session将用户数据写到用户独占Session中，服务端保存（重要信息，减少服务器资源浪费）
+- Session对象由服务器创建
+
+使用场景：
+
+- 保存用户登录信息
+- 购物车信息
+- 在整个网站中经常使用的数据
+
+使用Session：
+
+```java
+//解决乱码
+req.setCharacterEncoding("UTF-8");
+resp.setCharacterEncoding("UTF-8");
+resp.setContentType("text/html;charset=utf-8");
+//新建Session
+HttpSession session = req.getSession();
+//存入数据
+session.setAttribute("name", new Person("shinrin",17));
+//获取Session的ID
+String id = session.getId();
+//判断是否为新创建
+if (session.isNew()){
+resp.getWriter().write("Session创建成功，ID为"+id);
+}else {
+resp.getWriter().write("ID为" + id + "的Session已存在于服务器");
+}
+```
+
+读取Session：
+
+```java
+//获取Session
+HttpSession session = req.getSession();
+Person person = (Person) session.getAttribute("name");
+System.out.println(person);
+```
+
+手动注销Session：
+
+```java
+HttpSession session = req.getSession();
+//手动注销Session
+session.removeAttribute("name");
+session.invalidate();
+```
+
+会话自动过期（web.xml）：
+
+```java
+<!--设置Session的默认失效时间，以分钟为单位-->
+<session-config>
+	<session-timeout>15</session-timeout>
+</session-config>
+```
+
+## 七、JSP
+
+### 7.1 JSP简介 
+
+Java Server Pages：Java服务端页面，同Servlet，用于动态web技术。
+
+特点：
+
+- 类似HTML
+- 与HTML的区别
+  - HTML只能为用户提供静态的数据
+  - JSP页面中可以嵌入Java代码，为用户提供动态数据。
+
+### 7.2 JSP原理
+
+JSP如何执行？
+
+服务器内部工作：
+
+> tomcat下存在一个work目录。
+>
+> IDEA使用Tomcat会在IDEA的tomcat中产出一个work目录。
+
+浏览器向服务器发送请求，实质是在访问Servlet。
+
+JSP最终会转换为一个Java类。
+
+```java
+//初始化
+public void _jspInit() {}
+//销毁
+public void _jspDestroy() {}
+//JSPService
+public void _jspService(.http.HttpServletRequest request, HttpServletResponse response);
+```
+
+1. 判断请求
+2. 内置对象
+
+```java
+final javax.servlet.jsp.PageContext pageContext;	//页面上下文
+javax.servlet.http.HttpSession session = null;		//session
+final javax.servlet.ServletContext application;		//appliationcontext
+final javax.servlet.ServletConfig config;			//config
+javax.servlet.jsp.JspWriter out = null;				//out
+final java.lang.Object page = this;					//page：当前
+HttpServletRequest request							//请求
+HttpServletRequest request							//响应
+```
+
+3. 输出页面前增加的代码
+
+```java
+response.setContentType("text/html; charset=UTF-8");//设置响应的页面类型
+pageContext = _jspxFactory.getPageContext(this, request, response,
+											null, false, 8192, true);
+_jspx_page_context = pageContext;
+application = pageContext.getServletContext();
+config = pageContext.getServletConfig();
+out = pageContext.getOut();
+_jspx_out = out;
+```
+
+原理：
+
+- java代码不变
+
+- html转为java代码，如下：
+
+  ```java
+  out.write("<html>\r\n");
+  ```
+
+### 7.3 JSP基础语法
+
+JSP是java技术的一种应用，支持所有Java语法，并拥有一些扩充语法。
+
 
 
 
