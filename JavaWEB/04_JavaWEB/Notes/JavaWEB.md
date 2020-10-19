@@ -2109,8 +2109,6 @@ INSERT INTO account(`name`,money) VALUES('C',1000);
   }
   ```
 
-## 十四、SMBMS
-
 
 
 
