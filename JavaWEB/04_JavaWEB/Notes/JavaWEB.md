@@ -1376,9 +1376,9 @@ _jspx_out = out;
 
 原理：
 
-- java代码不变
+- java代码直接编译为class文件并向客户端返回
 
-- html转为java代码，如下：
+- html转java代码再编译为class文件并向客户端返回，如下：
 
   ```java
   out.write("<html>\r\n");
@@ -1388,11 +1388,728 @@ _jspx_out = out;
 
 JSP是java技术的一种应用，支持所有Java语法，并拥有一些扩充语法。
 
+```jsp
+  <%--  JSP表达式
+  作用：将程序结果输出到客户端
+  <%= 变量或表达式%>
+  --%>
+  <%= new java.util.Date()%>
+  <%--jsp脚本片段--%>
+  <%
+    int sum = 0;
+    for (int i = 0; i <= 100; i++) {
+      sum+=i;
+    }
+    out.println("<h1>Sum="+sum+"</h1>");
+  %>
+  <%
+    int x = 10;
+    out.println(x);
+  %>
+  <p>JSP文档</p>
+  <%
+    int y = 2;
+    out.println(y);
+  %>
+  <hr>
+  <%--代码中嵌入HTML文档--%>
+  <%
+    for (int i = 0; i < 5; i++) {
+  %>
+  <h1>Hello World <%=i%> </h1>
+  <%
+    }
+  %>
+  <%--JSP声明--%>
+  <%!
+    static {
+      System.out.println("Loading Servlet!");
+    }
+    private int glovalVar = 0;
+    public void shinrin(){
+      System.out.println("shinrin");
+    }
+  %>
+```
+
+注：JSP声明会被编译到J生成的Java类中，其余生成到_jspService方法中。
+
+JSP的注释不会显示在客户端（与HTML不同）。
+
+### 7.4 JSP指令
+
+```jsp
+<%@page args.... %>
+<%@include file=""%>
+
+<%--@include会将两个页面合二为一--%>
+
+<%@include file="common/header.jsp"%>
+<h1>网页主体</h1>
+<%@include file="common/footer.jsp"%>
+
+<hr>
+
+<%--jSP标签
+    jsp:include：拼接页面，本质还是三个
+    --%>
+<jsp:include page="/common/header.jsp"/>
+<h1>网页主体</h1>
+<jsp:include page="/common/footer.jsp"/>
+```
+
+### 7.5 九大内置对象
+
+- PageContext 存
+- Request 存
+- Response
+- Session 存
+- Application 【SerlvetContext】 存
+- config 【SerlvetConfig】
+- out
+- page 
+- exception
+
+```jsp
+<%
+  pageContext.setAttribute("name1","shinrin1"); //保存的数据只在一个页面中有效
+  request.setAttribute("name2","shinrin2"); //保存的数据只在一次请求中有效，请求转发会携带这个数据
+  session.setAttribute("name3","shinrin3"); //保存的数据只在一次会话中有效，从打开浏览器到关闭浏览器
+  application.setAttribute("name4","shinrin4");  //保存的数据只在服务器中有效，从打开服务器到关闭服务器
+%>
+```
+
+从pageContext取出，
+
+从底层到高层（作用域）：page->request->session->application。
+
+JVM：双亲委派机制。
+
+request：客户端向服务器发送请求，产生的数据，用户使用完即失效，比如：新闻。
+
+session：客户端向服务器发送请求，产生的数据，用户使用后仍然有用，比如：购物车。
+
+application：客户端向服务器发送请求，产生的数据，可多用户重复使用，比如：聊天数据。
+
+### 7.6 JSP标签、JSTL标签、EL表达式
+
+JSTL表达式的依赖：
+
+```xml
+        <!--JSTL表达式的依赖-->
+        <!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api -->
+        <dependency>
+            <groupId>javax.servlet.jsp.jstl</groupId>
+            <artifactId>jstl-api</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <!--Standard的依赖-->
+        <!-- https://mvnrepository.com/artifact/taglibs/standard -->
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+```
+
+**EL表达式：**
+
+- 获取数据。
+- 执行运算。
+- 获取web开发的常用对象。
+
+**JSP标签：**
+
+```jsp
+<%--jsp:include--%>
+
+<%--
+http://localhost:8080/jsptag.jsp?name=kuangshen&age=12
+--%>
+
+<jsp:forward page="/jsptag2.jsp">
+    <jsp:param name="name" value="kuangshen"></jsp:param>
+    <jsp:param name="age" value="12"></jsp:param>
+</jsp:forward>
+```
+
+**JSTL表达式：**
+
+弥补HTML标签不足，自定义标签。
+
+- 格式化标签
+- SQL标签
+- XML标签
+- 核心标签（重点）
+
+![](JavaWEB.assets/20200508152235704-1603075363175.png)
+
+JSTL标签使用步骤：
+
+- 引入对应的taglib。
+- 使用方法。
+- Tomcat中引入jstl包，否则解析错误。
+
+测试标签使用：
+
+c:if
+
+```jsp
+<head>
+    <title>Title</title>
+</head>
+<body>
+<h4>if测试</h4>
+<hr>
+<form action="coreif.jsp" method="get">
+    <%--
+    EL表达式获取表单中的数据
+    ${param.参数名}
+    --%>
+    <input type="text" name="username" value="${param.username}">
+    <input type="submit" value="登录">
+</form>
+
+<%--判断如果提交的用户名是管理员，则登录成功--%>
+<c:if test="${param.username=='admin'}" var="isAdmin">
+    <c:out value="管理员欢迎您！"/>
+</c:if>
+<%--自闭合标签--%>
+<c:out value="${isAdmin}"/>
+</body>
+```
+
+c:shoose c:when
+
+```jsp
+<body>
+
+<%--定义一个变量score，值为85--%>
+<c:set var="score" value="55"/>
+
+<c:choose>
+    <c:when test="${score>=90}">
+        你的成绩为优秀
+    </c:when>
+    <c:when test="${score>=80}">
+        你的成绩为一般
+    </c:when>
+    <c:when test="${score>=70}">
+        你的成绩为良好
+    </c:when>
+    <c:when test="${score<=60}">
+        你的成绩为不及格
+    </c:when>
+</c:choose>
+
+</body>
+```
+
+c:forEach
+
+```jsp
+<%
+    ArrayList<String> people = new ArrayList<>();
+    people.add(0,"张三");
+    people.add(1,"李四");
+    people.add(2,"王五");
+    people.add(3,"赵六");
+    people.add(4,"田六");
+    request.setAttribute("list",people);
+%>
+
+<%--
+var , 每一次遍历出来的变量
+items, 要遍历的对象
+begin,   哪里开始
+end,     到哪里
+step,   步长
+--%>
+<c:forEach var="people" items="${list}">
+    <c:out value="${people}"/> <br>
+</c:forEach>
+<hr>
+<c:forEach var="people" items="${list}" begin="1" end="3" step="1" >
+    <c:out value="${people}"/> <br>
+</c:forEach>
+```
+
+## 八、JavaBean
+
+实体类：
+
+- 无参构造
+- 属性私有化
+- 对应的get/set方法
+
+一般用来和数据库的字段做映射ORM。
+
+ORM：对象关系映射
+
+- 表===>类
+- 字段==>属性
+- 行记录==>对象
+
+示例：
+
+Person表：
+
+| id   | name     | age  | address   |
+| ---- | -------- | ---- | --------- |
+| 1    | shinrin1 | 17   | XiAn      |
+| 2    | shinrin2 | 27   | ChongQing |
+| 3    | shinrin3 | 37   | ChanSha   |
 
 
 
+```java
+class Person{
+    private int id;
+    private String name;
+    private int age;
+    private String address;
+}
 
+class A{
+    new People(1,"shinrin1",17，"XiAn");
+    new People(2,"shinrin2",27，"ChongQing");
+    new People(3,"shinrin3",37，"ChanSha");
+}
+```
 
+- 过滤器
+- 文件上传
+- 邮件发送
+
+## 九、MVC架构
+
+MVC： Model（模型）、 view （视图）、Controller（控制器）。
+
+### 9.1 传统架构
+
+![](JavaWEB.assets/原始架构.png)
+
+特点：用户直接访问控制层，控制层直接操作数据库。
+
+缺点：
+
+- servlet--CRUD--数据库
+
+- servlet代码中：处理请求、响应、视图跳转、处理JDBC、处理业务代码、处理逻辑代码。
+
+- 程序臃肿，不利于维护。
+
+### 9.2 MVC架构
+
+Servlet和JSP都可以写Java代码。为易于维护，Servlet专注于处理请求，以及控制视图跳转；JSP专注于显示数据。
+
+![](JavaWEB.assets/MVC.png)
+
+**Model**
+
+- 业务处理 ：业务逻辑（Service）
+- 数据持久层：CRUD （Dao - 数据持久化对象）
+
+**View**
+
+- 展示数据
+- 提供链接发起Servlet请求 （a，form，img…）
+
+**Controller （Servlet）**
+
+- 接收用户的请求 ：（req：请求参数、Session信息….）
+
+- 交给业务层处理对应的代码
+
+- 控制视图的跳转
+
+![](JavaWEB.assets/登录事务.png)
+
+注：DAO(Data Access Object)是一个数据访问接口，提供数据访问，处在[业务逻辑](https://baike.baidu.com/item/业务逻辑)与数据库资源中间。
+
+## 十、Filter（重点）
+
+Shiro安全框架技术使用Filter实现。
+
+Filter：过滤器，过滤网站数据。
+
+- 处理中文乱码
+- 登录验证
+
+![](JavaWEB.assets/过滤器.png)
+
+Filter开发步骤：
+
+1. 导包
+
+   ```java
+   package com.shinrin.filter;
+   ```
+
+2. 编写过滤器
+
+   - 实现Filter接口，重写对应方法：init、doFilter、destory。
+
+   ```java
+   public class CharacterEncodingFilter implements Filter {
+       //初始化：web服务器启动，过滤器被初始化，等待过滤对象出现！
+       public void init(FilterConfig filterConfig) throws ServletException {
+           System.out.println("CharacterEncodingFilter初始化");
+       }
+       //Chain : 链
+       //1. 过滤器中的所有代码，在过滤特定请求的时候都会执行
+       //2. 必须要让过滤器继续同行chain.doFilter(request,response);
+       public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+           request.setCharacterEncoding("utf-8");
+           response.setCharacterEncoding("utf-8");
+           response.setContentType("text/html;charset=UTF-8");
+           System.out.println("CharacterEncodingFilter执行前....");
+           chain.doFilter(request,response); //请求继续，否则将被拦停
+           System.out.println("CharacterEncodingFilter执行后....");
+       }
+       //销毁：web服务器关闭时，过滤器被销毁
+       public void destroy() {
+           System.out.println("CharacterEncodingFilter销毁");
+       }
+   }
+   ```
+
+3. 配置web.xml
+
+   ```xml
+   <filter>
+       <filter-name>CharacterEncodingFilter</filter-name>
+       <filter-class>com.shinrin.filter.CharacterEncodingFilter</filter-class>
+   </filter>
+   <filter-mapping>
+       <filter-name>CharacterEncodingFilter</filter-name>
+       <!-- /servlet的任何请求，都会经过该过滤器 -->
+       <url-pattern>/servlet/*</url-pattern>
+       <!-- 不能写作<url-pattern>/*</url-pattern> -->
+   </filter-mapping>
+   ```
+
+##  十一、Listener
+
+1. 实现一个监听器的接口：n种
+
+   - 实现监听器的接口
+
+     ```java
+     package com.shinrin.listener;
+     import javax.servlet.ServletContext;
+     import javax.servlet.http.HttpSessionEvent;
+     import javax.servlet.http.HttpSessionListener;
+     ```
+
+   - 依赖：
+
+   - 实现：
+
+     ```java
+     //统计网站在线人数 ： 统计session
+     public class OnlineCountListener implements HttpSessionListener {
+         //创建session监听
+         //创建Session触发该事件
+         public void sessionCreated(HttpSessionEvent se) {
+             ServletContext ctx = se.getSession().getServletContext();
+             System.out.println(se.getSession().getId());
+             Integer onlineCount = (Integer) ctx.getAttribute("OnlineCount");
+             if (onlineCount==null){
+                 onlineCount = new Integer(1);
+             }else {
+                 int count = onlineCount.intValue();
+                 onlineCount = new Integer(count+1);
+             }
+             ctx.setAttribute("OnlineCount",onlineCount);
+         }
+         //销毁session监听
+         //销毁Session触发该事件
+         public void sessionDestroyed(HttpSessionEvent se) {
+             ServletContext ctx = se.getSession().getServletContext();
+             Integer onlineCount = (Integer) ctx.getAttribute("OnlineCount");
+             if (onlineCount==null){
+                 onlineCount = new Integer(0);
+             }else {
+                 int count = onlineCount.intValue();
+                 onlineCount = new Integer(count-1);
+             }
+             ctx.setAttribute("OnlineCount",onlineCount);
+         }
+     }
+     ```
+
+2. web.xml配置（注册Listener）
+
+   ```java
+   <!--注册监听器-->
+   <listener>
+       <listener-class>com.kuang.listener.OnlineCountListener</listener-class>
+   </listener>
+   ```
+
+## 十二、Filter与Listener的应用
+
+- 监听器（GUI应用）
+
+  ```java
+  public class TestPanel {
+      public static void main(String[] args) {
+          Frame frame = new Frame("中秋节快乐");  //新建一个窗体
+          Panel panel = new Panel(null); //面板
+          frame.setLayout(null); //设置窗体的布局
+          frame.setBounds(300,300,500,500);
+          frame.setBackground(new Color(0,0,255)); //设置背景颜色
+          panel.setBounds(50,50,300,300);
+          panel.setBackground(new Color(0,255,0)); //设置背景颜色
+          frame.add(panel);
+          frame.setVisible(true);
+          //监听事件，监听关闭事件
+          frame.addWindowListener(new WindowAdapter() {
+              @Override
+              public void windowClosing(WindowEvent e) {
+                  super.windowClosing(e);
+              }
+          });
+      }
+  }
+  ```
+
+- 过滤器
+
+  - 用户登录后才能进入主页
+    - 用户登录后，向Session中放入用户的数据。
+    - 进入主页时判断用户是否已登录。
+
+  ```java
+  HttpServletRequest request = (HttpServletRequest) req;
+  HttpServletResponse response = (HttpServletResponse) resp;
+  if (request.getSession().getAttribute(Constant.USER_SESSION)==null){
+      response.sendRedirect("/error.jsp");
+  }
+  chain.doFilter(request,response);
+  ```
+
+## 十三、JDBC
+
+### 13.1 JDBC简介
+
+连接数据库。
+
+![](JavaWEB.assets/JDBC.png)
+
+**需要导入的包：**
+
+- java.sql
+- javax.sql
+- mysql-conneter-java… 连接驱动
+
+**依赖：**
+
+```java
+<!--mysql驱动-->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.47</version>
+</dependency>
+```
+
+测试（SQL语句）：
+
+```mysql
+CREATE TABLE users(
+    id INT PRIMARY KEY,
+    `name` VARCHAR(40),
+    `password` VARCHAR(40),
+    email VARCHAR(60),
+    birthday DATE
+);
+
+INSERT INTO users(id,`name`,`password`,email,birthday)
+VALUES(1,'Teemo','123456','teemo@qq.com','2010-01-01');
+INSERT INTO users(id,`name`,`password`,email,birthday)
+VALUES(2,'YaSuo','123456','yasuo@qq.com','2010-01-01');
+INSERT INTO users(id,`name`,`password`,email,birthday)
+VALUES(3,'Lux','123456','lux@qq.com','2010-01-01');
+
+SELECT	* FROM users;
+```
+
+### 13.2 JDBC的使用
+
+**JDBC步骤：**
+
+1. 加载驱动
+2. 连接数据库
+3. 向数据库发送SQL的对象Statement：CRUD
+4. 编写SQL（不同业务）
+5. 执行SQL
+6. 关闭连接（先开后关）
+
+```mysql
+public class TestJdbc {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        //配置信息
+        //useUnicode=true&characterEncoding=utf-8 解决中文乱码
+        String url="jdbc:mysql://localhost:3306/jdbc?useUnicode=true&characterEncoding=utf-8";
+        String username = "root";
+        String password = "123456";
+        //1.加载驱动
+        Class.forName("com.mysql.jdbc.Driver");
+        //2.连接数据库,代表数据库
+        Connection connection = DriverManager.getConnection(url, username, password);
+        //3.向数据库发送SQL的对象Statement,PreparedStatement : CRUD
+        Statement statement = connection.createStatement();
+        //4.编写SQL
+        String sql = "select * from users";
+        //5.执行查询SQL，返回一个 ResultSet  ： 结果集
+        ResultSet rs = statement.executeQuery(sql);
+        while (rs.next()){
+            System.out.println("id="+rs.getObject("id"));
+            System.out.println("name="+rs.getObject("name"));
+            System.out.println("password="+rs.getObject("password"));
+            System.out.println("email="+rs.getObject("email"));
+            System.out.println("birthday="+rs.getObject("birthday"));
+        }
+        //6.关闭连接，释放资源（一定要做） 先开后关
+        rs.close();
+        statement.close();
+        connection.close();
+    }
+}
+```
+
+**预编译SQL：**规避注入攻击，编译后传入的参数仅做为字段值，而非SQL命令。
+
+```java
+public class TestJDBC2 {
+    public static void main(String[] args) throws Exception {
+        //配置信息
+        //useUnicode=true&characterEncoding=utf-8 解决中文乱码
+        String url="jdbc:mysql://localhost:3306/jdbc?useUnicode=true&characterEncoding=utf-8";
+        String username = "root";
+        String password = "123456";
+        //1.加载驱动
+        Class.forName("com.mysql.jdbc.Driver");
+        //2.连接数据库,代表数据库
+        Connection connection = DriverManager.getConnection(url, username, password);
+        //3.编写SQL
+        String sql = "insert into  users(id, name, password, email, birthday) values (?,?,?,?,?);";
+        //4.预编译
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1,2);
+        preparedStatement.setString(2,"shinrin");
+        preparedStatement.setString(3,"123456");
+        preparedStatement.setString(4,"shinrin@qq.com");
+        preparedStatement.setDate(5,new Date(new java.util.Date().getTime()));
+        //5.执行SQL
+        int i = preparedStatement.executeUpdate();
+        if (i>0){
+            System.out.println("插入数据成功");
+        }
+        //6.关闭连接，释放资源（先开后关）
+        preparedStatement.close();
+        connection.close();
+    }
+}
+```
+
+### 13.3 事务
+
+**事务：**
+
+- 一组事务，或者全部成功，或者全部失败。
+
+- ACID原则：保证数据安全。
+
+转账案例：
+
+>开启事务
+>事务提交  commit()
+>事务回滚  rollback()
+>关闭事务
+>
+>转账：
+>A:1000
+>B:1000
+>    
+>A(900)   --100-->   B(1100) 
+
+单元测试：
+
+- 依赖：
+
+  ```xml
+  <!--单元测试-->
+  <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+  </dependency>
+  ```
+
+案例（事务）：
+
+- SQL语句
+
+```mysql
+CREATE TABLE account(
+   id INT PRIMARY KEY AUTO_INCREMENT,
+   `name` VARCHAR(40),
+   money FLOAT
+);
+
+INSERT INTO account(`name`,money) VALUES('A',1000);
+INSERT INTO account(`name`,money) VALUES('B',1000);
+INSERT INTO account(`name`,money) VALUES('C',1000);
+```
+
+- 处理
+
+  ```
+  @Test
+  public void test() {
+      //配置信息
+      //useUnicode=true&characterEncoding=utf-8 解决中文乱码
+      String url="jdbc:mysql://localhost:3306/jdbc?useUnicode=true&characterEncoding=utf-8";
+      String username = "root";
+      String password = "123456";
+      Connection connection = null;
+      //1.加载驱动
+      try {
+          Class.forName("com.mysql.jdbc.Driver");
+          //2.连接数据库,代表数据库
+          connection = DriverManager.getConnection(url, username, password);
+          //3.通知数据库开启事务,false 开启
+          connection.setAutoCommit(false);
+          String sql = "update account set money = money-100 where name = 'A'";
+          connection.prepareStatement(sql).executeUpdate();
+          //制造错误
+          //int i = 1/0;
+          String sql2 = "update account set money = money+100 where name = 'B'";
+          connection.prepareStatement(sql2).executeUpdate();
+          connection.commit();//以上两条SQL都执行成功即提交事务
+          System.out.println("success");
+  	} catch (Exception e) {
+          try {
+          	//出现异常，通知数据库回滚事务
+          	connection.rollback();
+          } catch (SQLException e1) {
+          	e1.printStackTrace();
+          }
+          e.printStackTrace();
+  	}finally {
+          try {
+          	connection.close();
+          } catch (SQLException e) {
+          	e.printStackTrace();
+          }
+      }
+  }
+  ```
+
+## 十四、SMBMS
 
 
 
