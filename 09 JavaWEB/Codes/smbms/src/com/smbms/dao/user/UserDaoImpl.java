@@ -9,16 +9,17 @@ import java.sql.ResultSet;
 
 public class UserDaoImpl implements UserDao{
     @Override
-    public User getLoginUser(Connection connection, String userCode) throws Exception {
+    public User getLoginUser(Connection connection, String userCode)
+            throws Exception {
+        // TODO Auto-generated method stub
         PreparedStatement pstm = null;
         ResultSet rs = null;
         User user = null;
-        if (connection == null){
-            String sql = "select * from smbms_user where userCOde=?";
+        if(null != connection){
+            String sql = "select * from smbms_user where userCode=?";
             Object[] params = {userCode};
-
-            rs = BaseDao.execute(connection,pstm,rs,sql,params);
-            if (rs.next()){
+            rs = BaseDao.execute(connection, pstm, rs, sql, params);
+            if(rs.next()){
                 user = new User();
                 user.setId(rs.getInt("id"));
                 user.setUserCode(rs.getString("userCode"));
@@ -34,7 +35,7 @@ public class UserDaoImpl implements UserDao{
                 user.setModifyBy(rs.getInt("modifyBy"));
                 user.setModifyDate(rs.getTimestamp("modifyDate"));
             }
-            BaseDao.closeResource(null,pstm,rs);
+            BaseDao.closeResource(null, pstm, rs);
         }
         return user;
     }

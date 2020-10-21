@@ -10,26 +10,32 @@ import java.sql.Connection;
 
 public class UserServiceImpl implements UserService{
 
-    //业务层都会调用DAO层，故引入DAO层
     private UserDao userDao;
     public UserServiceImpl(){
         userDao = new UserDaoImpl();
     }
 
     @Override
-    public User login(String userCode, String password) {
+    public User login(String userCode, String userPassword) {
+        // TODO Auto-generated method stub
         Connection connection = null;
         User user = null;
-
         try {
             connection = BaseDao.getConnection();
-            //通过业务层调用对应的具体的数据库操作
             user = userDao.getLoginUser(connection, userCode);
-        }catch (Exception e){
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
-        }finally {
-            BaseDao.closeResource(connection,null,null);
+        }finally{
+            BaseDao.closeResource(connection, null, null);
         }
+
+        //匹配密码
+        if(null != user){
+            if(!user.getUserPassword().equals(userPassword))
+                user = null;
+        }
+
         return user;
     }
 

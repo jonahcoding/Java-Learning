@@ -9,6 +9,7 @@ import cn.smbms.dao.BaseDao;
 import cn.smbms.dao.user.UserDao;
 import cn.smbms.dao.user.UserDaoImpl;
 import cn.smbms.pojo.User;
+import org.junit.Test;
 
 /**
  * service层捕获异常，进行事务处理
@@ -200,5 +201,11 @@ public class UserServiceImpl implements UserService{
 		}
 		return count;
 	}
-	
+
+	@Test
+	public void test(){
+		UserServiceImpl userService = new UserServiceImpl();
+		User admin = userService.login("liming", "1234567");
+		System.out.println(admin.getUserPassword());
+	}
 }
