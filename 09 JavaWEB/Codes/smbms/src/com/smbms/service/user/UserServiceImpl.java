@@ -12,7 +12,7 @@ public class UserServiceImpl implements UserService{
 
     //业务层都会调用DAO层，故引入DAO层
     private UserDao userDao;
-    private UserServiceImpl(){
+    public UserServiceImpl(){
         userDao = new UserDaoImpl();
     }
 
