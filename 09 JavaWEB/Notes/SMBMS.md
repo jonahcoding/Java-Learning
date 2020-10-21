@@ -24,38 +24,81 @@ USE `smbms`;
 
 ### 1.3 项目搭建
 
-1. 新建Maven项目（web模板），项目名：smbms-web
+1. 新建Maven项目（web模板），项目名：smbms
 
-2. 配置Tomcat（访问地址：http://localhost:8080/smbms/）
+2. 调整项目结构
 
-3. 测试项目是否可以运行
+   - **标记Web为指定目录**：Project Structure/Project Settings/Modules/项目名-Web
+   - 标记src为Sources Root。
+   - 如图：
 
-4. 导入包：jsp、servlet、mysql驱动、jstl、standard
+   ![](SMBMS.assets/项目搭建目录-1603267751431.png)
 
-5. 创建项目包结构：（路径：java/com/shinrin/）dao、filter、pojo、service、servlet、util
+   
 
-6. 编写实体类：（路径：java/com/shinrin/pojo/）Bill、Provider、Role、User
+3. 配置Tomcat并测试
+
+   - 地址：http://localhost:8080/smbms/
+
+4. 配置pom.xml（导包）
+
+   ```xml
+   <!--  
+   ==> servlet-api
+   ==> javax.servlet.jsp-api
+   ==> jstl-api
+   ==> mysql-connector-java
+   ==> standard
+   ==> junit
+   ==> junit-jupiter
+   其中junit-jupiter：
+   -->
+       <dependency>
+         <groupId>org.junit.jupiter</groupId>
+         <artifactId>junit-jupiter</artifactId>
+         <version>RELEASE</version>
+         <scope>compile</scope>
+       </dependency>
+   ```
+
+5. 创建项目包结构
+
+   - 路径：src/com/smbms/
+   - 新建包：dao、filter、pojo、service、servlet、tools
+
+6. 编写实体类（数据库表）
+
+   - 路径：src/com/smbms/pojo/
+   - Bill、Provider、Role、User
 
    - ORM映射：表-类映射
 
 7. 编写公共基础类
 
-   - 数据库配置文件（文件：resources/db.properties）
+   - 数据库配置文件
+
+     - 文件：src/database.properties
 
      ```properties
      driver=com.mysql.jdbc.Driver
-     url=jdbc:mysql://localhost:3306?useUnicode=true&characterEncoding=utf-8
-     username=root
+     #unicode编码格式，字符集为utf-8
+     url=jdbc:mysql://127.0.0.1:3306/smbms?useUnicode=true&characterEncoding=utf-8
+     user=root
      password=123456
      ```
 
-   - 数据库操作类（路径：java/com/shinrin/dao/BaseDao.java）
+   - 数据库操作类（dao）
 
-   - 编写字符编码过滤器（路径：java/com/shinrin/filter/CharacterEncodingFilter.java）
+     - 文件：src/com/smbms/dao/BaseDao.java
+
+   - 字符编码过滤器（filter）
+
+     - 文件：src/com/smbms/filter/CharacterEncodingFilter.java
 
 8. 导入静态资源
 
-   - （路径：webapp/）calendar、css、images、js文件夹。
+   - 路径：web/
+   - calendar、css、images、js、jsp文件夹。
 
 
 
@@ -63,12 +106,16 @@ USE `smbms`;
 
 ![](SMBMS.assets/登录功能.png)
 
-1. 编写登录前端页面：webapp/login.jsp
+1. 导入前端登录页面
+
+   - 文件：web/login.jsp
 
 2. 设置首页
 
+   - 文件：web\WEB-INF\web.xml
+
    ```xml
-   <!--设置欢迎页-->
+   <!--设置登录页-->
      <welcome-file-list>
        <welcome-file>login.jsp</welcome-file>
      </welcome-file-list>
@@ -76,7 +123,7 @@ USE `smbms`;
 
 3. 编写DAO层登录用户登录的接口
 
-   src\main\java\com\shinrin\dao\user\UserDao.java
+   - 文件：src\com\smbms\dao\user\UserDao.java
 
    ```java
    public interface UserDao {
@@ -85,9 +132,9 @@ USE `smbms`;
    }
    ```
 
-4. 编写DAO接口的实现类
+4. 编写DAO层登录用户登录的接口的实现类
 
-   src\main\java\com\shinrin\dao\user\UserDaoImpl.java
+   - 文件：src\com\smbms\dao\user\UserDaoImpl.java
 
    ```java
    public class UserDaoImpl implements UserDao{

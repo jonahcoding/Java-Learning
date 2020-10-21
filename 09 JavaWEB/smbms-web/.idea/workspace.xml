@@ -315,80 +315,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08dd47e5-b97b-4acf-ad8f-18b9e79cef5c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Test_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/Test_war_exploded.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/smbms_war.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/smbms_war.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/smbms_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/smbms_war_exploded.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/BaseDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/BaseDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/bill/BillDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/bill/BillDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/bill/BillDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/bill/BillDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/provider/ProviderDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/provider/ProviderDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/provider/ProviderDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/provider/ProviderDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/role/RoleDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/role/RoleDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/role/RoleDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/role/RoleDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/user/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/user/UserDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/user/UserDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/dao/user/UserDaoImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/filter/CharacterEncoding.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/filter/CharacterEncoding.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/filter/SysFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/filter/SysFilter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/pojo/Bill.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/pojo/Bill.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/pojo/Provider.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/pojo/Provider.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/pojo/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/pojo/Role.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/pojo/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/pojo/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/bill/BillService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/bill/BillService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/bill/BillServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/bill/BillServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/provider/ProviderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/provider/ProviderService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/provider/ProviderServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/provider/ProviderServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/role/RoleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/role/RoleService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/role/RoleServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/role/RoleServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/user/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/user/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/user/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/service/user/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/servlet/bill/BillServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/servlet/bill/BillServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/servlet/provider/ProviderServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/servlet/provider/ProviderServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/servlet/user/LoginServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/servlet/user/LoginServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/servlet/user/LogoutServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/servlet/user/LogoutServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/servlet/user/UserServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/servlet/user/UserServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/tools/BigDecimalUtil$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/tools/BigDecimalUtil$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/tools/BigDecimalUtil$BigDecimalOprations.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/tools/BigDecimalUtil$BigDecimalOprations.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/tools/BigDecimalUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/tools/BigDecimalUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/tools/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/tools/Constants.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/tools/PageSupport.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/cn/smbms/tools/PageSupport.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Test_war_exploded/WEB-INF/classes/database.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/dao/BaseDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/dao/bill/BillDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/dao/bill/BillDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/dao/provider/ProviderDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/dao/provider/ProviderDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/dao/role/RoleDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/dao/role/RoleDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/dao/user/UserDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/dao/user/UserDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/filter/CharacterEncoding.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/filter/SysFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/pojo/Bill.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/pojo/Provider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/pojo/Role.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/pojo/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/service/bill/BillService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/service/bill/BillServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/service/provider/ProviderService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/service/provider/ProviderServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/service/role/RoleService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/service/role/RoleServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/service/user/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/service/user/UserServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/servlet/bill/BillServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/servlet/provider/ProviderServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/servlet/user/LoginServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/servlet/user/LogoutServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/servlet/user/UserServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/tools/BigDecimalUtil$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/tools/BigDecimalUtil$BigDecimalOprations.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/tools/BigDecimalUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/tools/Constants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/cn/smbms/tools/PageSupport.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/smbms/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/smbms/database.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smbms.iml" beforeDir="false" afterPath="$PROJECT_DIR$/smbms.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/database.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -434,11 +367,17 @@
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="database.console.LAST_STATE" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15940489" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="project.structure.side.proportion" value="0.116414435" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
@@ -592,6 +531,8 @@
       <workItem from="1603249070383" duration="8000" />
       <workItem from="1603249120363" duration="9000" />
       <workItem from="1603249255739" duration="45000" />
+      <workItem from="1603249341118" duration="684000" />
+      <workItem from="1603250303040" duration="688000" />
     </task>
     <servers />
   </component>
@@ -615,95 +556,17 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="286" y="293" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1603247947251" />
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <last-edited>Test:war exploded</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.5" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>Web</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>smbms</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>lib1</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+    <state x="691" y="456" key="FileChooserDialogImpl" timestamp="1603264429569">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="691" y="456" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1603264429569" />
+    <state x="287" y="198" key="SettingsEditor" timestamp="1603250219018">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="287" y="198" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1603250219018" />
+    <state x="282" y="153" key="new project wizard" timestamp="1603264476810">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="282" y="153" key="new project wizard/0.0.1920.1080@0.0.1920.1080" timestamp="1603264476810" />
   </component>
 </project>
