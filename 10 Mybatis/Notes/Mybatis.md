@@ -94,7 +94,7 @@ public class JdbcTest {
 
 二、MyBatis概述
 
-MyBatis介绍：
+2.1 MyBatis介绍：
 
 - mybatis是一个持久层的框架，是apache下的顶级项目（开源）。
 
@@ -102,4 +102,32 @@ MyBatis介绍：
 - mybatis提供映射，可自由灵活生成（半自动化）满足需要sql语句。
   - **输入映射**：对preparedStatement中的输入参数自动进行映射。
   - **输出映射**：将查询结果集灵活映射成java对象。
+
+2.2 MyBatis原理：
+
+![](MyBatis.assets/20180420191152719.png)
+
+相关文件：
+
+- 数据库表user的映射类：
+  - 字段的get、set方法以及getString方法。
+  - 文件：\MyBatis_PROJ\src\main\java\com\shinrin\pojo\User.java
+
+- 映射类User的Mapper（Dao）接口：
+  - 声明操作User的方法。
+  - 文件：\MyBatis_PROJ\src\main\java\com\shinrin\UserMapper.java
+
+- 映射文件：
+  - 为指定Mapper的方法配置SQL语句。	
+  - 文件：\MyBatis_PROJ\src\main\resources\UserMapper.xml（为指定的方法配置sql语句）
+
+- MyBatis全局配置文件：
+  - 配置数据源、事务、MyBatis环境。
+  - \MyBatis_PROJ\src\main\resources\\mybatis-config.xml
+
+
+
+- 配置数据源、事务以及MyBatis环境。
+
+
 
