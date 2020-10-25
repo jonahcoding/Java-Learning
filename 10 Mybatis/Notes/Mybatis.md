@@ -92,7 +92,7 @@ public class JdbcTest {
 }
 ```
 
-## 二、MyBatis概述
+# 二、MyBatis概述
 
 ## 2.1 MyBatis介绍
 
@@ -122,7 +122,7 @@ public class JdbcTest {
 
 **项目结构预览：**
 
-![image-20201025222956038](Mybatis.assets/image-20201025222956038.png)
+![image-20201025225325458](Mybatis.assets/image-20201025225325458.png)
 
 ## 3.1 搭建环境
 
@@ -352,7 +352,7 @@ INSERT INTO `user`(`id`,`name`,`pwd`) VALUES
 
 ### 3.3.1 测试代码
 
-UserTest.java
+UserDaoTest.java
 
 ```java
 package com.shinrin.dao;
@@ -426,4 +426,244 @@ public class UserTest {
 ### 3.3.3 测试结果
 
 ![image-20201025222757380](Mybatis.assets/image-20201025222757380.png)
+
+# 四、CRUD
+
+## 4.1 namespace
+
+- 确保namespace中的包名和Dao/Mapper接口的包名一致。（UserMapper.xml）
+
+  ```xml
+  <mapper namespace="com.shinrin.dao.UserDao">
+  ```
+
+## 4.2 select
+
+选择，查询语句（UserMapper.xml）：
+
+- id：对应namespace（接口）中的方法名。
+- resultType：SQL语句执行的返回值类型。
+- parameterType：参数类型。
+
+### 4.2.1 编写接口
+
+```java
+    //通过ID获取用户信息
+    User getUserById(int id);
+```
+
+### 4.2.2 编写Mapper中的SQL
+
+```xml
+    <select id="getUserById" parameterType="int" resultType="com.shinrin.pojo.User">
+        select * from mybatis.user where id = #{id}
+    </select>
+```
+
+### 4.2.3 测试
+
+```java
+    @Test
+    public void getUserById(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        User user = mapper.getUserById(1);
+        System.out.println(user);
+        sqlSession.close();
+    }
+```
+
+![image-20201025225824737](Mybatis.assets/image-20201025225824737.png)
+
+## 4.3 insert
+
+### 4.3.1 编写接口
+
+```java
+    //插入一条用户信息
+    int addUser(User user);
+```
+
+### 4.3.2 编写Mapper中的SQL
+
+```xml
+    <insert id="addUser" parameterType="com.shinrin.pojo.User">
+        insert into mybatis.user (id, name, pwd) values (#{id}, #{name}, #{pwd});
+    </insert>
+```
+
+### 4.3.3 测试
+
+**注：增删改，事务必须提交，才能生效！**
+
+```java
+    //增删改需要提交事务
+    @Test
+    public void addUser(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        int res = mapper.addUser(new User(4, "LiQing", "654321"));
+        if (res > 0) {
+            System.out.println("插入数据成功！");
+        }
+        sqlSession.commit();
+        sqlSession.close();
+    }
+```
+
+## 4.4 update
+
+### 4.4.1 编写接口
+
+```java
+    //修改用户
+    int updateUser(User user);
+```
+
+### 4.4.2 编写Mapper中的SQL
+
+```xml
+    <update id="updateUser" parameterType="com.shinrin.pojo.User" >
+        update mybatis.user set name = #{name},pwd = #{pwd} where id = #{id};
+    </update>
+```
+
+### 4.4.3 测试
+
+```java
+    @Test
+    public void updateUser(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        int res = mapper.updateUser(new User(4,"Jinx","987654"));
+        if (res > 0) {
+            System.out.println("修改数据成功！");
+        }
+        sqlSession.commit();
+        sqlSession.close();
+    }
+```
+
+## 4.5 delete
+
+### 4.5.1 编写接口
+
+```java
+    //删除用户
+    int deleteUser(int id);
+```
+
+### 4.5.2 编写Mapper中的SQL
+
+```xml
+    <delete id="deleteUser" parameterType="int">
+        delete from mybatis.user where id = #{id};
+    </delete>
+```
+
+### 4.5.3 测试
+
+```java
+    @Test
+    public void deleteUser(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        int res = mapper.deleteUser(4);
+        if (res > 0) {
+            System.out.println("删除数据成功！");
+        }
+        sqlSession.commit();
+        sqlSession.close();
+    }
+```
+
+# 五、Map和模糊查询
+
+## 5.1 Map
+
+**使用情景：实体类、数据库表的字段或参数过多时使用Map。**
+
+- ***Map传递参数：sql中取key。***【parameterType="map"】
+
+- ***对象传递参数：sql中取属性。***【parameterType="Object"】
+- 仅一个基本数据类型参数时，可在sql中直接取到。
+
+### 5.1.1 接口
+
+```java
+    //Map
+    int addUser2(Map<String,Object> map);
+```
+
+### 5.1.2 Mapper
+
+```xml
+    <insert id="addUser2" parameterType="map">
+        insert into mybatis.user (id, pwd) values (#{userid}, #{password});
+    </insert>
+```
+
+### 5.1.3 测试
+
+```java
+    @Test
+    public void addUser2(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("userid", 4);
+        map.put("password", 142857);
+        int res = mapper.addUser2(map);
+        if (res > 0) {
+            System.out.println("插入数据成功！");
+        }
+        sqlSession.commit();
+        sqlSession.close();
+    }
+```
+
+## 5.2 模糊查询
+
+### 5.2.1 接口
+
+```java
+    //模糊查询
+    List<User> getUserLike(String value);
+```
+
+### 5.2.2 Mapper
+
+```xml
+    <select id="getUserLike" parameterType="String" resultType="com.shinrin.pojo.User">
+        select * from mybatis.user where name like #{values}
+    </select>
+```
+
+### 5.2.3 测试
+
+```java
+    //模糊查询
+    @Test
+    public void getUserLike(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserDao mapper = sqlSession.getMapper(UserDao.class);
+
+        List<User> userList = mapper.getUserLike("%e%");
+        for (User user : userList) {
+            System.out.println(user);
+        }
+        //关闭sqlSession
+        sqlSession.close();
+    }
+```
+
+### 5.2.4 总结
+
+- java代码中使用通配符（安全）
+  - sql：```select * from mybatis.user where name like #{values}```
+  - Java代码：```List<User> userList = mapper.getUserLike("%e%");```
+
+- sql中使用通配符（存在SQL注入风险）
+  - sql：```select * from mybatis.user where name like "%"#{value}"%"```
+  - Java代码：```List<User> userList = mapper.getUserLike("e");```
 
