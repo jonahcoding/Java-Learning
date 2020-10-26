@@ -1,6 +1,9 @@
 package com.shinrin.pojo;
 
+import org.apache.ibatis.type.Alias;
+
 //实体类
+@Alias("User")//使用注解起别名
 public class User {
     private int id;
     private String name;

@@ -667,3 +667,370 @@ public class UserTest {
   - sql：```select * from mybatis.user where name like "%"#{value}"%"```
   - Java代码：```List<User> userList = mapper.getUserLike("e");```
 
+# 六、配置解析
+
+
+
+## 6.1 核心配置文件
+
+- mybatis-config.xml
+
+| 标签               | 属性           |
+| :----------------- | -------------- |
+| configuration      | 配置           |
+| properties         | 属性           |
+| settings           | 设置           |
+| typeAliases        | 类型别名       |
+| typeHandlers       | 类型处理器     |
+| objectFactory      | 对象工厂       |
+| plugins            | 插件           |
+| environments       | 环境配置       |
+| environment        | 环境变量       |
+| transactionManager | 事务管理器     |
+| dataSource         | 数据源         |
+| databaseIdProvider | 数据库厂商标识 |
+| mappers            | 映射器         |
+
+## 6.2 环境配置（environments）
+
+- **Mybatis可配置多种环境，但每个SqlSessionFactory实例只能选择一种环境。**
+- Mybatis默认的事务管理器是JDBC，连接池是POOLED
+
+## 6.3 属性（properties）
+
+- 可通过properties属性来实现引用配置文件。
+- 属性可以外部配置也可以动态替换（Java属性文件中配置或由properties元素的子元素传递）
+
+【例】
+
+- 编写配置文件：db.properties
+
+```properties
+driver=com.mysql.jc.jdbc.Driver
+url=jdbc:mysql://localhost::3306/mybatis?serverTimezone=UTC
+username=root
+password=1704
+```
+
+- 核心配置文件
+
+```xml
+	<!--引入外部配置文件-->
+	<properties resource="db.properties">
+		<property name="username" value="root"/>
+		<property name="pwd" value="123456"/>
+	</properties>
+```
+
+注：
+
+1. 可直接引入外部文件。
+2. 可在其中增加一些属性配置。
+3. **如果核心配置文件与配置文件存在同一个字段，优先使用外部配置文件。**
+
+## 6.4 类型别名（typeAliases）
+
+作用：为Java类型设置短名字，减少类完全限定名的冗余。
+
+第一种：指定单个类（适用于实体类较少的情形）
+
+```xml
+    <!--为实体类起别名-->
+    <typeAliases>
+        <typeAliases type="com.shinrin.pojo.User" alias="User">
+    <typeAliases>
+```
+
+第二种：指定包名（默认别名为类的类名，首字母小写，实体类较多时使用）
+
+```xml
+    <!--为实体类起别名-->
+    <typeAliases>
+        <package name="com.shinrin.pojo">
+    <typeAliases>
+```
+
+注：第二种指定包名方式可通过注解实现自定义类的别名。
+
+```java
+@Alias("User")
+public class User(){}
+```
+
+## 6.5 设置
+
+![1603689681336](Mybatis.assets/1603689681336.png)
+
+![1603689703932](Mybatis.assets/1603689703932.png)
+
+例：
+
+```xml
+<settings>
+  <setting name="cacheEnabled" value="true"/>
+  <setting name="lazyLoadingEnabled" value="true"/>
+  <setting name="multipleResultSetsEnabled" value="true"/>
+  <setting name="useColumnLabel" value="true"/>
+  <setting name="useGeneratedKeys" value="false"/>
+  <setting name="autoMappingBehavior" value="PARTIAL"/>
+  <setting name="autoMappingUnknownColumnBehavior" value="WARNING"/>
+  <setting name="defaultExecutorType" value="SIMPLE"/>
+  <setting name="defaultStatementTimeout" value="25"/>
+  <setting name="defaultFetchSize" value="100"/>
+  <setting name="safeRowBoundsEnabled" value="false"/>
+  <setting name="mapUnderscoreToCamelCase" value="false"/>
+  <setting name="localCacheScope" value="SESSION"/>
+  <setting name="jdbcTypeForNull" value="OTHER"/>
+  <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
+</settings>
+```
+
+## 6.6 其他配置
+
+- [typeHandlers（类型处理器）](https://mybatis.org/mybatis-3/zh/configuration.html#typeHandlers)
+- [objectFactory（对象工厂）](https://mybatis.org/mybatis-3/zh/configuration.html#objectFactory)
+- plugins插件
+  - mybatis-generator-core
+  - mybatis-plus
+  - 通用mapper
+
+## 6.7 映射器（Mappers）
+
+MapperRegistry：注册绑定Mapper文件。
+
+- 方式一：使用资源文件绑定
+
+  ```xml
+  <mappers>
+      <mapper resource="com/shinrin/dao/UserMapper.xml"/>
+  </mappers>
+  ```
+
+- 方式二：使用class文件绑定
+
+  ```xml
+  <mappers>
+      <mapper class="com.shinrin.dao.UserMapper"/>
+  </mappers>
+  ```
+
+  - 接口与Mapper配置文件必须同名。
+  - 接口与配置文件必须在同一文件夹下。
+
+- 方式三：扫描包进行注入绑定
+
+  ```xml
+  <mappers>
+      <package name="com.shinrin.dao"/>
+  </mappers>
+  ```
+
+## 6.8 生命周期与作用域
+
+![](Mybatis.assets/生命周期.png)
+
+**SqlSessionFactoryBuilder：**
+
+- 创建后丢弃，局部变量
+
+**SqlSessionFactory：**
+
+- 类似与数据库连接池。
+- 一旦创建，在应用运行期间一直存在。
+- 最佳作用域：应用作用域。
+- 单例模式或静态单例模式。
+
+**SqlSession：**
+
+- 接入连接池的请求。
+- SqlSession的实例非线程安全，不能被共享。
+- 最佳作用域：请求或方法作用域。
+- 使用完毕即刻关闭，避免资源占用。
+
+![](Mybatis.assets/生命周期2.png)
+
+每一个SQL Mapper对应一个业务。
+
+# 七、resultMap
+
+## 7.1 存在的问题
+
+属性与字段名不一致，导致查询结果无法封装进实体类。
+
+数据表：
+
+![1603693668825](Mybatis.assets/1603693668825.png)
+
+实体类：
+
+![1603693698362](Mybatis.assets/1603693698362.png)
+
+解决方法：别名。
+
+```xml
+<select id="getUserById" resultType="com.kuang.pojo.User">
+    select id,name,pwd as password from mybatis.user where id = #{id}
+</select>
+```
+
+## 7.2 resultMap
+
+结果集映射：
+
+```
+id name pwd
+id name password
+```
+
+```xml
+<!--结果集映射-->
+<resultMap id="UserMap" type="User">
+    <!--column数据库中的字段，property实体类中的属性-->
+    <result column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="pwd" property="password"/>
+</resultMap>
+
+<select id="getUserById" resultMap="UserMap">
+    select * from mybatis.user where id = #{id}
+</select>
+```
+
+- ResultMap的设计思想：对于简单语句不需要配置显式的结果映射，对于复杂语句只需要描述其关系即可。
+
+# 八、日志
+
+## 8.1 日志工厂
+
+- 数据库操作异常时，使用日志进行排错。
+
+- 代替sout、debug
+
+![1603689681336](Mybatis.assets/1603689681336.png)
+
+重点：
+
+1. LOG4J
+2. STDOUT_LOGGING
+
+日志的配置：mybatis核心配置文件。
+
+```xml
+    <!--日志-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+```
+
+![1603694949127](Mybatis.assets/1603694949127.png)
+
+## 8.2 Log4j
+
+什么是Log4j？
+
+- Log4j是Apache的一个开源项目，通过使用Log4j，可控制日志信息的输出目的地：控制台、文件、GUI组件。
+- 自定义每一条日志的输出格式。
+- 自定义每一条日志信息的级别，控制日志生成过程。
+- 通过配置文件灵活配置，无需修改应用代码。
+
+步骤：
+
+1. 导包（pom.xml）
+
+   ```xml
+   <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+   <dependency>
+       <groupId>log4j</groupId>
+       <artifactId>log4j</artifactId>
+       <version>1.2.17</version>
+   </dependency>
+   ```
+
+2. log4j.properties
+
+   ```properties
+   #将等级为DEBUG的日志信息输出到console和file这两个目的地，console和file的定义在下面的代码
+   log4j.rootLogger=DEBUG,console,file
+   
+   #控制台输出的相关设置
+   log4j.appender.console = org.apache.log4j.ConsoleAppender
+   log4j.appender.console.Target = System.out
+   log4j.appender.console.Threshold=DEBUG
+   log4j.appender.console.layout = org.apache.log4j.PatternLayout
+   log4j.appender.console.layout.ConversionPattern=[%c]-%m%n
+   
+   #文件输出的相关设置
+   log4j.appender.file = org.apache.log4j.RollingFileAppender
+   log4j.appender.file.File=./log/kuang.log
+   log4j.appender.file.MaxFileSize=10mb
+   log4j.appender.file.Threshold=DEBUG
+   log4j.appender.file.layout=org.apache.log4j.PatternLayout
+   log4j.appender.file.layout.ConversionPattern=[%p][%d{yy-MM-dd}][%c]%m%n
+   
+   #日志输出级别
+   log4j.logger.org.mybatis=DEBUG
+   log4j.logger.java.sql=DEBUG
+   log4j.logger.java.sql.Statement=DEBUG
+   log4j.logger.java.sql.ResultSet=DEBUG
+   log4j.logger.java.sql.PreparedStatement=DEBUG
+   ```
+
+# 九、分页
+
+减少数据的处理量。
+
+## 9.1 使用Limit分页
+
+```mysql
+语法：SELECT * from user limit startIndex,pageSize;
+SELECT * from user limit 3;  #[0,n]
+```
+
+1. 接口
+
+   ```mysql
+   //分页
+   List<User> getUserByLimit(Map<String,Integer> map);
+   ```
+
+2. Mapper.xml
+
+   ```mysql
+   <!--//分页-->
+   <select id="getUserByLimit" parameterType="map" resultMap="UserMap">
+       select * from  mybatis.user limit #{startIndex},#{pageSize}
+   </select>
+   ```
+
+3. 测试
+
+   ```java
+       @Test
+       public void getUserByLimitTest(){
+           SqlSession sqlSession = MybatisUtils.getSqlSession();
+           UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+           HashMap<String, Integer> map = new HashMap<String, Integer>();
+           map.put("startIndex",1);
+           map.put("pageSize",2);
+           List<User> userList =  mapper.getUserByLimit(map);
+           for (User user : userList) {
+               System.out.println(user);
+           }
+           sqlSession.close();
+       }
+   ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

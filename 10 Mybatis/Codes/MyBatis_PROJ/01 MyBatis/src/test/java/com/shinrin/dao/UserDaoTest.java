@@ -2,7 +2,7 @@ package com.shinrin.dao;
 
 import com.shinrin.pojo.User;
 import com.shinrin.utils.MybatisUtils;
-import jdk.nashorn.internal.ir.CallNode;
+
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
@@ -15,8 +15,8 @@ public class UserDaoTest {
         //获取sqlSession
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         //执行操作
-        UserDao userDao = sqlSession.getMapper(UserDao.class);
-        List<User> userList = userDao.getUserList();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        List<User> userList = userMapper.getUserList();
         for (User user : userList) {
             System.out.println(user);
         }
@@ -27,7 +27,7 @@ public class UserDaoTest {
     @Test
     public void getUserById(){
         SqlSession sqlSession = MybatisUtils.getSqlSession();
-        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         User user = mapper.getUserById(1);
         System.out.println(user);
         sqlSession.close();
@@ -37,7 +37,7 @@ public class UserDaoTest {
     @Test
     public void addUser(){
         SqlSession sqlSession = MybatisUtils.getSqlSession();
-        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         int res = mapper.addUser(new User(4, "LiQing", "654321"));
         if (res > 0) {
             System.out.println("插入数据成功！");
@@ -49,7 +49,7 @@ public class UserDaoTest {
     @Test
     public void updateUser(){
         SqlSession sqlSession = MybatisUtils.getSqlSession();
-        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         int res = mapper.updateUser(new User(4,"Jinx","987654"));
         if (res > 0) {
             System.out.println("修改数据成功！");
@@ -61,7 +61,7 @@ public class UserDaoTest {
     @Test
     public void deleteUser(){
         SqlSession sqlSession = MybatisUtils.getSqlSession();
-        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         int res = mapper.deleteUser(4);
         if (res > 0) {
             System.out.println("删除数据成功！");
@@ -73,7 +73,7 @@ public class UserDaoTest {
     @Test
     public void addUser2(){
         SqlSession sqlSession = MybatisUtils.getSqlSession();
-        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("userid", 4);
         map.put("password", 142857);
@@ -89,7 +89,7 @@ public class UserDaoTest {
     @Test
     public void getUserLike(){
         SqlSession sqlSession = MybatisUtils.getSqlSession();
-        UserDao mapper = sqlSession.getMapper(UserDao.class);
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 
         List<User> userList = mapper.getUserLike("%e%");
         for (User user : userList) {
