@@ -1020,15 +1020,100 @@ SELECT * from user limit 3;  #[0,n]
        }
    ```
 
+## 9.2 RowBounds分页（了解）
 
+1. 接口
 
+   ```java
+       //分页2
+       List<User> getUserByRowBounds();
+   ```
 
+2. Mapper.xml
 
+   ```java
+       <!--分页2-->
+       <select id="getUserByRowBounds" resultMap="UserMap">
+           select * from  mybatis.user
+       </select>
+   ```
 
+3. 测试
 
+   ```java
+       @Test
+       public void getUserByRowBounds(){
+           SqlSession sqlSession = MybatisUtils.getSqlSession();
+           //RowBounds实现
+           RowBounds rowBounds = new RowBounds(1, 2);
+           //通过Java代码层面实现分页
+           List<User> userList = sqlSession.selectList("com.shinrin.dao.UserMapper.getUserByRowBounds",null,rowBounds);
+   
+           for (User user : userList) {
+               System.out.println(user);
+           }
+           sqlSession.close();
+       }
+   ```
 
+## 9.3 MyBatis分页插件PageHelper
 
+https://pagehelper.github.io/docs/
 
+# 十、使用注解开发
+
+## 10.1 面向接口编程
+
+**优势： ==解耦== , 可拓展 , 提高复用 , 分层开发中 , 上层不用管具体的实现 , 大家都遵守共同的标准 , 使得开发变得容易 , 规范性更好**
+
+**接口的理解**
+
+1. 定义（规范、约束）与实现（名实分离）的分离。
+
+2. 反应了系统设计人员对系统的抽象理解。
+3. 接口分类：（1）个体的抽象（抽象体）。（2）个体某方面的抽象（抽象面）。
+
+面向对象：考虑问题时，以对象为单位，考虑它的属性及方法 。
+
+面向过程：考虑问题时，以一个具体的流程（事务过程）为单位，考虑它的实现 。
+
+面向接口：接口与非接口设计针对复用技术而言，体现系统架构，与面向对象非同类问题。
+
+## 10.2 使用注解开发
+
+1. 注解在接口上实现
+
+   ```java
+   @Select("select * from user")
+   List<User> getUsers();
+   ```
+
+2. 核心配置文件中绑定接口
+
+   ```java
+   <!--绑定接口-->
+   <mappers>
+       <mapper class="com.kuang.dao.UserMapper"/>
+   </mappers>
+   ```
+
+3. 测试
+
+   ```java
+       @Test
+       public void test(){
+           SqlSession sqlSession = MybatisUtils.getSqlSession();
+           UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+           List<User> users = mapper.getUsers();
+           for (User user : users) {
+               System.out.println(user);
+           }
+           sqlSession.close();
+   ```
+
+本质：通过反射实现。
+
+底层：动态代理。
 
 
 
