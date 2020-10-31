@@ -14,7 +14,8 @@
 
     <!--日志-->
     <settings>
-        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
+        <setting name="logImpl" value="LOG4J"/>
     </settings>
 
     <!--为实体类起别名-->

@@ -9,8 +9,10 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>01 MyBatis</module>
-        <module>02 MyBatis</module>
+        <module>MyBatis_01</module>
+        <module>MyBatis_02</module>
+        <module>MyBatis_03</module>
+        <module>MyBatis_04</module>
     </modules>
 
 </project>

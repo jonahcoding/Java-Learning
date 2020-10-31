@@ -1115,7 +1115,205 @@ https://pagehelper.github.io/docs/
 
 底层：动态代理。
 
+MyBatis的执行原理：
 
+![](MyBatis.assets/MyBatis执行过程.png)
+
+## 10.3 CRUD
+
+创建工具类时实现自动提交：
+
+```java
+    public static SqlSession getSqlSession(){
+        return sqlSessionFactory.openSession(true);//自动提交事务
+    }
+```
+
+增删改查：
+
+```java
+    //查
+    @Select("select * from mybatis.user")
+    List<User> getUsers();
+    //查
+    //方法存在多个参数时，参数前面加上@Param("id")注解，仅基本类型
+    @Select("select * from mybatis.user where id = #{id}")
+    User getUserById(@Param("id") int id);
+    //增
+    @Insert("insert into mybatis.user(id,name,pwd) values(#{id}, #{name}, #{pwd})")
+    int addUser(User user);
+    //改
+    @Update("update mybatis.user set name=#{name}, pwd=#{pwd} where id = #{id}")
+    int updateUser(User user);
+    //删
+    @Delete("delete from mybatis.user where id = #{id}")
+    int deleteUser(@Param("id") int id);
+```
+
+**关于@Param()注解**
+
+- 基本类型的参数或String（非引用类型）
+- SQL中引用的是@Param()中设定的属性名
+
+**#{}与${}的区别：**
+
+- #{}防止注入，避免风险。
+
+# 十一、Lombok
+
+- java库
+- 插件
+- 构建工具（简化POJO模型对象）
+
+**安装与使用：**
+
+1. IDEA插件：IDEA-Setting-Plugins-搜索Lombok插件。
+
+2. Maven仓库导入。
+
+   ```xml
+           <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+           <dependency>
+               <groupId>org.projectlombok</groupId>
+               <artifactId>lombok</artifactId>
+               <version>1.18.16</version>
+           </dependency>
+   ```
+
+3. 实体类上加注解
+
+*可用的注解：*
+
+```
+@Getter and @Setter
+@FieldNameConstants
+@ToString
+@EqualsAndHashCode
+@AllArgsConstructor, @RequiredArgsConstructor and @NoArgsConstructor
+@Log, @Log4j, @Log4j2, @Slf4j, @XSlf4j, @CommonsLog, @JBossLog, @Flogger, @CustomLog
+@Data
+@Builder
+@SuperBuilder
+@Singular
+@Delegate
+@Value
+@Accessors
+@Wither
+@With
+@SneakyThrows
+@val
+@var
+experimental @var
+@UtilityClass
+```
+
+@Data：无参构造，get、set、toString、hashCode、equals。
+
+@AllArgsConstructor：有参构造
+
+@NoArgsConstructor：无参构造
+
+# 十二、多对一处理
+
+多个学生对应一个老师
+
+- 于学生而言：关联，多个学生关联一个老师（多对一）
+- 于老师而言：集合，一个老师教多个学生（一对多）
+
+建表：学生的字段tid关联老师的字段id
+
+SQL（分步建表）：
+
+```
+CREATE TABLE `teacher` (
+  `id` INT(10) NOT NULL,
+  `name` VARCHAR(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8
+
+INSERT INTO teacher(`id`, `name`) VALUES (1, '关老师'); 
+
+CREATE TABLE `student` (
+  `id` INT(10) NOT NULL,
+  `name` VARCHAR(30) DEFAULT NULL,
+  `tid` INT(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fktid` (`tid`),
+  CONSTRAINT `fktid` FOREIGN KEY (`tid`) REFERENCES `teacher` (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8
+
+
+INSERT INTO `student` (`id`, `name`, `tid`) VALUES ('1', '小栗', '1'); 
+INSERT INTO `student` (`id`, `name`, `tid`) VALUES ('2', '小猫', '1'); 
+INSERT INTO `student` (`id`, `name`, `tid`) VALUES ('3', '小汪', '1'); 
+INSERT INTO `student` (`id`, `name`, `tid`) VALUES ('4', '小余', '1'); 
+INSERT INTO `student` (`id`, `name`, `tid`) VALUES ('5', '小贾', '1');
+```
+
+**测试环境搭建：**
+
+1. 导入lombok
+2. 新建实体类Teacher、Student
+3. 建立Mapper接口
+4. 建立Mapper.xml
+5. 核心配置文件中注册Mapper接口或文件（xml不能使用通配符）
+6. 测试查询
+
+**按照查询嵌套处理：**
+
+```xml
+    <!--按照查询嵌套处理
+    思路：
+        1.查询所有的学生信息。
+        2.依据查询得到的学生tid，寻找对应的老师。
+    -->
+    <select id="getStudent" resultMap="StudentTeacherMap">
+        select * from student
+    </select>
+
+    <resultMap id="StudentTeacherMap" type="Student">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <association property="teacher" column="tid" javaType="Teacher" select="getTeacher"/>
+    </resultMap>
+
+    <select id="getTeacher" resultType="Teacher">
+        select * from teacher where id = #{tid}
+    </select>
+```
+
+**按照结果嵌套处理：**
+
+```xml
+    <!--按照结果嵌套处理
+        取别名以区分字段（学生name与老师name），可省略 as
+    -->
+    <select id="getStudent2" resultMap="StudentTeacher2">
+        select s.id sid,s.name sname,t.id tid, t.name tname
+        from student s,teacher t
+        where s.tid = t.id;
+    </select>
+
+    <resultMap id="StudentTeacher2" type="Student">
+        <result property="id" column="sid"/>
+        <result property="name" column="sname"/>
+        <association property="teacher" javaType="Teacher">
+            <result property="name" column="tname"/>
+            <result property="id" column="tid"/>
+        </association>
+    </resultMap>
+```
+
+多对一查询方式：
+
+- 子查询
+- 连表查询
+
+# 十三、一对多处理
+
+于老师而言。
+
+环境搭建，同上。
 
 
 

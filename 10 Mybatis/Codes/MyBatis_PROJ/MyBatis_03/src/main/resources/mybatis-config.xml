@@ -14,6 +14,7 @@
 
     <!--日志-->
     <settings>
+        <!--标准的日志工厂实现-->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
 
@@ -39,6 +40,8 @@
     </environments>
 
     <mappers>
-        <mapper resource="com/shinrin/dao/UserMapper.xml"/>
+        <mapper class="com.shinrin.dao.UserMapper"/>
+        <!--<mapper resource="com/shinrin/dao/*Mapper.xml"/>-->
     </mappers>
+
 </configuration>
