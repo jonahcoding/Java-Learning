@@ -1224,7 +1224,7 @@ experimental @var
 
 SQL（分步建表）：
 
-```
+```mysql
 CREATE TABLE `teacher` (
   `id` INT(10) NOT NULL,
   `name` VARCHAR(30) DEFAULT NULL,
@@ -1259,7 +1259,7 @@ INSERT INTO `student` (`id`, `name`, `tid`) VALUES ('5', '小贾', '1');
 5. 核心配置文件中注册Mapper接口或文件（xml不能使用通配符）
 6. 测试查询
 
-**按照查询嵌套处理：**
+### 按照查询嵌套处理：
 
 ```xml
     <!--按照查询嵌套处理
@@ -1282,7 +1282,7 @@ INSERT INTO `student` (`id`, `name`, `tid`) VALUES ('5', '小贾', '1');
     </select>
 ```
 
-**按照结果嵌套处理：**
+### 按照结果嵌套处理：
 
 ```xml
     <!--按照结果嵌套处理
@@ -1315,5 +1315,421 @@ INSERT INTO `student` (`id`, `name`, `tid`) VALUES ('5', '小贾', '1');
 
 环境搭建，同上。
 
+**实体类**
 
+老师：
+
+```java
+@Data
+public class Teacher {
+    private int id;
+    private String name;
+	//一个老师教多个学生
+    private List<Student> students;
+}
+```
+
+学生：
+
+```java
+@Data
+public class Student {
+    private int id;
+    private String name;
+}
+```
+
+### 按结果嵌套查询：
+
+```xml
+    <!--按照结果嵌套查询-->
+    <select id="getTeacher" resultMap="TeacherStudent">
+        select s.id sid, s.name sname, t.name tname,t.id tid
+        from student s,teacher t
+        where s.tid = t.id and t.id = #{tid}
+    </select>
+
+    <resultMap id="TeacherStudent" type="Teacher">
+        <result property="id" column="tid"/>
+        <result property="name" column="tname"/>
+        <!--复杂的属性，我们需要单独处理 对象： association 集合： collection
+        javaType="" 指定属性的类型！
+        集合中的泛型信息，我们使用ofType获取
+        -->
+        <collection property="students" ofType="Student">
+            <result property="id" column="sid"/>
+            <result property="name" column="sname"/>
+            <result property="tid" column="tid"/>
+        </collection>
+    </resultMap>
+```
+
+### 按照查询嵌套处理：
+
+```xml
+    <!--按照查询嵌套处理-->
+    <select id="getTeacher2" resultMap="TeacherStudent2">
+        select * from mybatis.taecher where id = #{tid}
+    </select>
+    <resultMap id="TeacherStudent2" type="Teacher">
+        <collection property="students" javaType="ArrayList" ofType="Student" select="getStudentByTeacherId" column="id"/>
+    </resultMap>
+    
+    <select id="getStudentByTeacherId" resultType="Student">
+        select * from mybatis.student where tid = #{tid};
+    </select>
+```
+
+**总结：**
+
+1. 关联（association）多对一
+2. 集合（collection）一对多
+3. javaType & ofType
+   1. JavaType：用来指定实体类中属性的类型
+   2. ofType：指定映射到List或集合中的pojo类型，泛型中的约束类型。
+
+面试高频：
+
+- mysql引擎
+- InnoDB底层原理
+- 索引
+- 索引优化
+
+# 十四、动态SQL
+
+**动态SQL：根据不同的条件生成不同的sql语句。**
+
+```
+动态 SQL 元素和 JSTL 或基于类似 XML 的文本处理器相似。在 MyBatis 之前的版本中，有很多元素需要花时间了解。MyBatis 3 大大精简了元素种类，现在只需学习原来一半的元素便可。MyBatis 采用功能强大的基于 OGNL 的表达式来淘汰其它大部分元素。
+
+if
+choose (when, otherwise)
+trim (where, set)
+foreach
+```
+
+搭建环境：
+
+```mysql
+CREATE TABLE `blog` (
+  `id` varchar(50) NOT NULL COMMENT '博客id',
+  `title` varchar(100) NOT NULL COMMENT '博客标题',
+  `author` varchar(30) NOT NULL COMMENT '博客作者',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `views` int(30) NOT NULL COMMENT '浏览量'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+```
+
+创建基础工程：
+
+- 导包
+
+- 编写配置文件
+
+  ```xml
+      <settings>
+          <!-- 驼峰命名转换（数据库字段名与实体类属性名） -->
+          <setting name="mapUnderscoreToCamelCase" value="true"/>
+      </settings>
+  ```
+
+- 编写实体类
+
+  ```java
+  @Data
+  public class Blog {
+      private int id;
+      private String title;
+      private String author;
+      private Date creatTime;
+      private int views;
+  }
+  ```
+
+- 编写实体类对应的Mapper接口和Mapper.xml文件
+
+### IF
+
+```xml
+    <select id="queryBlogIF" parameterType="map" resultType="blog">
+        select * from mybatis.blog where 1=1
+        <if test="title != null">
+            and title = #{title}
+        </if>
+        <if test="author != null">
+            and author = #{author}
+        </if>
+    </select>
+```
+
+### choose(when, otherwise)
+
+```xml
+    <!--只执行第一个满足when的-->
+    <select id="queryBlogChoose" parameterType="map" resultType="blog">
+        select * from mybatis.blog
+        <where>
+            <choose>
+                <when test="title != null">
+                    title = #{title}
+                </when>
+                <when test="author != null">
+                    and author = #{author}
+                </when>
+                <otherwise>
+                    and views = #{views}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+```
+
+### trim(where,set)
+
+```xml
+    <select id="queryBlogIF" parameterType="map" resultType="blog">
+        select * from mybatis.blog
+        <where>
+            <if test="title != null">
+                title = #{title}
+            </if>
+            <if test="author != null">
+                and author = #{author}
+            </if>
+        </where>
+    </select>
+```
+
+```xml
+    <update id="updateBlog" parameterType="map">
+        update mybatis.blog
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="author != null">
+                author = #{author},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+```
+
+### SQL片段
+
+抽取部分功能以复用！
+
+1. 抽取
+
+   ```xml
+   <sql id="if-title-author">
+       <if test="title != null">
+           title = #{title}
+       </if>
+       <if test="author != null">
+           and author = #{author}
+       </if>
+   </sql>
+   ```
+
+2. 复用
+
+   ```xml
+   <select id="queryBlogIF" parameterType="map" resultType="blog">
+       select * from mybatis.blog
+       <where>
+           <include refid="if-title-author"></include>
+       </where>
+   </select>
+   ```
+
+### Fareach
+
+```mysql
+select * from user where 1=1 and (id=1, or id=2, or id=3)
+```
+
+```xml
+    <select id="queryBlogForeach" parameterType="map" resultType="blog">
+        select * from mybatis.blog
+        <where>
+            <foreach collection="ids" item="id" open="and (" close=")" separator="or">
+                id = #{id}
+            </foreach>
+        </where>
+    </select>
+```
+
+测试程序：
+
+```java
+    @Test
+    public void queryBlogForeachTest() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        BlogMapper mapper = sqlSession.getMapper(BlogMapper.class);
+
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        ids.add(1);
+        ids.add(2);
+        HashMap hashMap = new HashMap();
+        hashMap.put("ids", ids);
+
+        List<Blog> blogs = mapper.queryBlogForeach(hashMap);
+        for (Blog blog : blogs) {
+            System.out.println(blog);
+        }
+        sqlSession.close();
+    }
+```
+
+动态SQL的实质：拼接SQL语句。
+
+现在mysql中写出完整的SQL，再对应的修改成为动态SQL实现通用。
+
+# 十五、缓存
+
+## 15.1 缓存简介
+
+> 查询数据时，频繁连接数据库，耗费资源
+>
+> 一次查询的结果暂存在内存中，再次查询时从缓存读取（不走数据库）。
+
+1. 什么是缓存（Cache）？
+   - 存储在内存中的临时数据。
+   - 将用户经常查询的数据放在缓存（内存）中，用户查询数据时不从磁盘（关系型数据库文件）查询，而是从缓存中查询，从而提高查询效率，解决高并发系统的性能问题。
+2. 为什么使用缓存？
+   - 减少和数据库的交互次数，减少系统开销，提高系统效率。
+3. 什么样的数据可以使用缓存？
+   - 经常查询且不经常改变的数据。
+
+## 15.2 MyBatis缓存
+
+- MyBatis的查询缓存特性，非常方便地定制和配置缓存。极大提升查询效率。
+- MyBatis系统中定义了两级缓存：一级缓存和二级缓存。
+  - 默认情况下，只有一级缓存开启（SqlSession级别的缓存，本地查询）。
+  - 二级缓存需要手动开启和配置，基于namespace级别的缓存。
+  - 为提高扩展性，MyBatis定义了缓存接口Cache，可通过Cache接口实现自定义缓存。
+
+## 15.3 一级缓存
+
+一级缓存又称本地缓存：SqlSession
+
+- 与数据库同一次会话期间查询到的数据会放在本地缓存中。
+- 此后获取相同数据，直接从缓存中获取，没必要再次查询数据库。
+
+**测试步骤：**
+
+1. 开启日志
+2. 同一个Session中查询两次相同记录
+3. 查看输出（日志）
+
+Mapper.xml
+
+```xml
+    <select id="queryUserById" resultType="user" useCache="true">
+        select * from mybatis.user where id = #{id}
+    </select>
+```
+
+测试程序：
+
+```java
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UsersMapper mapper = sqlSession.getMapper(UsersMapper.class);
+        User user1 = mapper.queryUserById(1);
+        System.out.println(user1);
+
+        User user2 = mapper.queryUserById(1);
+        System.out.println(user2);
+
+        System.out.println(user1 == user2);
+
+        sqlSession.close();
+```
+
+![image-20201101233921341](MyBatis.assets/image-20201101233921341.png)
+
+缓存失效的情况：
+
+1. 查询不同的数据（记录）
+
+2. 增删改操作（改变原有数据会刷新缓存）
+
+3. 查询不同的Mapper.xml
+
+4. 手动清理缓存
+
+   ```java
+   sqlSession.clearCache();
+   ```
+
+总结：一级缓存默认开启，只在一次SqlSession中有效。
+
+一级缓存是一个Map。
+
+## 15.4 二级缓存
+
+- 二级缓存有称全局缓存（解决了一级缓存作用域太低的局限性）
+- 基于namespace级别的缓存，一个名称空间，对应一个二级缓存。
+- 工作机制：
+  - 一次会话查询一个数据，此数据存放在一级缓存中。
+  - 会话结束后一级缓存保存在二级缓存中。
+  - 新建会话从二级缓存中查询信息。
+  - 不同的mapper查得的数据放在自己对应的缓存（map）中。
+
+使用步骤：
+
+1. 开启全局缓存
+
+   ```xml
+       <settings>
+           <!--显式开启全局缓冲-->
+           <setting name="cacheEnabled" value="true"/>
+       </settings>
+   ```
+
+2. 在要使用的Mapper中开启
+
+   ```xml
+       <!--在当前Mapper中使用（开启）二级缓存-->
+       <cache/>
+   ```
+
+   或可自定义参数
+
+   ```xml
+   <!--在当前Mapper.xml中使用二级缓存-->
+   <cache  eviction="FIFO"
+          flushInterval="60000"
+          size="512"
+          readOnly="true"/>
+   ```
+
+3. 指定Mapper中的某些方法不使用二级缓存
+
+   ```xml
+       <select id="queryUserById" resultType="users" useCache="false">
+           select * from mybatis.user where id = #{id}
+       </select>
+   ```
+
+4. 测试
+
+   实体类先序列化，否则报错
+
+   ```
+   Caused by: java.io.NotSerializableException: com.kuang.pojo.User
+   ```
+
+**总结：**
+
+- 二级缓存，在同一个Mapper下有效。
+- 所有数据先放在一级缓存中。
+- 会话提交或关闭后，才提交到二级缓存中。
+
+## 15.5 缓存原理
+
+
+
+## 15.6 自定义缓存
 

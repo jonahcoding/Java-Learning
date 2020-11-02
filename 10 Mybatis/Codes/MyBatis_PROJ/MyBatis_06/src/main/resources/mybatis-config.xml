@@ -2,23 +2,24 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--configuration核心配置文件-->
 <configuration>
-    <!-- 全局变量 -->
-    <!--引入外部配置-->
+
+    <!-- 引入外部配置文件 -->
     <properties resource="db.properties"/>
 
-    <!--日志-->
     <settings>
-        <!--标准的日志工厂实现-->
+        <!-- 标准的日志工厂实现 -->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 
-    <!--为实体类起别名-->
+    <!-- 可以给实体类起别名 -->
     <typeAliases>
         <package name="com.shinrin.pojo"/>
     </typeAliases>
 
-    <!--配置环境-->
+    <!-- 环境选择 -->
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -32,11 +33,6 @@
     </environments>
 
     <mappers>
-        <mapper resource="com/shinrin/dao/TeacherMapper.xml"/>
-        <mapper resource="com/shinrin/dao/StudentMapper.xml"/>
-        <!--<mapper class="com.shinrin.dao.TeacherMapper"/>-->
-        <!--<mapper class="com.shinrin.dao.StudentMapper"/>-->
+        <mapper class="com.shinrin.dao.BlogMapper"/>
     </mappers>
-
-
 </configuration>

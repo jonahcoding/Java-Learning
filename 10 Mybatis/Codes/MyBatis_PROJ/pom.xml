@@ -13,6 +13,9 @@
         <module>MyBatis_02</module>
         <module>MyBatis_03</module>
         <module>MyBatis_04</module>
+        <module>MyBatis_05</module>
+        <module>MyBatis_06</module>
+        <module>MyBatis_07</module>
     </modules>
 
 </project>

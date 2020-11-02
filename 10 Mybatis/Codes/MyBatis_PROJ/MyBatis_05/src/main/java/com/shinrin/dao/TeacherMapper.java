@@ -2,10 +2,11 @@ package com.shinrin.dao;
 
 import com.shinrin.pojo.Teacher;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 public interface TeacherMapper {
 
-    @Select("select * from teacher where id = #{id}")
-    Teacher getTeacher(@Param("id") int id);
+    //获取指定老师下的所有学生及老师信息
+    Teacher getTeacher(@Param("tid") int id);
+    Teacher getTeacher2(@Param("tid") int id);
+
 }

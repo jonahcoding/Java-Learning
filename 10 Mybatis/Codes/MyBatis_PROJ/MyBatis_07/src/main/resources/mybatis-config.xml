@@ -11,7 +11,8 @@
     <settings>
         <!-- 标准的日志工厂实现 -->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
-        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--开启全局缓冲-->
+        <setting name="cacheEnabled" value="true"/>
     </settings>
 
     <!-- 可以给实体类起别名 -->
@@ -33,6 +34,6 @@
     </environments>
 
     <mappers>
-        <mapper class="com.shinrin.dao.BlogMapper"/>
+        <mapper class="com.shinrin.dao.UsersMapper"/>
     </mappers>
 </configuration>

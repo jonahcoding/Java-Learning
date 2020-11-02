@@ -15,7 +15,7 @@
     <!--为实体类起别名-->
     <typeAliases>
         <!--方式一：指定单个类-->
-        <typeAlias type="com.shinrin.pojo.User" alias="User"/>
+        <typeAlias type="com.shinrin.pojo.Users" alias="User"/>
         <!--方式二：指定包名-->
         <package name="com.shinrin.pojo"/>
     </typeAliases>
