@@ -4,4 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!--使用Spring来创建对象-->
+    <bean id="hello" class="com.shinrin.pojo.Hello">
+        <property name="str" value="Spring"/>
+    </bean>
 </beans>

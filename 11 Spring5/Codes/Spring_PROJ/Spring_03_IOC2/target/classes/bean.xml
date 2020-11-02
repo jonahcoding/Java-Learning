@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--一、无参构造-->
+    <!--<bean id="user" class="com.shinrin.pojo.User">-->
+    <!--    &lt;!&ndash;默认使用无参构造&ndash;&gt;-->
+    <!--    <property name="name" value="Teemo"/>-->
+    <!--</bean>-->
+
+    <!--二、有参构造，使用下标-->
+    <!--<bean id="user" class="com.shinrin.pojo.User">-->
+    <!--    <constructor-arg index="0" value="Yasuo"/>-->
+    <!--</bean>-->
+
+    <!--三、有参构造，使用类型-->
+    <!--<bean id="user" class="com.shinrin.pojo.User">-->
+    <!--    <constructor-arg type="java.lang.String" value="Yasuo"/>-->
+    <!--</bean>-->
+
+    <!--四、有参构造，使用参数名称-->
+    <bean id="user" class="com.shinrin.pojo.User">
+        <constructor-arg name="name" value="Yasuo"/>
+    </bean>
+
+    <!--设置别名，亦可使用别名获取对象-->
+    <alias name="user" alias="U_s_e_r"/>
+    <!--
+    id = 对象名
+    class = 类名
+    name = 对象别名
+    -->
+    <bean id="userT" class="com.shinrin.pojo.User" name="user2, u2"/>
+</beans>
