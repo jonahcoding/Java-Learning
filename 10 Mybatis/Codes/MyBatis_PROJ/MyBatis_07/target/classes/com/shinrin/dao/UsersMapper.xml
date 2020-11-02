@@ -14,6 +14,7 @@
            flushInterval="6000"
            size="512"
            readOnly="true"/>
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
     <select id="queryUserById" resultType="users" useCache="true">
         select * from mybatis.user where id = #{id}
     </select>
