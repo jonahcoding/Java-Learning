@@ -14,6 +14,8 @@
         <module>Spring_03_IOC2</module>
         <module>Spring_04_DI</module>
         <module>Spring_05_Auto</module>
+        <module>Spring_06_Annotation</module>
+        <module>Spring_07_AppConfig</module>
     </modules>
 
     <dependencies>

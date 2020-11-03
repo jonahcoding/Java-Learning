@@ -772,13 +772,153 @@ beans.xml
        private Dog dog;
    ```
 
-八、使用注解开发
+# 八、使用注解开发
 
+1. 导入context的约束
 
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:annotation-config/>
+	<!--some beans...-->
+</beans>
+```
 
+2. 属性注入：
 
+```java
+@Component
+public class User {
 
+    @Value("shinrin")
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+```
+
+3. @Component的衍生注解（web开发中，MVC架构中分层）
+
+   - dao（@Repository）
+   - service（@Service）
+   - controller（@Controller）
+
+   作用：将类注册到容器中。
+
+4. 作用域@Scope("singleton")
+
+   ```java
+   @Component
+   //@Scope("singleton")
+   @Scope("singleton")
+   public class User {
+   
+       @Value("shinrin")
+       private String name;
+   
+       public String getName() {
+           return name;
+       }
+   
+       public void setName(String name) {
+           this.name = name;
+       }
+   }
+   ```
+
+总结：
+
+xml与注解：xml更加灵活，维护简单；注解只能针对当前类，维护复杂。
+
+实践：
+
+- xml管理bean
+- 注解完成属性的注入
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+    <!--指定要扫描的包-->
+    <context:component-scan base-package="com.pojo"/>
+
+</beans>
+```
+
+# 九、使用java方式配置spring
+
+**JavaConfig：Spring的一个子项目，在spring4之后，成为核心功能**
+
+Config2.java
+
+```java
+@Configuration
+public class Config2 {
+
+}
+```
+
+MyConfig.java
+
+```java
+@Configuration //本身是一个@Component，被spring容器托管，注册到容器中。
+@ComponentScan("com.shinrin.pojo")
+@Import(Config2.class)
+public class MyConfig {
+
+    @Bean
+    public User getUser(){
+        return new User();
+    }
+}
+```
+
+实体类：
+
+```java
+@Component
+public class User {
+
+    @Value("shinrin")
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+}
+```
+
+纯Java配置方式，常见于SpringBoot。
 
 
 
