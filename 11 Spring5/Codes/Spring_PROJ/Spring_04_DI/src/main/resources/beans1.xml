@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="adddress" class="com.shinrin.pojo.Address">
+        <property name="address" value="Changsha"/>
+    </bean>
+
+    <bean id="student" class="com.shinrin.pojo.Student">
+        <property name="name" value="shinrin"/>
+        <property name="address" ref="adddress"/>
+
+        <property name="books">
+            <array>
+                <value>沙海</value>
+                <value>世界</value>
+                <value>防风氏</value>
+            </array>
+        </property>
+
+        <property name="hobbies">
+            <list>
+                <value>Play</value>
+                <value>Coding</value>
+                <value>Music</value>
+            </list>
+        </property>
+
+        <property name="card">
+            <map>
+                <entry key="1" value="12"/>
+                <entry key="2" value="34"/>
+            </map>
+        </property>
+
+        <property name="game">
+            <set>
+                <value>FGO</value>
+                <value>LOL</value>
+                <value>PUBG</value>
+            </set>
+        </property>
+
+        <property name="wife">
+            <null></null>
+        </property>
+
+        <property name="infor">
+            <props>
+                <prop key="id">1704</prop>
+                <prop key="name">jonah</prop>
+            </props>
+        </property>
+
+    </bean>
+</beans>

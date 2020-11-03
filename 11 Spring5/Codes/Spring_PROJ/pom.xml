@@ -12,6 +12,8 @@
         <module>Spring_01_IOC1</module>
         <module>Spring_02_hellospring</module>
         <module>Spring_03_IOC2</module>
+        <module>Spring_04_DI</module>
+        <module>Spring_05_Auto</module>
     </modules>
 
     <dependencies>

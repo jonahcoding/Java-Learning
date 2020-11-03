@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="addr" class="com.shinrin.pojo.Address">
+        <property name="address" value="Yordel"/>
+    </bean>
+
+    <!--构造器注入-->
+    <bean id="user1" class="com.shinrin.pojo.User">
+        <constructor-arg index="0" value="Yasuo"/>
+        <constructor-arg index="1" value="27"/>
+        <constructor-arg index="2" ref="addr"/>
+    </bean>
+    <!--c命名空间(构造器注入)-->
+    <bean id="user2" class="com.shinrin.pojo.User" c:name = "Yasuo" c:age="27" p:address-ref="addr"/>
+
+    <!--set注入-->
+    <bean id="user3" class="com.shinrin.pojo.User">
+        <property name="name" value="Teemo"/>
+        <property name="age" value="7"/>
+        <property name="address" value="Yordel"/>
+    </bean>
+    <!--p命名空间注入(set注入)-->
+    <bean id="user4" class="com.shinrin.pojo.User" p:name = "Teeemo" p:age="10" p:address-ref="addr"/>
+
+    <!--单例模式-->
+    <bean id="user2" class="com.shinrin.pojo.User" c:name = "Yasuo" c:age="27" p:address-ref="addr" scope="singleton"/>
+    <!--原型模式-->
+    <bean id="user2" class="com.shinrin.pojo.User" c:name = "Yasuo" c:age="27" p:address-ref="addr" scope="prototype"/>
+
+</beans>
