@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--合并配置文件：用于团队合作开发-->
+    <import resource="bean1.xml"/>
+    <import resource="bean2.xml"/>
+    <import resource="bean3.xml"/>
+
+</beans>

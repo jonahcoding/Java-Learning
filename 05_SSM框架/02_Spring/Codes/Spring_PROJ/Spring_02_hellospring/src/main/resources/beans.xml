@@ -13,6 +13,6 @@
     property 设置对象的属性值
     -->
     <bean id="hello" class="com.shinrin.pojo.Hello">
-        <property name="str" value="Spring"/>
+        <property name="str" value="shinrin"/>
     </bean>
 </beans>

@@ -4,7 +4,14 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!--使用Spring来创建对象-->
+    <!--使用Spring来创建对象（Bean）-->
+    <!--
+    类型 变量名 = new 类型();
+    Hello hello = new Hello();
+    id = 变量名
+    class = 实体类
+    property 设置对象的属性值
+    -->
     <bean id="hello" class="com.shinrin.pojo.Hello">
         <property name="str" value="Spring"/>
     </bean>

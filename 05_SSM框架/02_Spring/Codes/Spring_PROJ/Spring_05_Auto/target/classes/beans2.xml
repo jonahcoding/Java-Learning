@@ -13,20 +13,10 @@
 
     <bean id="dog" class="com.shinrin.pojo.Dog"/>
     <bean id="dog11" class="com.shinrin.pojo.Dog"/>
-    <bean id="dog22" class="com.shinrin.pojo.Dog"/>
-
-    <bean id="person" class="com.shinrin.pojo.Person">
-    <property name="name" value="shinrin"/>
-    </bean>
 
     <!--byName自动查找和对象set对应的值相对应的id-->
-    <!--<bean id="person" class="com.shinrin.pojo.Person" autowire="byName">-->
-        <!--<property name="name" value="shinrin"/>-->
-    <!--</bean>-->
-
-    <!--byType自动查找和对象属性相同的bean-->
-    <!--<bean id="person" class="com.shinrin.pojo.Person" autowire="byType">-->
-        <!--<property name="name" value="shinrin"/>-->
-    <!--</bean>-->
+    <bean id="person" class="com.shinrin.pojo.Person" autowire="byName">
+        <property name="name" value="shinrin"/>
+    </bean>
 
 </beans>

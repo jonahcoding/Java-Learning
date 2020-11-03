@@ -16,6 +16,7 @@
         <module>Spring_05_Auto</module>
         <module>Spring_06_Annotation</module>
         <module>Spring_07_AppConfig</module>
+        <module>Spring_08_Proxy</module>
     </modules>
 
     <dependencies>

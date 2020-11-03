@@ -472,6 +472,7 @@ public class User {
         return "User{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
+                ", address=" + address +
                 '}';
     }
 }
@@ -566,16 +567,16 @@ public class User {
         <constructor-arg index="2" ref="addr"/>
     </bean>
     <!--c命名空间(构造器注入)-->
-    <bean id="user2" class="com.shinrin.pojo.User" c:name = "Yasuo" c:age="27" p:address-ref="addr"/>
+    <bean id="user2" class="com.shinrin.pojo.User" c:name = "Yasuo" c:age="27" c:address-ref="addr"/>
 
     <!--set注入-->
     <bean id="user3" class="com.shinrin.pojo.User">
         <property name="name" value="Teemo"/>
         <property name="age" value="7"/>
-        <property name="address" value="Yordel"/>
+        <property name="address" ref="addr"/>
     </bean>
     <!--p命名空间注入(set注入)-->
-    <bean id="user4" class="com.shinrin.pojo.User" p:name = "Teeemo" p:age="10" p:address-ref="addr"/>
+    <bean id="user4" class="com.shinrin.pojo.User" p:name = "Teemo" p:age="10" p:address-ref="addr"/>
 
 </beans>
 ```
@@ -693,88 +694,9 @@ public class Person {
 
 ## 7.2 使用xml自动装配
 
-beans.xml
+**byName自动装配：自动查找与对象set对应的值（属性名）相对应的id（bean）**
 
-```xml
-    <bean id="cat" class="com.shinrin.pojo.Cat"/>
-    <bean id="dog11" class="com.shinrin.pojo.Dog"/>
-
-    <!--byName自动查找和对象set对应的值相对应的id-->
-    <!--<bean id="person" class="com.shinrin.pojo.Person" autowire="byName">-->
-        <!--<property name="name" value="shinrin"/>-->
-    <!--</bean>-->
-
-    <!--byType自动查找和对象属性相同的bean-->
-    <bean id="person" class="com.shinrin.pojo.Person" autowire="byType">
-        <property name="name" value="shinrin"/>
-    </bean>
-```
-
-- **byName自动装配：自动查找与对象set对应的值（属性名）相对应的id（bean）**
-
-- **byType自动装配：自动查找与对象属性（类型）相同的bean**
-
-
-
-## 7.3 使用注解自动装配
-
-1. 导入context约束
-
-   ```xml
-   <beans xmlns="http://www.springframework.org/schema/beans"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xmlns:context="http://www.springframework.org/schema/context"
-          xsi:schemaLocation="http://www.springframework.org/schema/beans
-           https://www.springframework.org/schema/beans/spring-beans.xsd
-           http://www.springframework.org/schema/context
-           https://www.springframework.org/schema/context/spring-context.xsd">
-   
-       <context:annotation-config/>
-   	<!--some beans...-->
-   </beans>
-   ```
-
-2. @Autowire
-
-   1. @Autowired通过byType实现，默认要求对象必须存在。
-   2. 通过@Autowired(required = false)以允许对象不存在（为null值）。
-   3. 如果有多个对象，使用 @Qualifier(value = "cat11")以指定唯一的id对象。
-
-3. @Resource
-   1. @Resource默认通过byName实现，未指定name和type时，按byName（属性名）查找匹配，无匹配时回退至原始类型（属性类型）通过byType查找，如匹配则自动装配。
-   2. 如同时指定name和type，则在上下文中查询唯一匹配装配，未果抛出异常。
-   3. 如只指定name，则在上下文中查询名称（id）匹配的bean装配，未果抛出异常。
-   4. 如只指定type，则在上下文中查询类型匹配的唯一bean装配，无匹配或多个匹配抛出异常。
-
-4. beans.xml
-
-   ```xml
-       <bean id="cat" class="com.shinrin.pojo.Cat"/>
-       <bean id="cat11" class="com.shinrin.pojo.Cat"/>
-   
-       <bean id="dog" class="com.shinrin.pojo.Dog"/>
-       <bean id="dog11" class="com.shinrin.pojo.Dog"/>
-       <bean id="dog22" class="com.shinrin.pojo.Dog"/>
-   ```
-
-5. 实体类
-
-   ```java
-       //默认byType实现，要求对象必须存在
-       //指定参数required = false以允许对象为null
-       @Autowired(required = false)
-       //有多个对象时，按bean的id查找
-       @Qualifier(value = "cat11")
-       private Cat cat;
-   
-       //默认byName实现，查询未果时再按byType查找
-       @Resource(name = "dog11")
-       private Dog dog;
-   ```
-
-# 八、使用注解开发
-
-1. 导入context的约束
+beans2.xml
 
 ```xml
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -786,14 +708,123 @@ beans.xml
         https://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
-	<!--some beans...-->
+
+    <bean id="cat" class="com.shinrin.pojo.Cat"/>
+    <bean id="cat11" class="com.shinrin.pojo.Cat"/>
+
+    <bean id="dog" class="com.shinrin.pojo.Dog"/>
+    <bean id="dog11" class="com.shinrin.pojo.Dog"/>
+
+    <!--byName自动查找和对象set对应的值相对应的id-->
+    <bean id="person" class="com.shinrin.pojo.Person" autowire="byName">
+        <property name="name" value="shinrin"/>
+    </bean>
+
 </beans>
 ```
 
-2. 属性注入：
+**byType自动装配：自动查找与对象属性（类型）相同的bean**
+
+beans3.xml
+
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <bean id="cat" class="com.shinrin.pojo.Cat"/>
+
+    <bean id="dog11" class="com.shinrin.pojo.Dog"/>
+
+    <!--byType自动查找和对象属性相同的bean-->
+    <bean id="person" class="com.shinrin.pojo.Person" autowire="byType">
+        <property name="name" value="shinrin"/>
+    </bean>
+
+</beans>
+```
+
+## 7.3 使用注解自动装配
+
+**@Autowire**
+
+1. @Autowired通过byType实现，默认要求对象必须存在。
+2. 通过@Autowired(required = false)以允许对象不存在（为null值）。
+3. 如果有多个对象，使用 @Qualifier(value = "cat11")以指定唯一的id对象。
+
+**@Resource**
+
+1. @Resource默认通过byName实现，未指定name和type时，按byName（属性名）查找匹配，无匹配时回退至原始类型（属性类型）通过byType查找，如匹配则自动装配。
+2. 如同时指定name和type，则在上下文中查询唯一匹配装配，未果抛出异常。
+3. 如只指定name，则在上下文中查询名称（id）匹配的bean装配，未果抛出异常。
+4. 如只指定type，则在上下文中查询类型匹配的唯一bean装配，无匹配或多个匹配抛出异常。
+
+Person.java
+
+```java
+    //默认byType实现，要求对象必须存在
+    //指定参数required = false以允许对象为null
+    @Autowired(required = false)
+    //有多个对象时，按bean的id查找
+    @Qualifier(value = "cat11")
+    private Cat cat;
+
+    //默认byName实现，查询未果时再按byType查找
+    @Resource(name = "dog11")
+    private Dog dog;
+```
+
+beans1.xml
+
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <bean id="cat" class="com.shinrin.pojo.Cat"/>
+    <bean id="cat11" class="com.shinrin.pojo.Cat"/>
+
+    <bean id="dog" class="com.shinrin.pojo.Dog"/>
+    <bean id="dog11" class="com.shinrin.pojo.Dog"/>
+    <bean id="dog22" class="com.shinrin.pojo.Dog"/>
+
+    <bean id="person" class="com.shinrin.pojo.Person">
+    <property name="name" value="shinrin"/>
+    </bean>
+
+</beans>
+```
+
+# 八、使用注解开发
+
+**@Component及衍生注解**（web开发中，MVC架构中分层）
+
+- dao（@Repository）
+- service（@Service）
+- controller（@Controller）
+
+**作用：将类注册到容器中。**
+
+**作用域@Scope("singleton")**
+
+1. 属性注入：
 
 ```java
 @Component
+//@Scope("prototype")
+@Scope("singleton")
 public class User {
 
     @Value("shinrin")
@@ -809,43 +840,7 @@ public class User {
 }
 ```
 
-3. @Component的衍生注解（web开发中，MVC架构中分层）
-
-   - dao（@Repository）
-   - service（@Service）
-   - controller（@Controller）
-
-   作用：将类注册到容器中。
-
-4. 作用域@Scope("singleton")
-
-   ```java
-   @Component
-   //@Scope("singleton")
-   @Scope("singleton")
-   public class User {
-   
-       @Value("shinrin")
-       private String name;
-   
-       public String getName() {
-           return name;
-       }
-   
-       public void setName(String name) {
-           this.name = name;
-       }
-   }
-   ```
-
-总结：
-
-xml与注解：xml更加灵活，维护简单；注解只能针对当前类，维护复杂。
-
-实践：
-
-- xml管理bean
-- 注解完成属性的注入
+2. beans.xml配置
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -864,30 +859,42 @@ xml与注解：xml更加灵活，维护简单；注解只能针对当前类，�
 </beans>
 ```
 
-# 九、使用java方式配置spring
+**总结**：xml更加灵活，维护简单；注解只能针对当前类，维护复杂。
+
+**实践**：
+
+- xml管理bean
+- 注解完成属性的注入
+
+# 九、使用java方式配置Spring
 
 **JavaConfig：Spring的一个子项目，在spring4之后，成为核心功能**
 
 Config2.java
 
 ```java
+//其他配置文件（团队协作）
 @Configuration
 public class Config2 {
-
 }
 ```
 
 MyConfig.java
 
 ```java
-@Configuration //本身是一个@Component，被spring容器托管，注册到容器中。
+//本身是一个@Component，也会被Spring容器托管，注册到容器中。
+//@Configuration代表Spring配置类，同beans.xml
+@Configuration
 @ComponentScan("com.shinrin.pojo")
 @Import(Config2.class)
 public class MyConfig {
 
+    //注册一个bean：相当于bean标签。
+    //方法名称：相当于bean标签的id属性。
+    //方法返回值：相当于bean标签中的class属性。
     @Bean
     public User getUser(){
-        return new User();
+        return new User();//返回注入到bean中的对象。
     }
 }
 ```
@@ -918,7 +925,224 @@ public class User {
 }
 ```
 
-纯Java配置方式，常见于SpringBoot。
+测试：
+
+```java
+    @Test
+    public void test(){
+        //如果完全使用配置方式：只能通过AnnotationConfig上下文来获取容器，通过配置类的class对象加载。
+        ApplicationContext context = new AnnotationConfigApplicationContext(MyConfig.class);
+        User getUser = (User) context.getBean("getUser");
+        System.out.println(getUser);
+    }
+```
+
+**纯Java配置方式，常见于SpringBoot。**
+
+# 十、代理模式
+
+静态代理和动态代理。
+
+## 10.1静态代理
+
+角色分析：
+
+- 抽象角色：一般会使用接口和抽象类来解决。
+- 真实角色：被代理角色。
+- 代理角色：代理真实角色，添加附属操作。
+- 客户：访问代理对象的人。
+
+代理步骤：
+
+1. 接口
+2. 真实角色
+3. 代理角色
+4. 客户端访问代理角色
+
+代理模式的好处：
+
+- 使真实角色的操作更加单纯，不用关注一些公共业务。
+- 公共业务交由代理角色，**实现业务分工**。
+- 公共**业务扩展时，方便管理**。
+
+缺点：
+
+- 一个真实角色产生一个代理角色，使开发效率降低。
+
+------
+
+**实例：通过代理模式增加日志功能。**
+
+1. UserService.java（接口）
+
+   ```java
+   public interface UserService {
+       public void add();
+       public void delete();
+       public void update();
+       public void query();
+   }
+   ```
+
+2. UserServiceImpl.java
+
+   ```java
+   public class UserServiceImpl implements UserService{
+   
+       public void add() {
+           System.out.println("增加了一个用户");
+       }
+   
+       public void delete() {
+           System.out.println("删除了一个用户");
+       }
+   
+       public void update() {
+           System.out.println("修改了一个用户");
+       }
+   
+       public void query() {
+           System.out.println("查询了一个用户");
+       }
+   }
+   ```
+
+3. UserServiceProxy.java
+
+   ```java
+   public class UserServiceProxy implements UserService{
+   
+       private UserServiceImpl userService;
+   
+       public void setUserService(UserServiceImpl userService) {
+           this.userService = userService;
+       }
+   
+       public void add() {
+           log("add");
+           userService.add();
+       }
+   
+       public void delete() {
+           userService.delete();
+       }
+   
+       public void update() {
+           userService.update();
+       }
+   
+       public void query() {
+           userService.query();
+       }
+   
+       //日志方法
+       public void log(String msg){
+           System.out.println("[Debug] 使用了" + msg + "方法。");
+       }
+   }
+   ```
+
+4. Client.java
+
+   ```java
+   public class Client {
+       public static void main(String[] args) {
+           UserServiceImpl userService = new UserServiceImpl();
+           UserServiceProxy proxy = new UserServiceProxy();
+           proxy.setUserService(userService);
+           proxy.add();
+       }
+   }
+   ```
+
+## 10.2 动态代理
+
+- 动态代理和静态代理角色一样。
+
+- 动态代理的代理类是动态生成的。
+- 动态代理的分类：基于接口的动态代理、基于类的动态代理。
+  - 基于接口——JDK动态代理
+  - 基于类：cglib
+  - Java字节码
+
+InvocationHandler
+
+1. Rent.java（接口）
+
+   ```java
+   public interface Rent {
+       public void rent();
+   }
+   ```
+
+2. Host.java
+
+   ```java
+   public class Host implements Rent {
+       public void rent() {
+           System.out.println("host rent");
+       }
+   }
+   ```
+
+3. ProxyInvocationHandler.java
+
+   ```java
+   //使用此类，自动生成代理类
+   public class ProxyInvocationHandler implements InvocationHandler {
+   
+       //被代理的接口
+       private Rent rent;
+   
+       public void setRent(Rent rent){
+           this.rent = rent;
+       }
+   
+       //生成代理类
+       public Object getProxy(){
+           return Proxy.newProxyInstance(this.getClass().getClassLoader(), rent.getClass().getInterfaces(), this);
+       }
+   
+       //处理代理实例，并返回结果
+       public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+           seeHouse();
+           Object result = method.invoke(rent, args);
+           fare();
+           return result;
+       }
+   
+       public void seeHouse(){
+           System.out.println("see house");
+       }
+   
+       public void fare(){
+           System.out.println("fare");
+       }
+   }
+   ```
+
+4. Client.java
+
+   ```java
+   public class Client {
+       public static void main(String[] args) {
+           //真实角色
+           Host host = new Host();
+   
+           //代理角色
+           ProxyInvocationHandler proxyInvocationHandler = new ProxyInvocationHandler();
+   
+           //通过调用程序处理角色来处理要调用的接口对象。
+           proxyInvocationHandler.setRent(host);
+   
+           //proxy动态生成
+           Rent proxy = (Rent) proxyInvocationHandler.getProxy();
+           proxy.rent();
+       }
+   }
+   ```
+
+   
 
 
 
