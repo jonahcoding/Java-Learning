@@ -1515,7 +1515,7 @@ Spring注册文件：
 </project>
 ```
 
-## 12.2 回顾MyBatis
+## 12.1 回顾MyBatis
 
 1. pojo实体类：
 
@@ -1627,7 +1627,7 @@ public void selectUser() throws IOException {
 }
 ```
 
-12.2 MyBatis-Spring
+## 12.2 MyBatis-Spring
 
 MyBatis-Spring： http://www.mybatis.org/spring/zh/index.html 
 
@@ -1651,13 +1651,193 @@ Spring结合MyBatis使用，需要在Spring应用上下文中至少定义：
 
 **如何创建SqlSessionFactory？**
 
-1. 在MyBatis中：通过SqlSessionFactoryBuilder创建SqlSessionFactory。
+- 在MyBatis中：通过SqlSessionFactoryBuilder创建SqlSessionFactory。
 
-2. 在MyBatis-Spring中：通过SqlSessionFactoryBean创建SqlSessionFactory，需要修改Spring的xml配置：
+- MyBatis-Spring中：通过SqlSessionFactoryBean创建SqlSessionFactory，需要修改Spring的xml配置：
+
+```xml
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="dataSource" ref="dataSource" />
+</bean>
+```
+
+**第一种实现方式：**
+
+1. 实体类：User.java
+
+   ```java
+   package com.shinrin.pojo;
+   
+   public class User {
+       private int id;
+       private String name;
+       private String pwd;
+   
+       @Override
+       public String toString() {
+           return "User{" +
+                   "id=" + id +
+                   ", name='" + name + '\'' +
+                   ", pwd='" + pwd + '\'' +
+                   '}';
+       }
+   }
+   ```
+
+2. 实体映射接口：UserMapper.java
+
+   ```java
+   package com.shinrin.mapper;
+   
+   import com.shinrin.pojo.User;
+   
+   import java.util.List;
+   
+   public interface UserMapper {
+       List<User> selectUser();
+   }
+   ```
+
+3. 实体映射配置：UserMapper.xml
 
    ```xml
-   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-   	<property name="dataSource" ref="dataSource" />
-   </bean>
+   <?xml version="1.0" encoding="UTF-8" ?>
+   <!DOCTYPE mapper
+           PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+           "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+   <mapper namespace="com.shinrin.mapper.UserMapper">
+       <select id="selectUser" resultType="user">
+           select * from mybatis.user;
+       </select>
+   
+   </mapper>
+   ```
+
+4. 接口实现类：UserMapperImpl.java
+
+   ```java
+   package com.shinrin.mapper;
+   
+   import com.shinrin.pojo.User;
+   import org.mybatis.spring.SqlSessionTemplate;
+   
+   import java.util.List;
+   
+   public class UserMapperImpl implements UserMapper {
+   
+       private SqlSessionTemplate sqlSession;
+   
+       public void setSqlSession(SqlSessionTemplate sqlSession) {
+           this.sqlSession = sqlSession;
+       }
+   
+       public List<User> selectUser() {
+           UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+           return mapper.selectUser();
+       }
+   }
+   ```
+
+5. MyBatis配置文件：mybatis-config.xml
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8" ?>
+   <!DOCTYPE configuration
+           PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+           "http://mybatis.org/dtd/mybatis-3-config.dtd">
+   
+   <configuration>
+   
+       <typeAliases>
+           <package name="com.shinrin.pojo"/>
+       </typeAliases>
+   
+   </configuration>
+   ```
+
+6. Spring配置文件：beans.xml
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <beans xmlns="http://www.springframework.org/schema/beans"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+   
+       <!--配置数据源，替换mybatis的数据源-->
+       <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+           <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+           <property name="url" value="jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC&amp;useSSL=false"/>
+           <property name="username" value="root"/>
+           <property name="password" value="1704"/>
+       </bean>
+   
+       <!--配置SqlSessionFactory-->
+       <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+           <property name="dataSource" ref="dataSource"/>
+           <!--关联MyBatis-->
+           <property name="configLocation" value="classpath:mybatis-config.xml"/>
+           <property name="mapperLocations" value="classpath:com/shinrin/mapper/*.xml"/>
+       </bean>
+   
+       <!--注册SqlSessionTemplate，关联SqlSessionFactory-->
+       <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+           <!--利用构造器注入-->
+           <constructor-arg index="0" ref="sqlSessionFactory"/>
+       </bean>
+   
+       <!--实现方法一-->
+       <bean id="userMapper1" class="com.shinrin.mapper.UserMapperImpl1">
+           <property name="sqlSession" ref="sqlSession"/>
+       </bean>
+   
+   </beans>
+   ```
+
+7. 测试：
+
+   ```java
+       @Test
+       public void test1(){
+           ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+           UserMapper mapper = (UserMapper) context.getBean("userMapper1");
+           List<User> users = mapper.selectUser();
+           System.out.println(users);
+       }
+   ```
+
+**第二种实现方式：**
+
+1. 修改UserDaoImpl（继承于SqlSessionDaoSupport，直接getSqlSession）
+
+   ```java
+   public class UserDaoImpl2 extends SqlSessionDaoSupport implements UserMapper {
+      public List<User> selectUser() {
+          UserMapper mapper = getSqlSession().getMapper(UserMapper.class);
+          return mapper.selectUser();
+     }
+   }
+   ```
+
+2. 修改bean
+
+   ```xml
+       <!--实现方法二-->
+       <bean id="userMapper2" class="com.shinrin.mapper.UserMapperImpl2">
+           <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+       </bean>
+   ```
+
+3. 测试
+
+   ```java
+       @Test
+       public void test2(){
+           ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+           UserMapper mapper = (UserMapper) context.getBean("userMapper2");
+           List<User> users = mapper.selectUser();
+           System.out.println(users);
+       }
    ```
 

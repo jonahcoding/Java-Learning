@@ -1,4 +1,4 @@
-package com.shinrin.dao;
+package com.shinrin.mapper;
 
 public class UserDaoMysqlImpl implements UserDao{
     public void getUser() {

@@ -1,4 +1,4 @@
-package com.shinrin.dao;
+package com.shinrin.mapper;
 
 public interface UserDao {
     void getUser();

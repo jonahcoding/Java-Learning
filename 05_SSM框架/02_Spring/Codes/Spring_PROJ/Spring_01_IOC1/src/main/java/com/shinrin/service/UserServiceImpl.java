@@ -1,10 +1,6 @@
 package com.shinrin.service;
 
-import com.shinrin.dao.UserDao;
-import com.shinrin.dao.UserDaoImpl;
-import com.shinrin.dao.UserDaoMysqlImpl;
-import com.shinrin.dao.UserDaoOracleImpl;
-import jdk.nashorn.internal.ir.CallNode;
+import com.shinrin.mapper.UserDao;
 
 public class UserServiceImpl implements UserService{
 

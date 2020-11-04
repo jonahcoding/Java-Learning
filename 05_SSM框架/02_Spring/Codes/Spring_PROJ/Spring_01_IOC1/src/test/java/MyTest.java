@@ -1,4 +1,4 @@
-import com.shinrin.dao.UserDaoOracleImpl;
+import com.shinrin.mapper.UserDaoOracleImpl;
 import com.shinrin.service.UserService;
 import com.shinrin.service.UserServiceImpl;
 import org.junit.Test;
