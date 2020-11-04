@@ -1423,5 +1423,241 @@ Spring注册文件：
   - 默认为false：使用JDK动态代理织入增强。（若目标类未声明接口，则Spring自动使用CGLib动态代理）
   - 配置为true：使用CGLib动态代理技术织入增强。
 
+# 十二、Spring整合MyBatis
 
+导入jar包依赖（Maven配置文件：pom.xml）
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>Spring_PROJ</artifactId>
+        <groupId>com.shinrin</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>Spring_10_MyBatis</artifactId>
+
+    <dependencies>
+        <!-- junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- mybatis -->        
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.2</version>
+        </dependency>  
+        <!-- mysql-connector-java -->                
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.47</version>
+        </dependency> 
+        <!-- spring相关 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>5.2.5.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>5.2.3.RELEASE</version>
+        </dependency>   
+        <!-- aspectJ AOP织入器 -->        
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.4</version>
+        </dependency>		
+        <!-- mybatis-spring整合包 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>2.0.4</version>
+        </dependency>
+        <!-- lombok整合包 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+        </dependency>
+    </dependencies>
+    <!-- 解决资源过滤问题 -->
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+</project>
+```
+
+## 12.2 回顾MyBatis
+
+1. pojo实体类：
+
+```java
+package com.shinrin.pojo;
+
+public class User {
+   private int id;  		//id
+   private String name;   	//姓名
+   private String pwd;   	//密码
+}
+```
+
+2. UserMapper接口：
+
+```java
+public interface UserMapper {
+   public List<User> selectUser();
+}
+```
+
+3. 接口对应的Mapper映射文件：
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+       "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shinrin.dao.UserMapper">
+
+   <select id="selectUser" resultType="User">
+    select * from user
+   </select>
+
+</mapper>
+```
+
+4. 数据库配置文件：
+
+```properties
+driver=com.mysql.cj.jdbc.Driver
+url=jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC
+username=root
+password=1704
+```
+
+5. MyBatis的配置文件：
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 全局变量 -->
+    <!--引入外部配置-->
+    <properties resource="db.properties"/>
+
+    <!--日志-->
+    <settings>
+        <!--标准的日志工厂实现-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <!--为实体类起别名-->
+    <typeAliases>
+        <package name="com.shinrin.pojo"/>
+    </typeAliases>
+
+    <!--配置环境-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <package name="com.shinrin.dao"/>
+    </mappers>
+
+</configuration>
+```
+
+6. 测试类：
+
+```java
+@Test
+public void selectUser() throws IOException {
+
+   String resource = "mybatis-config.xml";
+   InputStream inputStream = Resources.getResourceAsStream(resource);
+   SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+   SqlSession sqlSession = sqlSessionFactory.openSession();
+
+   UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+   List<User> userList = mapper.selectUser();
+   for (User user: userList){
+       System.out.println(user);
+  }
+
+   sqlSession.close();
+}
+```
+
+12.2 MyBatis-Spring
+
+MyBatis-Spring： http://www.mybatis.org/spring/zh/index.html 
+
+作用：整合MyBatis到Spring。
+
+如使用Maven构建工程，则只需导入mybatis-spring的jar包。
+
+```xml
+        <!-- mybatis-spring整合包 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>2.0.4</version>
+        </dependency>
+```
+
+Spring结合MyBatis使用，需要在Spring应用上下文中至少定义：
+
+- SqlSessionFactory（一个）
+- 数据映射器类（至少一个）
+
+**如何创建SqlSessionFactory？**
+
+1. 在MyBatis中：通过SqlSessionFactoryBuilder创建SqlSessionFactory。
+
+2. 在MyBatis-Spring中：通过SqlSessionFactoryBean创建SqlSessionFactory，需要修改Spring的xml配置：
+
+   ```xml
+   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+   	<property name="dataSource" ref="dataSource" />
+   </bean>
+   ```
 

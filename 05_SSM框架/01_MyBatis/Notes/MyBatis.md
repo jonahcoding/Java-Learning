@@ -397,7 +397,7 @@ public class UserTest {
                       <include>**/*.properties</include>
                       <include>**/*.xml</include>
                   </includes>
-                  <filtering>false</filtering>
+                  <filtering>true</filtering>
               </resource>
               <resource>
                   <directory>src/main/resources</directory>
@@ -405,7 +405,7 @@ public class UserTest {
                       <include>**/*.properties</include>
                       <include>**/*.xml</include>
                   </includes>
-                  <filtering>false</filtering>
+                  <filtering>true</filtering>
               </resource>
           </resources>
       </build>
