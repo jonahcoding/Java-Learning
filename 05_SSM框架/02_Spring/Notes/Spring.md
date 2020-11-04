@@ -1055,6 +1055,8 @@ public class User {
    }
    ```
 
+![](Image/未命名文件.png)
+
 ## 10.2 动态代理
 
 - 动态代理和静态代理角色一样。
@@ -1063,9 +1065,34 @@ public class User {
 - 动态代理的分类：基于接口的动态代理、基于类的动态代理。
   - 基于接口——JDK动态代理
   - 基于类：cglib
-  - Java字节码
+  - javasist
 
-InvocationHandler
+【查看JDK帮助文档】
+
+**InvocationHandler：调用处理程序。**
+
+- 代理实例的调用处理程序实现的接口。
+- 每个代理实例都有一个关联的调用处理程序。
+
+```java
+Object invoke(Object proxy, 方法 method, Object[] args)；
+//参数
+//proxy - 调用该方法的代理实例
+//method -所述方法对应于调用代理实例上的接口方法的实例。方法对象的声明类将是该方法声明的接口，它可以是代理类继承该方法的代理接口的超级接口。
+//args -包含的方法调用传递代理实例的参数值的对象的阵列，或null如果接口方法没有参数。原始类型的参数包含在适当的原始包装器类的实例中，例如java.lang.Integer或java.lang.Boolean 。
+```
+
+**Proxy：代理，提供创建动态代理类和实例的静态方法。**
+
+```java
+//生成代理类
+public Object getProxy(){
+   return Proxy.newProxyInstance(this.getClass().getClassLoader(),
+                                 rent.getClass().getInterfaces(),this);
+}
+```
+
+动态代理实现租房：
 
 1. Rent.java（接口）
 
@@ -1099,13 +1126,17 @@ InvocationHandler
        }
    
        //生成代理类
+       //第二个参数：获取要代理的抽象角色（一类）。
        public Object getProxy(){
            return Proxy.newProxyInstance(this.getClass().getClassLoader(), rent.getClass().getInterfaces(), this);
        }
    
-       //处理代理实例，并返回结果
+       //proxy：代理类
+       //method：代理类的调用处理程序的方法对象。
+       //处理代理实例上的方法调用并返回结果。
        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
            seeHouse();
+           //本质利用反射实现。
            Object result = method.invoke(rent, args);
            fare();
            return result;
@@ -1128,23 +1159,78 @@ InvocationHandler
        public static void main(String[] args) {
            //真实角色
            Host host = new Host();
-   
-           //代理角色
+           //代理实例的调用处理程序
            ProxyInvocationHandler proxyInvocationHandler = new ProxyInvocationHandler();
-   
-           //通过调用程序处理角色来处理要调用的接口对象。
+           //放置真实角色
            proxyInvocationHandler.setRent(host);
-   
-           //proxy动态生成
+           //动态生成对应的代理类
            Rent proxy = (Rent) proxyInvocationHandler.getProxy();
            proxy.rent();
        }
    }
    ```
 
-   
+核心：**一个动态代理，一般代理某一类业务，一个动态代理可以代理多个类（通过代理接口实现）。**
 
+------
 
+使用动态代理实现代理UserService：（亦可编写通用的动态代理实现的类，代理对象设置为Object）
+
+代理类：ProxyInvocationHandler.java
+
+```java
+public class ProxyInvocationHandler implements InvocationHandler{
+
+    private Object target;
+
+    public void setTarget(Object target) {
+        this.target = target;
+    }
+
+    //生成代理类
+    public Object getProxy(){
+        return Proxy.newProxyInstance(this.getClass().getClassLoader(), target.getClass().getInterfaces(), this);
+    }
+
+    //proxy代理类
+    //method：代理类的调用处理程序的方法对象
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        log(method.getName());
+        Object result = method.invoke(target, args);
+        return result;
+    }
+
+    public void log(String methodName){
+        System.out.println("执行了" + methodName + "方法");
+    }
+}
+```
+
+测试：Client.java
+
+```java
+package com.shinrin.demo04;
+
+public class Client {
+    public static void main(String[] args) {
+        //真实对象
+        UserServiceImpl userService = new UserServiceImpl();
+        //代理对象的调用处理程序
+        ProxyInvocationHandler pih = new ProxyInvocationHandler();
+        pih.setTarget(userService);//设置要代理的对象
+        UserService proxy = (UserService) pih.getProxy();//动态生成代理类
+        proxy.delete();
+    }
+}
+```
+
+动态代理的优势：
+
+1. 使真实角色更加纯粹，不用关注公共的事情。
+2. 公共业务由代理完成，实现了业务的分工。
+3. 公共业务扩展时更加集中，方便管理。
+4. 一个动态代理，一般代理某一类业务。
+5. 一个动态代理可以代理多个类，代理的是接口。
 
 
 

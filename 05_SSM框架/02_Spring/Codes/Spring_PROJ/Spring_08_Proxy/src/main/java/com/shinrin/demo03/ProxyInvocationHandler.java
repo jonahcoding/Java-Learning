@@ -15,13 +15,17 @@ public class ProxyInvocationHandler implements InvocationHandler {
     }
 
     //生成代理类
+    //第二个参数：获取要代理的抽象角色（一类）。
     public Object getProxy(){
         return Proxy.newProxyInstance(this.getClass().getClassLoader(), rent.getClass().getInterfaces(), this);
     }
 
-    //处理代理实例，并返回结果
+    //proxy：代理类
+    //method：代理类的调用处理程序的方法对象。
+    //处理代理实例上的方法调用并返回结果。
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         seeHouse();
+        //本质利用反射实现。
         Object result = method.invoke(rent, args);
         fare();
         return result;

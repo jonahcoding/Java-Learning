@@ -4,14 +4,12 @@ public class Client {
     public static void main(String[] args) {
         //真实角色
         Host host = new Host();
-
-        //代理角色
+        //代理实例的调用处理程序
         ProxyInvocationHandler proxyInvocationHandler = new ProxyInvocationHandler();
-
-        //通过调用程序处理角色来处理要调用的接口对象。
+        //放置真实角色
         proxyInvocationHandler.setRent(host);
-
-        Rent proxy = (Rent) proxyInvocationHandler.getProxy();//proxy动态生成
+        //动态生成对应的代理类
+        Rent proxy = (Rent) proxyInvocationHandler.getProxy();
         proxy.rent();
     }
 }
