@@ -10,7 +10,7 @@ public class MyTest {
 
     @Test
     public void test1(){
-        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         UserMapper mapper = (UserMapper) context.getBean("userMapper1");
         List<User> users = mapper.selectUser();
         System.out.println(users);
@@ -18,7 +18,7 @@ public class MyTest {
 
     @Test
     public void test2(){
-        ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         UserMapper mapper = (UserMapper) context.getBean("userMapper2");
         List<User> users = mapper.selectUser();
         System.out.println(users);

@@ -19,6 +19,7 @@
         <module>Spring_08_Proxy</module>
         <module>Spring_09_AOP</module>
         <module>Spring_10_MyBatis</module>
+        <module>Spring_11_Transaction</module>
     </modules>
 
     <dependencies>
@@ -26,7 +27,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>5.2.5.RELEASE</version>
+            <version>5.2.3.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
