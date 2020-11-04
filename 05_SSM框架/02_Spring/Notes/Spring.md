@@ -1055,7 +1055,7 @@ public class User {
    }
    ```
 
-![](Image/未命名文件.png)
+![](Spring.assets/Spring_02.png)
 
 ## 10.2 动态代理
 
@@ -1091,84 +1091,6 @@ public Object getProxy(){
                                  rent.getClass().getInterfaces(),this);
 }
 ```
-
-动态代理实现租房：
-
-1. Rent.java（接口）
-
-   ```java
-   public interface Rent {
-       public void rent();
-   }
-   ```
-
-2. Host.java
-
-   ```java
-   public class Host implements Rent {
-       public void rent() {
-           System.out.println("host rent");
-       }
-   }
-   ```
-
-3. ProxyInvocationHandler.java
-
-   ```java
-   //使用此类，自动生成代理类
-   public class ProxyInvocationHandler implements InvocationHandler {
-   
-       //被代理的接口
-       private Rent rent;
-   
-       public void setRent(Rent rent){
-           this.rent = rent;
-       }
-   
-       //生成代理类
-       //第二个参数：获取要代理的抽象角色（一类）。
-       public Object getProxy(){
-           return Proxy.newProxyInstance(this.getClass().getClassLoader(), rent.getClass().getInterfaces(), this);
-       }
-   
-       //proxy：代理类
-       //method：代理类的调用处理程序的方法对象。
-       //处理代理实例上的方法调用并返回结果。
-       public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-           seeHouse();
-           //本质利用反射实现。
-           Object result = method.invoke(rent, args);
-           fare();
-           return result;
-       }
-   
-       public void seeHouse(){
-           System.out.println("see house");
-       }
-   
-       public void fare(){
-           System.out.println("fare");
-       }
-   }
-   ```
-
-4. Client.java
-
-   ```java
-   public class Client {
-       public static void main(String[] args) {
-           //真实角色
-           Host host = new Host();
-           //代理实例的调用处理程序
-           ProxyInvocationHandler proxyInvocationHandler = new ProxyInvocationHandler();
-           //放置真实角色
-           proxyInvocationHandler.setRent(host);
-           //动态生成对应的代理类
-           Rent proxy = (Rent) proxyInvocationHandler.getProxy();
-           proxy.rent();
-       }
-   }
-   ```
 
 核心：**一个动态代理，一般代理某一类业务，一个动态代理可以代理多个类（通过代理接口实现）。**
 
@@ -1224,23 +1146,282 @@ public class Client {
 }
 ```
 
-动态代理的优势：
+**动态代理的优势**：
 
 1. 使真实角色更加纯粹，不用关注公共的事情。
 2. 公共业务由代理完成，实现了业务的分工。
 3. 公共业务扩展时更加集中，方便管理。
 4. 一个动态代理，一般代理某一类业务。
-5. 一个动态代理可以代理多个类，代理的是接口。
+5. 一个动态代理可以代理多个类（代理接口）。
 
+# 十一、AOP
 
+## 11.1 什么是AOP？
 
+> AOP（Aspect Oriented Programming）意为：面向切面编程，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。AOP是OOP的延续，是软件开发中的一个热点，也是Spring框架中的一个重要内容，是函数式编程的一种衍生范型。<span style="border-bottom:2px dashed yellow;">*利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。*</span> 
+>
+> **面向切面编程的直观理解**： **在运行时，动态地将代码切入到类的指定方法、指定位置上的编程思想** 。
 
+![](Spring.assets/AOP-1604461046210.png)
 
+## 11.2 AOP在Spring中的作用：
 
+提供声明式事务，允许用户自定义切面。
 
+|         名词         | 解释                                                         |
+| :------------------: | :----------------------------------------------------------- |
+|      横切关注点      | 跨越应用程序多个模块的方法或功能。与业务逻辑无关的，但需关注的部分。如日志 , 安全 , 缓存 , 事务等等 |
+|    切面（ASPECT）    | 横切关注点 被模块化 的特殊对象。即，它是一个类。             |
+|    通知（Advice）    | 切面必须要完成的工作。即，它是类中的一个方法。               |
+|    目标（Target）    | 被通知对象。                                                 |
+|    代理（Proxy）     | 向目标对象应用通知之后创建的对象。                           |
+|  切入点（PointCut）  | 切面通知 执行的 “地点”的定义。                               |
+| 连接点（JointPoint） | 与切入点匹配的执行点。                                       |
 
+![](Spring.assets/未命名文件.png)
 
+Spring使用增强类定义横切逻辑，同时由于Spring只支持方法连接点，增强还包括在方法的哪一点加入横切代码的方位信息，所以增强既包括横切逻辑，又包括部分连接点的信息。
 
+按照增强（通知）在目标类方法连接点的位置可以将增强划分为以下五类：
+
+1. **前置增强** (org.springframework.aop.BeforeAdvice)： 表示在目标方法执行前来实施增强。
+2. **后置增强** (org.springframework.aop.AfterReturningAdvice)：表示在目标方法执行后来实施增强。
+3. **环绕增强** (org.aopalliance.intercept.MethodInterceptor)：表示在目标方法执行前后同时实施增强。
+4. **异常抛出增强** (org.springframework.aop.ThrowsAdvice) ：表示在目标方法抛出异常后来实施增强。
+5. **引介增强** (org.springframework.aop.introductioninterceptor)：表示在目标类中添加一些新的方法和属性。
+
+即AOP不改变原有代码的前提下，增加功能。
+
+## 11.3 使用Spring实现AOP
+
+导入依赖：
+
+```xml
+<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+<dependency>
+   <groupId>org.aspectj</groupId>
+   <artifactId>aspectjweaver</artifactId>
+   <version>1.9.4</version>
+</dependency>
+```
+
+**方式一：使用Spring API实现AOP**
+
+业务接口：
+
+```java
+public interface UserService {
+    public void add();
+    public void delete();
+    public void update();
+    public void query();
+}
+```
+
+业务实现类：
+
+```java
+public class UserServiceImpl implements UserService{
+    public void add() {
+        System.out.println("增加用户");
+    }
+
+    public void delete() {
+        System.out.println("删除用户");
+    }
+
+    public void update() {
+        System.out.println("更新用户");
+    }
+
+    public void query() {
+        System.out.println("查询用户");
+    }
+}
+```
+
+增强类：前置增强
+
+```java
+public class Log implements MethodBeforeAdvice {
+
+    //method：要执行的目标对象的方法
+    //args：被调用的方法的参数
+    //target：被调用的目标对象
+    public void before(Method method, Object[] args, Object target) throws Throwable {
+        System.out.println(target.getClass().getName() + "的" + method.getName() + "方法将被执行");
+    }
+}
+```
+
+增强类：后置增强
+
+```java
+public class AfterLog implements AfterReturningAdvice {
+
+    //returnValue：返回值
+    //method：要执行的目标对象的方法
+    //args：被调用的方法的参数
+    //target：被调用的目标对象
+    public void afterReturning(Object returnValue, Method method, Object[] args,
+                               Object target) throws Throwable {
+        System.out.println("执行了" + target.getClass().getName()
+                + "的" + method.getName() + "方法，"
+                + "返回值：" + returnValue);
+    }
+}
+```
+
+Spring注册文件：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--注册bean-->
+    <bean id="userService" class="com.shinrin.service.UserServiceImpl"/>
+    <bean id="log" class="com.shinrin.log.Log"/>
+    <bean id="afterLog" class="com.shinrin.log.AfterLog"/>
+
+    <!--aop的配置-->
+    <aop:config>
+        <!--切入点，expression：表达式匹配要执行的方法-->
+        <aop:pointcut id="pointcut" expression="execution(* 
+        com.shinrin.service.UserServiceImpl.*(..))"/>
+        <!--执行环绕，advice-ref执行方法，pointcut-ref切入点-->
+        <aop:advisor advice-ref="log" pointcut-ref="pointcut"/>
+        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>
+    </aop:config>
+
+</beans>
+```
+
+测试：
+
+```java
+    @Test
+    public void test1(){
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans1.xml");
+        UserService userService = (UserService) context.getBean("userService");
+        userService.query();
+    }
+```
+
+> Spring的AOP将公共的业务（日志、安全等）和领域业务结合起来，当执行领域业务时，将会加入公共业务，实现公共业务的重复使用，同时领域业务更加纯粹。
+>
+> 本质是动态代理。
+
+**方式二：自定义类实现AOP**
+
+目标业务接口及业务类不变（UserService/UserServiceImpl）。
+
+自定义切入类：
+
+```java
+public class DiyPointcut {
+
+    public void before(){
+        System.out.println("---------方法执行前---------");
+    }
+    public void after(){
+        System.out.println("---------方法执行后---------");
+    }
+}
+```
+
+Spring注册文件：
+
+```xml
+    <!--注册bean-->
+    <bean id="userService" class="com.shinrin.service.UserServiceImpl"/>
+    <bean id="diy" class="com.shinrin.diy.DiyPointcut"/>
+
+    <!--aop的配置-->
+    <aop:config>
+    <!--使用AOP的标签实现-->
+        <aop:aspect ref="diy">
+            <aop:pointcut id="diyPointcut" expression="execution(*
+            com.shinrin.service.UserServiceImpl.*(..))"/>
+            <aop:before method="before" pointcut-ref="diyPointcut"/>
+            <aop:after method="after" pointcut-ref="diyPointcut"/>
+        </aop:aspect>
+    </aop:config>
+```
+
+测试：
+
+```java
+    @Test
+    public void test2(){
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans2.xml");
+        UserService userService = (UserService) context.getBean("userService");
+        userService.add();
+    }
+```
+
+**方式三：使用注解实现AOP**
+
+编写增强类：
+
+```java
+@Aspect
+public class AnnotationPointcut {
+
+    @Before("execution(* com.shinrin.service.UserServiceImpl.*(..))")
+    public void before(){
+        System.out.println("---------方法执行前---------");
+    }
+    
+    @After("execution(* com.shinrin.service.UserServiceImpl.*(..))")
+    public void after(){
+        System.out.println("---------方法执行后---------");
+    }
+    
+    @Around("execution(* com.shinrin.service.UserServiceImpl.*(..))")
+    public void around(ProceedingJoinPoint jp) throws Throwable {
+        System.out.println("环绕前");
+        System.out.println("签名：" + jp.getSignature());
+        //执行目标方法
+        Object proceed = jp.proceed();
+        System.out.println("环绕后");
+        System.out.println(proceed);
+    }
+}
+```
+
+Spring注册文件：
+
+```xml
+    <!--注册bean-->
+    <bean id="userService" class="com.shinrin.service.UserServiceImpl"/>
+    <bean id="annotation" class="com.shinrin.annotation.AnnotationPointcut"/>
+
+    <aop:aspectj-autoproxy/>
+```
+
+测试：
+
+```java
+    @Test
+    public void test3(){
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans3.xml");
+        UserService userService = (UserService) context.getBean("userService");
+        userService.delete();
+    }
+```
+
+**关于```<aop:aspectj-autoproxy/>```的说明：**
+
+- aop的命名空间：声明自动为Spring容器中配置@Aspect的切面的bean创建代理，织入页面。
+- 属性proxy-target-class：
+  - 默认为false：使用JDK动态代理织入增强。（若目标类未声明接口，则Spring自动使用CGLib动态代理）
+  - 配置为true：使用CGLib动态代理技术织入增强。
 
 
 

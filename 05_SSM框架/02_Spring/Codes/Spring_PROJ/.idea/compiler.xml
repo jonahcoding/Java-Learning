@@ -13,6 +13,7 @@
         <module name="Spring_04_DI" />
         <module name="Spring_02_hellospring" />
         <module name="Spring_07_AppConfig" />
+        <module name="Spring_09_AOP" />
         <module name="Spring_08_Proxy" />
       </profile>
     </annotationProcessing>

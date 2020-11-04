@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--注册bean-->
+    <bean id="userService" class="com.shinrin.service.UserServiceImpl"/>
+    <bean id="diy" class="com.shinrin.diy.DiyPointcut"/>
+
+    <!--aop的配置-->
+    <aop:config>
+    <!--使用AOP的标签实现-->
+        <aop:aspect ref="diy">
+            <aop:pointcut id="diyPointcut" expression="execution(*
+            com.shinrin.service.UserServiceImpl.*(..))"/>
+            <aop:before method="before" pointcut-ref="diyPointcut"/>
+            <aop:after method="after" pointcut-ref="diyPointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
