@@ -11,7 +11,7 @@ public class UserMapperImpl extends SqlSessionDaoSupport implements UserMapper {
         User user = new User(6, "Galen", "1222001");
         UserMapper mapper = getSqlSession().getMapper(UserMapper.class);
         mapper.addUser(user);
-        mapper.delete(5);
+        mapper.deleteUser(5);
         return mapper.selectUser();
     }
 
@@ -19,7 +19,7 @@ public class UserMapperImpl extends SqlSessionDaoSupport implements UserMapper {
         return getSqlSession().getMapper(UserMapper.class).addUser(user);
     }
 
-    public int delete(int id) {
-        return getSqlSession().getMapper((UserMapper.class)).delete(id);
+    public int deleteUser(int id) {
+        return getSqlSession().getMapper((UserMapper.class)).deleteUser(id);
     }
 }

@@ -9,5 +9,5 @@ public interface UserMapper {
 
     int addUser(User user);
 
-    int delete(int id);
+    int deleteUser(int id);
 }

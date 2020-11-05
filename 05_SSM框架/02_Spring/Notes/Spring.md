@@ -1841,3 +1841,320 @@ Spring结合MyBatis使用，需要在Spring应用上下文中至少定义：
        }
    ```
 
+# 十三、声明式事务
+
+## 13.1 事务
+
+- 事务在项目开发中，涉及数据的一致性问题，十分重要。
+- 事务管理时企业级应用程序开发中的必备技术，用来保证数据的完整性和一致性。
+
+**事务的四个属性：**
+
+原子性
+
+> 事务是原子性操作，将一系列的动作当成一个独立的工作单元，要么全部完成，要么完全不起作用。
+
+一致性
+
+> 一旦所有事务动作完成，事务就要被提交，数据和资源处于一种满足业务规则的一致状态中。
+
+隔离性
+
+> 可能有多个事务同时处理相同的数据，因此每个事务都应该与其他业务隔离开，防治数据损坏。
+
+持久性
+
+> 事务一旦完成，无论系统发生什么错误，结果都不会受影响。通常情况下，事务的结果被写到持久化存储器中。
+
+## 13.2 Spring中的事务管理
+
+ Spring在不同的事务管理API之上定义了一个抽象层，使得开发人员不必了解底层的事务管理API就可以使用Spring的事务管理机制。Spring支持编程式事务管理和声明式的事务管理。 
+
+**编程式事务管理**
+
+- 将事务管理代码嵌到业务方法中来控制事务的提交和回滚
+- 缺点：必须在每个事务操作业务逻辑中包含额外的事务管理代码
+
+**声明式事务管理**
+
+- 一般情况下比编程式事务好用。
+- 将事务管理代码从业务方法中分离出来，以声明的方式来实现事务管理。
+- 将事务管理作为横切关注点，通过aop方法模块化。Spring中通过Spring AOP框架支持声明式事务管理。
+
+**Spring管理事务，头文件约束导入：tx**
+
+```xml
+xmlns:tx="http://www.springframework.org/schema/tx"
+
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd">
+```
+
+**配置数据源**
+
+```xml
+<!--配置数据源，替换mybatis的数据源-->
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC&amp;useSSL=false"/>
+    <property name="username" value="root"/>
+    <property name="password" value="1704"/>
+</bean>
+```
+**配置SqlSessionFactory**
+
+```xml
+<!--配置SqlSessionFactory-->
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <!--关联MyBatis-->
+    <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    <property name="mapperLocations" value="classpath:com/shinrin/mapper/*.xml"/>
+</bean>
+```
+**事务管理器**
+
+- 无论使用Spring的哪种事务管理策略（编程式或者声明式）事务管理器都是必须的。
+- 就是 Spring的核心事务管理抽象，管理封装了一组独立于技术的方法。
+
+```xml
+    <!--声明JDBC事务（事务管理器）-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <constructor-arg ref="dataSource" />
+    </bean>
+```
+
+**配置事务通知**
+
+```xml
+<!--配置事务通知-->
+<tx:advice id="txAdvice" transaction-manager="transactionManager">
+    <tx:attributes>
+        <!--配置哪些方法使用什么样的事务,配置事务的传播特性-->
+        <tx:method name="add" propagation="REQUIRED"/>
+        <tx:method name="delete" propagation="REQUIRED"/>
+        <tx:method name="update" propagation="REQUIRED"/>
+        <tx:method name="search*" propagation="REQUIRED"/>
+        <tx:method name="get" read-only="true"/>
+        <tx:method name="*" propagation="REQUIRED"/>
+    </tx:attributes>
+</tx:advice>
+```
+**spring事务传播特性**
+
+事务传播行为就是多个事务方法相互调用时，事务如何在这些方法间传播。
+
+spring支持7种事务传播行为：
+
+| propagation   |                                                              |
+| ------------- | ------------------------------------------------------------ |
+| requierd      | 如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，这是最常见的选择。 |
+| supports      | 支持当前事务，如果没有当前事务，就以非事务方法执行。         |
+| mandatory     | 使用当前事务，如果没有当前事务，就抛出异常。                 |
+| required_new  | 新建事务，如果当前存在事务，把当前事务挂起。                 |
+| not_supported | 以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。   |
+| never         | 以非事务方式执行操作，如果当前事务存在则抛出异常。           |
+| nested        | 如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与propagation_required类似的操作。 |
+
+**Spring 默认的事务传播行为是 PROPAGATION_REQUIRED**，它适合于绝大多数的情况。
+
+假设 ServiveX#methodX() 都工作在事务环境下（即都被 Spring 事务增强了），假设程序中存在如下的调用链：Service1#method1()->Service2#method2()->Service3#method3()，那么这 3 个服务类的 3 个方法通过 Spring 的事务传播机制都工作在同一个事务中。
+
+如：多个方法存在调用，会被放在一个事务中。
+
+## 13.3 测试
+
+1. 实体类：User.java
+
+   ```java
+   public class User {
+       private int id;
+       private String name;
+       private String pwd;
+   
+       public User(int id, String name, String pwd) {
+           this.id = id;
+           this.name = name;
+           this.pwd = pwd;
+       }
+   
+       @Override
+       public String toString() {
+           return "User{" +
+                   "id=" + id +
+                   ", name='" + name + '\'' +
+                   ", pwd='" + pwd + '\'' +
+                   '}';
+       }
+   }
+   ```
+
+2. Mapper接口：UserMapper.java
+
+   ```java
+   public interface UserMapper {
+       List<User> selectUser();
+   
+       int addUser(User user);
+   
+       int deleteUser(int id);
+   }
+   ```
+
+3. Mapper配置文件：UserMapper.xml
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8" ?>
+   <!DOCTYPE mapper
+           PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+           "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+   <mapper namespace="com.shinrin.mapper.UserMapper">
+       <select id="selectUser" resultType="user">
+           select * from mybatis.user;
+       </select>
+   
+       <insert id="addUser" parameterType="com.shinrin.pojo.User">
+           insert into user (id,name,pwd) values (#{id},#{name},#{pwd})
+       </insert>
+   
+       <delete id="deleteUser" parameterType="int">
+           delete from user where id = #{id}
+       </delete>
+   
+   </mapper>
+   ```
+
+4. Mapper实现类：UserMapperImpl.java
+
+   ```java
+   public class UserMapperImpl extends SqlSessionDaoSupport implements UserMapper {
+   
+       public List<User> selectUser() {
+           User user = new User(6, "Galen", "1222001");
+           UserMapper mapper = getSqlSession().getMapper(UserMapper.class);
+           mapper.addUser(user);
+           mapper.deleteUser(5);
+           return mapper.selectUser();
+       }
+   
+       public int addUser(User user) {
+           return getSqlSession().getMapper(UserMapper.class).addUser(user);
+       }
+   
+       public int deleteUser(int id) {
+           return getSqlSession().getMapper((UserMapper.class)).deleteUser(id);
+       }
+   }
+   ```
+
+5. mybatis配置文件：mybatis-config.xml
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8" ?>
+   <!DOCTYPE configuration
+           PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+           "http://mybatis.org/dtd/mybatis-3-config.dtd">
+   
+   <configuration>
+   
+       <typeAliases>
+           <package name="com.shinrin.pojo"/>
+       </typeAliases>
+   
+   </configuration>
+   ```
+
+6. Spring配置文件：spring-dao.xml
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <beans xmlns="http://www.springframework.org/schema/beans"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:aop="http://www.springframework.org/schema/aop"
+          xmlns:tx="http://www.springframework.org/schema/tx"
+          xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/aop
+          http://www.springframework.org/schema/aop/spring-aop.xsd
+          http://www.springframework.org/schema/tx
+          https://www.springframework.org/schema/tx/spring-tx.xsd">
+   
+       <!--配置数据源，替换mybatis的数据源-->
+       <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+           <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+           <property name="url" value="jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC&amp;useSSL=false"/>
+           <property name="username" value="root"/>
+           <property name="password" value="1704"/>
+       </bean>
+   
+       <!--配置SqlSessionFactory-->
+       <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+           <property name="dataSource" ref="dataSource"/>
+           <!--关联MyBatis-->
+           <property name="configLocation" value="classpath:mybatis-config.xml"/>
+           <property name="mapperLocations" value="classpath:com/shinrin/mapper/*.xml"/>
+       </bean>
+   
+       <!--声明式JDBC事务（事务管理器）-->
+       <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+           <constructor-arg ref="dataSource" />
+       </bean>
+   
+       <!--配置事务通知-->
+       <tx:advice id="txAdvice" transaction-manager="transactionManager">
+           <tx:attributes>
+               <!--配置哪些方法使用什么样的事务,配置事务的传播特性-->
+               <tx:method name="add" propagation="REQUIRED"/>
+               <tx:method name="delete" propagation="REQUIRED"/>
+               <tx:method name="update" propagation="REQUIRED"/>
+               <tx:method name="search*" propagation="REQUIRED"/>
+               <tx:method name="get" read-only="true"/>
+               <tx:method name="*" propagation="REQUIRED"/>
+           </tx:attributes>
+       </tx:advice>
+   
+       <!--配置aop织入事务-->
+       <aop:config>
+           <aop:pointcut id="txPointcut" expression="execution(* com.shinrin.mapper.*.*(..))"/>
+           <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+       </aop:config>
+   
+   </beans>
+   ```
+
+7. Spring配置文件：applicationContext.xml
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <beans xmlns="http://www.springframework.org/schema/beans"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+   
+       <beans>
+           <import resource="spring-dao.xml"/>
+   
+           <bean id="userMapper" class="com.shinrin.mapper.UserMapperImpl">
+               <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+           </bean>
+       </beans>
+   
+   </beans>
+   ```
+
+8. 测试类：MyTest.java
+
+   ```java
+       @Test
+       public void test(){
+           ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+           UserMapper userMapper = context.getBean("userMapper", UserMapper.class);
+           for (User user : userMapper.selectUser()) {
+               System.out.println(user);
+           }
+       }
+   ```
+
+   
+
