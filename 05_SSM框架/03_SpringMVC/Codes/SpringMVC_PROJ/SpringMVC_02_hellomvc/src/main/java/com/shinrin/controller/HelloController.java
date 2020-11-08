@@ -10,7 +10,7 @@ public class HelloController implements Controller {
         ModelAndView mv = new ModelAndView();
 
         //业务代码
-        String result = "HelloSpringMVC";
+        String result = "Hello SpringMVC";
         mv.addObject("msg", result);
 
         //视图跳转

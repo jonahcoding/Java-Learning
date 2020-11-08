@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SpringMVC_01_Servlet" />
+        <module name="SpringMVC_03_Annotation" />
         <module name="SpringMVC_02_hellomvc" />
+        <module name="SpringMVC_05_JSON" />
+        <module name="SpringMVC_01_Servlet" />
+        <module name="SpringMVC_04_Controller" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
