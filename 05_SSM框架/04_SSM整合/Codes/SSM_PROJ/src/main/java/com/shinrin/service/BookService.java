@@ -20,6 +20,9 @@ public interface BookService {
     Books queryBookById(int id);
 
     //查询所有的书
-    List<Books> queryAllBooks();
+    List<Books> queryAllBook();
+
+    //按名称查询书籍
+    Books queryBookByName(@Param("bookName") String bookName);
 
 }
