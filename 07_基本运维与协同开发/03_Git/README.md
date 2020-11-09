@@ -337,7 +337,7 @@ IDEA中集成了Git。
 4. 修改部分源码并提交到远程仓库
 
    ```
-   同3，右键项目 ==> Git ==> Add ==> Commit ==> Push 
+   右键项目 ==> Git ==> Add ==> Commit ==> Push 
    ```
 
 5. 从远程仓库获取其它用户的提交
@@ -377,14 +377,4 @@ IDEA中集成了Git。
    ```
    切换到master分支 ==> Git ==> Repository ==> Merge Changes ==> 勾选要合并的分支 ==> Merge
    ```
-
-
-
-前方高能，Bug止步！
-
-------
-
-神兽在此，诸神退散！
-
-------
 
