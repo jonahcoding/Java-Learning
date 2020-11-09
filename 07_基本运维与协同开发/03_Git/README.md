@@ -86,21 +86,21 @@ https://www.bbsmax.com/A/rV57bN3RJP/
 
 ## 3.1 工作区域
 
-**本地工作区域：**工作目录（Working Directory）、暂存区(Stage/Index)、资源库(Repository或Git Directory)。
+**本地工作区域**：工作目录（Working Directory）、暂存区(Stage/Index)、资源库(Repository或Git Directory)。
 
 - Workspace：工作区，存放项目代码
 - Index / Stage：暂存区，临时存放改动，实为文件，保存待提交的文件列表信息。
 - Repository：仓库区（或本地仓库），存放安全数据，包含所有版本。其中HEAD指向最新版本。
 
-**远程工作区域：**远程git仓库(Remote Directory)。
+**远程工作区域**：远程git仓库(Remote Directory)。
 
 - Remote：远程仓库，托管代码的服务器，用于远程数据交换 。
 
-**工作区域的转换：**
+**工作区域的转换**：
 
 ![](README.assets/Git工作分区转换.png)
 
-**本地工作区域详解：**
+**本地工作区域详解**：
 
 ![](README.assets/Git本地工作区域详解.png)
 
@@ -165,23 +165,31 @@ https://www.bbsmax.com/A/rV57bN3RJP/
 
 - Untracked：未跟踪，此文件在文件夹中但未加入git库，不参与版本控制。
 
+  ```
   - 执行`git add`加入暂存区，文件状态变为Staged。
+  ```
 
 - Unmodify：未修改，即版本库中的文件快照内容与当前一致。
 
+  ```
   - 如文件被修改，文件状态变为Modified。
   - 执行`git rm`移出版本库，文件状态变为Untracked。
+  ```
 
 - Modified：文件已修改。
 
+  ```
   - 执行`git add`加入暂存区，文件状态变为Staged。
   - 执行`git checkout`丢弃修改，文件状态回退为unmodify状态。
+  ```
 
 - Staged：暂存状态。
 
+  ```
   - 执行`git commit`将修改同步到版本库中，文件状态变为Unmodify状态。
-  - 执行`git reset HEAD filename`取消暂存，文件状态回退为Modified状态。
-
+- 执行`git reset HEAD filename`取消暂存，文件状态回退为Modified状态。
+  ```
+  
   ![](README.assets/Git文件状态.jpg)
 
 **查看文件状态**
@@ -210,6 +218,7 @@ git status
 #为注释
 *.txt        #忽略所有.txt结尾的文件。
 !lib.txt     #忽略除lib.txt外的其他文件。
+/build		 #忽略build目录下的所有文件（不包含子目录）。
 build/       #忽略build目录下的所有目录和文件。
 doc/*.txt    #忽略doc目录下以.txt结尾的文件（不包含子目录）。
 ```
@@ -259,7 +268,9 @@ $ git branch -dr [remote/branch]
 
 2. Github/Gitee配置SSH
 
-   - 账户 ==> setting ==> SSH and GPGkeys ==> New SSH key ==> 粘贴公钥Key
+   ```
+   账户 ==> setting ==> SSH and GPGkeys ==> New SSH key ==> 粘贴公钥Key
+   ```
 
 3. 测试SSH连接
 
@@ -305,53 +316,74 @@ IDEA中集成了Git。
 1. 创建项目
 
    ```
-   1. VCS - > Import into Version Control -> Create Git Repository
+   VCS ==> Import into Version Control ==> Create Git Repository
    # 指定本地仓库的位置：项目源代码同级目录。
    ```
 
 2. 提交
 
-   右键项目 ==> Git ==> Commit Directory  ==> 填写Commit Message ==> Commit / Commit and Push
-
-   - 如选择Commit and Push项提交 ==> Push Commits ==> Define remote ==> 添加远程仓库地址
+   ```
+   右键项目 ==> Git ==> Commit Directory  ==> 填写Commit Message
+   ==> Commit / Commit and Push
+   
+   如选择Commit and Push项提交 ==> Push Commits ==> Define remote
+   ==> 添加远程仓库地址
+   ```
 
 3. 从远程Git获取项目源码
 
-   IDEA启动页 ==> Check out from Version Control ==> Git ==> 填写远程仓库地址&本地仓库目录
+   ```
+   IDEA启动页 ==> Check out from Version Control ==> Git
+   ==> 填写远程仓库地址&本地仓库目录
+   ```
 
 4. 修改部分源码并提交到远程仓库
 
+   ```
    同3，右键项目 ==> Git ==> Add ==> Commit ==> Push 
+   ```
 
 5. 从远程仓库获取其它用户的提交
 
+   ```
    右键项目 ==> Git ==> Add ==> Repository ==> Pull
-
-   - Fetch和Pull的区别：Fetch拉取后对比修改决定是否合并，如遵守执行**修改前先更新**可直接Pull。
+   
+   Fetch和Pull的区别：Fetch拉取后对比修改决定是否合并，如遵守执行【修改前先更新】可直接Pull。
+   ```
 
 6. 创建分支
 
-   场景： 临时修改bug、开发不确定是否加入的功能等 。
-
-   右键项目 ==> Git ==> Repository ==> Branches ==> New Branch（新建分支需要提交到远程）
-
-   - 界面右下角显示多个分支，右键分支 ==> Checkout 以切换。
+   ```
+   使用场景：临时修改bug、开发不确定是否加入的功能等 。
+   
+   右键项目 ==> Git ==> Repository ==> Branches ==> New Branch
+   
+   界面右下角显示多个分支，右键分支 ==> Checkout 以切换。
+   ```
 
 7. 提交分支到远程Git仓库
 
-   切换到待提交的分支 ==> 右键项目 ==> Git ==> Repository ==> Push ==> Push Commits ==> Push
+   ```
+   切换到待提交的分支 ==> 右键项目 ==> Git ==> Repository ==> Push
+   ==> Push Commits ==> Push
+   ```
 
 8. 获取其它用户提交的分支
 
-   右键项目 ==> Git ==> Repository ==> Pull==> Pull Changes ==> 刷新按钮 ==> Pull
-
-    ==> 界面右下角点击新的分支 ==>  Checkout as new local branch （创建本地分支）
-
-   - 如需合并分支：Pull Changes ==> 刷新按钮 ==> 勾选分支 ==> Pull
+   ```
+右键项目 ==> Git ==> Repository ==> Pull==> Pull Changes ==> 刷新按钮 ==> Pull ==> 界面右下角点击新的分支 ==>  Checkout as new local branch （创建本地分支）
+   
+如需合并分支：Pull Changes ==> 刷新按钮 ==> 勾选新分支 ==> Pull
+   ```
 
 9. 分支合并到主干
 
-   切换到master分支 ==> Git ==> Repository ==> Merge Changes ==> 勾选要合并的分支 ==> Merge
+   ```
+   切换到master分支 ==> Git ==> Repository ==> Merge Changes 
+   ==> 勾选要合并的分支 ==> Merge
+   ```
+   
+   
 
 
 
