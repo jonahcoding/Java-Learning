@@ -317,26 +317,23 @@ IDEA中集成了Git。
 
    ```
    VCS ==> Import into Version Control ==> Create Git Repository
-   # 指定本地仓库的位置：项目源代码同级目录。
+   指定本地仓库的位置：项目源代码同级目录。
    ```
 
 2. 提交
 
    ```
-   右键项目 ==> Git ==> Commit Directory  ==> 填写Commit Message
-   ==> Commit / Commit and Push
+   右键项目 ==> Git ==> Commit Directory  ==> 填写Commit Message ==> Commit / Commit and Push
    
-   如选择Commit and Push项提交 ==> Push Commits ==> Define remote
-   ==> 添加远程仓库地址
+   如选择Commit and Push项提交 ==> Push Commits ==> Define remote ==> 添加远程仓库地址
    ```
-
+   
 3. 从远程Git获取项目源码
 
    ```
-   IDEA启动页 ==> Check out from Version Control ==> Git
-   ==> 填写远程仓库地址&本地仓库目录
+   IDEA启动页 ==> Check out from Version Control ==> Git ==> 填写远程仓库地址&本地仓库目录
    ```
-
+   
 4. 修改部分源码并提交到远程仓库
 
    ```
@@ -364,10 +361,9 @@ IDEA中集成了Git。
 7. 提交分支到远程Git仓库
 
    ```
-   切换到待提交的分支 ==> 右键项目 ==> Git ==> Repository ==> Push
-   ==> Push Commits ==> Push
+   切换到待提交的分支 ==> 右键项目 ==> Git ==> Repository ==> Push ==> Push Commits ==> Push
    ```
-
+   
 8. 获取其它用户提交的分支
 
    ```
@@ -379,9 +375,12 @@ IDEA中集成了Git。
 9. 分支合并到主干
 
    ```
-   切换到master分支 ==> Git ==> Repository ==> Merge Changes 
-   ==> 勾选要合并的分支 ==> Merge
+   切换到master分支 ==> Git ==> Repository ==> Merge Changes ==> 勾选要合并的分支 ==> Merge
    ```
 
-   
+------
+
+神兽保佑，乱码走开！
+
+------
 
