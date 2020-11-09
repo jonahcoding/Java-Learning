@@ -145,19 +145,19 @@ https://www.bbsmax.com/A/rV57bN3RJP/
 
 3. 本地仓库搭建
 
-   1. 创建新的仓库（本地）
+   - 创建新的仓库（本地）
 
-      ```
-      # 在当前目录新建一个Git代码库
-      $ git init
-      ```
+     ```
+     # 在当前目录新建一个Git代码库
+     $ git init
+     ```
 
-   2. 克隆远程仓库
+   - 克隆远程仓库
 
-      ```
-      # 克隆项目及其版本信息
-      $ git clone [url]
-      ```
+     ```
+     # 克隆项目及其版本信息
+     $ git clone [url]
+     ```
 
 # 五、Git文件操作
 
@@ -166,28 +166,28 @@ https://www.bbsmax.com/A/rV57bN3RJP/
 - Untracked：未跟踪，此文件在文件夹中但未加入git库，不参与版本控制。
 
   ```
-  - 执行`git add`加入暂存区，文件状态变为Staged。
+  执行git add加入暂存区，文件状态变为Staged。
   ```
 
 - Unmodify：未修改，即版本库中的文件快照内容与当前一致。
 
   ```
-  - 如文件被修改，文件状态变为Modified。
-  - 执行`git rm`移出版本库，文件状态变为Untracked。
+  如文件被修改，文件状态变为Modified。
+  执行git rm移出版本库，文件状态变为Untracked。
   ```
 
 - Modified：文件已修改。
 
   ```
-  - 执行`git add`加入暂存区，文件状态变为Staged。
-  - 执行`git checkout`丢弃修改，文件状态回退为unmodify状态。
+  执行git add加入暂存区，文件状态变为Staged。
+  执行git checkout丢弃修改，文件状态回退为unmodify状态。
   ```
 
 - Staged：暂存状态。
 
   ```
-  - 执行`git commit`将修改同步到版本库中，文件状态变为Unmodify状态。
-- 执行`git reset HEAD filename`取消暂存，文件状态回退为Modified状态。
+  执行git commit将修改同步到版本库中，文件状态变为Unmodify状态。
+  执行git reset HEAD filename取消暂存，文件状态回退为Modified状态。
   ```
   
   ![](README.assets/Git文件状态.jpg)
@@ -373,7 +373,7 @@ IDEA中集成了Git。
    ```
 右键项目 ==> Git ==> Repository ==> Pull==> Pull Changes ==> 刷新按钮 ==> Pull ==> 界面右下角点击新的分支 ==>  Checkout as new local branch （创建本地分支）
    
-如需合并分支：Pull Changes ==> 刷新按钮 ==> 勾选新分支 ==> Pull
+   如需合并分支：Pull Changes ==> 刷新按钮 ==> 勾选新分支 ==> Pull
    ```
 
 9. 分支合并到主干
@@ -382,56 +382,6 @@ IDEA中集成了Git。
    切换到master分支 ==> Git ==> Repository ==> Merge Changes 
    ==> 勾选要合并的分支 ==> Merge
    ```
+
    
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
