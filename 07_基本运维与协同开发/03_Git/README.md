@@ -363,11 +363,11 @@ IDEA中集成了Git。
    ```
    切换到待提交的分支 ==> 右键项目 ==> Git ==> Repository ==> Push ==> Push Commits ==> Push
    ```
-   
+
 8. 获取其它用户提交的分支
 
    ```
-右键项目 ==> Git ==> Repository ==> Pull==> Pull Changes ==> 刷新按钮 ==> Pull ==> 界面右下角点击新的分支 ==>  Checkout as new local branch （创建本地分支）
+   右键项目 ==> Git ==> Repository ==> Pull==> Pull Changes ==> 刷新按钮 ==> Pull ==> 界面右下角点击新的分支 ==>  Checkout as new local branch （创建本地分支）
    
    如需合并分支：Pull Changes ==> 刷新按钮 ==> 勾选新分支 ==> Pull
    ```
@@ -378,9 +378,13 @@ IDEA中集成了Git。
    切换到master分支 ==> Git ==> Repository ==> Merge Changes ==> 勾选要合并的分支 ==> Merge
    ```
 
+
+
+前方高能，Bug止步！
+
 ------
 
-神兽保佑，乱码走开！
+神兽在此，诸神退散！
 
 ------
 
