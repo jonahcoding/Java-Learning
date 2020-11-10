@@ -2,19 +2,24 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SpringMVC_03_Annotation" />
-        <module name="SpringMVC_02_hellomvc" />
-        <module name="SpringMVC_05_JSON" />
+        <module name="SpringMVC_07_Interceptor" />
+        <module name="SpringMVC_06_Ajax" />
         <module name="SpringMVC_01_Servlet" />
         <module name="SpringMVC_04_Controller" />
+        <module name="SpringMVC_02_hellomvc" />
+        <module name="SpringMVC_08_UploadAndDownload" />
+        <module name="SpringMVC_05_JSON" />
+        <module name="SpringMVC_03_Annotation" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="SpringMVC_02_hellomvc" target="1.7" />
+      <module name="untitled" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

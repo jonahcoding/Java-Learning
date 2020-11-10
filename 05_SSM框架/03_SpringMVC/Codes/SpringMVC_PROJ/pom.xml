@@ -14,6 +14,9 @@
         <module>SpringMVC_03_Annotation</module>
         <module>SpringMVC_04_Controller</module>
         <module>SpringMVC_05_JSON</module>
+        <module>SpringMVC_06_Ajax</module>
+        <module>SpringMVC_07_Interceptor</module>
+        <module>SpringMVC_08_UploadAndDownload</module>
     </modules>
 
     <dependencies>
