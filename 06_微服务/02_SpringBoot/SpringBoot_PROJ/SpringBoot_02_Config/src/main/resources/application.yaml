@@ -1,0 +1,14 @@
+name: shinrin
+
+student1:
+  name: shinrin
+  age: 3
+
+student2: {name: shinrin, age: 3}
+
+pets1:
+  - cat
+  - dog
+  - pig
+
+pets2: [cat, dog, pig]
