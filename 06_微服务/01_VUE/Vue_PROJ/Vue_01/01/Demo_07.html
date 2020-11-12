@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--在线CDN-->
+    <!--1.导入vue.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+    <!--导入axios-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+
+</head>
+<body>
+
+<div id="app">
+    <div>{{info.name}}</div>
+    <a v-bind:href="info.url">百度</a>
+</div>
+
+<script>
+    let vm = new Vue({
+        el: "#app",
+        //和data: 不同 属性：vm
+        data() {
+            return {
+                info: {
+                    name:null,
+                    url:null,
+                },
+            }
+        },
+        mounted() {
+            //钩子函数 链式编程 ES6新特性
+            axios.get("../data.json").then(response => (this.info=response.data));
+        }
+    });
+</script>
+
+</body>
+</html>

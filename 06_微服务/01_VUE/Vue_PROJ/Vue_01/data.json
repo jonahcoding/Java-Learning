@@ -1,0 +1,25 @@
+{
+  "name": "shinrin",
+  "age": "18",
+  "sex": "男",
+  "url":"https://www.baidu.com",
+  "address": {
+    "street": "风居住的街道",
+    "city": "长沙",
+    "country": "中国"
+  },
+  "links": [
+    {
+      "name": "bilibili",
+      "url": "https://www.bilibili.com"
+    },
+    {
+      "name": "baidu",
+      "url": "https://www.baidu.com"
+    },
+    {
+      "name": "shinrin video",
+      "url": "https://www.4399.com"
+    }
+  ]
+}
