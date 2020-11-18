@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SHINRIN</title>
+</head>
+<body>
+
+<h1>Thymeleaf测试页面</h1>
+
+
+<!--th:text 将div中的值设定为指定的值-->
+<div th:text="${msg}"></div>
+<!--不转义-->
+<div th:utext="${msg}"></div>
+
+<!--遍历数据-->
+<h4 th:each="user:${users}" th:text="${user}"></h4>
+
+<h4>
+    <!--行内写法-->
+    <span th:each="user:${users}">[[${user}]]</span>
+</h4>
+
+</body>
+</html>
