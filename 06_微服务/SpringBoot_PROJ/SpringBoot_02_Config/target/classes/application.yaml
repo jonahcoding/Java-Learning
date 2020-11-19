@@ -1,0 +1,20 @@
+person:
+  name: shinrin${random.uuid}
+  age: ${random.int}
+  happy: true
+  birth: 1996/12/08
+  maps: {k1: v1, k2: v2}
+  list:
+    - code
+    - music
+  hello: Good
+  dog:
+    name: ${person.hello:Nice}_旺财
+    # 如果person存在hello属性（Good），则值为Good_旺财
+    # 如果person不存在hello属性，则值为Nice_旺财
+    age: 3
+  email: 5445029@qq.com
+
+dog:
+  first-name: 大黄
+  age: 3
