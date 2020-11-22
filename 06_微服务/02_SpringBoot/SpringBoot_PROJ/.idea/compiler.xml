@@ -7,15 +7,24 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="springboot_03_web" />
-        <module name="springboot_02_config" />
-        <module name="SpringBoot_PROJ" />
+        <module name="SpringBoot_07_Security" />
+        <module name="SpringBoot_05_MyBatis" />
+        <module name="SpringBoot_06_Security" />
+        <module name="SpringBoot_04_Data" />
         <module name="SpringBoot_01_HellowWorld" />
+        <module name="Shiro_01_HelloWorld" />
+        <module name="Shiro_01_helloworld" />
+        <module name="springboot_02_config" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Shiro_01_HelloWorld" target="1.5" />
+      <module name="Shiro_01_helloworld" target="1.5" />
       <module name="SpringBoot_02_Config" target="1.8" />
       <module name="SpringBoot_03_Config2" target="1.8" />
       <module name="SpringBoot_03_Web" target="1.8" />
+      <module name="SpringBoot_07_Security" target="1.8" />
+      <module name="SpringBoot_07_Shiro" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -24,6 +33,10 @@
       <module name="SpringBoot_02_Config" options="-parameters" />
       <module name="SpringBoot_03_Config2" options="-parameters" />
       <module name="SpringBoot_03_Web" options="-parameters" />
+      <module name="SpringBoot_04_Data" options="-parameters" />
+      <module name="SpringBoot_05_MyBatis" options="-parameters" />
+      <module name="SpringBoot_06_Security" options="-parameters" />
+      <module name="SpringBoot_07_Security" options="-parameters" />
       <module name="springboot_02_config" options="-parameters" />
       <module name="springboot_03_web" options="-parameters" />
     </option>

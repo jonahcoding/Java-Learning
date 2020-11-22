@@ -1456,3 +1456,584 @@ public void addInterceptors(InterceptorRegistry registry) {
 <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#">[[${session.loginUser}]]</a>
 ```
 
+## 7.6 展示员工
+
+```html
+<a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#" th:href="@{/emps}">
+
+```
+
+## 7.7 增加员工
+
+## 7.8 修改员工
+
+## 7.9 删除员工
+
+# 八、如何创建一个网站
+
+1. 前端：前端模板
+2. 设计数据库（根据前端）
+3. 前端独立运行，独立化工程。
+4. 数据库接口对接：json。
+5. 前后端联调。
+
+一套自己熟悉的后台模板（工作必要）：xadmin
+
+前端页面：至少自己可通过前端框架组合出网站页面
+
+- index
+- about
+- blog
+- post
+- user
+
+# 九、SpringBoot与数据库
+
+## 9.1 结合JDBC API
+
+配置数据源（application.yml）。
+
+```yml
+spring:
+  datasource:
+    username: root
+    password: 1704
+    url: jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+```
+
+增删改查。
+
+```java
+@RestController
+public class JDBCController {
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    //查询数据库的所有信息
+    //没有实体类，如何获取？Map
+    @GetMapping("/userList")
+    public List<Map<String, Object>> userList(){
+
+        String sql = "select * from mybatis.user";
+        List<Map<String, Object>> list_maps = jdbcTemplate.queryForList(sql);
+        return list_maps;
+    }
+
+    @GetMapping("/addUser")
+    public String addUser(){
+
+        String sql = "insert into mybatis.user(id, name, pwd) values(7, 'Pix', 'Lulu')";
+        jdbcTemplate.update(sql);
+        return "update ok";
+    }
+
+    @GetMapping("/updateUser/{id}")
+    public String updateUser(@PathVariable("id") String id){
+
+        String sql = "update mybatis.user set name=?,pwd=? where id="+id;
+        Object[] objects = new Object[2];
+        objects[0] = "Teemo";
+        objects[1] = "123456";
+        jdbcTemplate.update(sql, objects);
+        return "update ok";
+    }
+
+    @GetMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable("id") String id){
+
+        String sql = "delete from mybatis.user where id=?";
+        jdbcTemplate.update(sql, id);
+        return "delete ok";
+    }
+
+}
+```
+
+## 9.2 结合Druid数据源
+
+1. 导入依赖
+
+```xml
+<!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid</artifactId>
+    <version>1.2.3</version>
+</dependency>
+```
+
+2. 修改默认数据源
+
+```yml
+spring:
+  datasource:
+    username: root
+    password: 1704
+    url: jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource #自定义数据源
+
+    #Spring Boot 默认是不注入这些属性值的，需要自己绑定
+    #druid 数据源专有配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+
+    #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
+    #如果允许时报错  java.lang.ClassNotFoundException: org.apache.log4j.Priority
+    #则导入 log4j 依赖即可，Maven 地址：https://mvnrepository.com/artifact/log4j/log4j
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+```
+
+3. 导入log4j依赖
+
+```xml
+<dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.17</version>
+</dependency>
+```
+
+4. DruidDataSource绑定全局配置并注册到容器
+
+> DruidConfig.java
+
+```java
+@Configuration
+public class DruidConfig {
+
+    @ConfigurationProperties(prefix = "spring.datasource")
+    @Bean
+    public DataSource druidDataSource(){
+        return new DruidDataSource();
+    }
+}
+
+```
+
+> 测试
+
+```java
+    @Test
+    void contextLoads() throws SQLException {
+
+        //查看数据源
+        System.out.println(dataSource.getClass());
+        //获得数据库连接
+        Connection connection = dataSource.getConnection();
+        System.out.println(connection);
+        DruidDataSource druidDataSource = (DruidDataSource) dataSource;
+        System.out.println("druidDataSource 数据源最大连接数：" + druidDataSource.getMaxActive());
+        System.out.println("druidDataSource 数据源初始化连接数：" + druidDataSource.getInitialSize());
+        //关闭
+        connection.close();
+    }
+```
+
+5. 后台监控
+
+> DriudConfig.java
+
+```java
+    //后台监控：web.xml
+    //访问：http://localhost:8080/druid/login.html
+    @Bean
+    public ServletRegistrationBean statViewServlet(){
+        ServletRegistrationBean bean = new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
+        //后台登录，配置账号密码
+        HashMap<String, String> initParameters = new HashMap<>();//登录key（固定）
+        initParameters.put("loginUsername", "admin");
+        initParameters.put("loginPassword", "123456");
+        //允许访问
+        initParameters.put("allow","");//所有人可访问
+        //initParameters.put("allow","localhost");//仅本地可访问
+        bean.setInitParameters(initParameters);//设置初始化参数
+        return bean;
+    }
+```
+
+6. 过滤器
+
+```java
+    //过滤器
+    @Bean
+    public FilterRegistrationBean webStatFilter(){
+        FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
+        bean.setFilter(new WebStatFilter());
+        //可过滤的请求
+        HashMap<String, String> initParameters = new HashMap<>();
+        //不参与统计的请求
+        initParameters.put("exclusions", "*.js,*.css,/druid/*");
+        bean.setInitParameters(initParameters);
+        return bean;
+    }
+```
+
+## 9.3 整合MyBatis
+
+1. 导入依赖
+
+```xml
+<!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
+<dependency>
+    <groupId>org.mybatis.spring.boot</groupId>
+    <artifactId>mybatis-spring-boot-starter</artifactId>
+    <version>2.1.4</version>
+</dependency>
+```
+
+2. 数据库配置（application.properties）
+
+```properties
+spring.datasource.username=root
+spring.datasource.password=1704
+spring.datasource.url=jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# 整合MyBatis
+mybatis.type-aliases-package=com.serein.pojo
+mybatis.mapper-locations=classpath:mybatis/mapper/*.xml
+```
+
+3. 测试
+
+```java
+@Autowired
+DataSource dataSource;
+
+@Test
+void contextLoads() throws SQLException {
+    System.out.println(dataSource.getClass());
+    System.out.println(dataSource.getConnection());
+}
+```
+
+4. pojo类
+
+```java
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class User {
+    int id;
+    String name;
+    String pwd;
+}
+```
+
+5. Mapper接口
+
+```java
+//Mapper：mybatis的mapper类。
+@Mapper
+//Repository：注册到Spring容器
+@Repository
+public interface UserMapper {
+    List<User> queryUserList();
+
+    User queryUserById(int id);
+
+    int addUser(User user);
+
+    int updateUser(User user);
+
+    int deleteUser(int id);
+}
+```
+
+6. UserMapper.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.serein.mapper.UserMapper">
+    <select id="queryUserList" resultType="User">
+        select * from mybatis.user
+    </select>
+
+    <select id="queryUserById" resultType="user">
+        select * from mybatis.user where id = #{id};
+    </select>
+
+    <insert id="addUser" parameterType="User">
+        insert into mybatis.user(id, name, pwd) values (#{id}, #{name}, #{pwd})
+    </insert>
+
+    <update id="updateUser" parameterType="user">
+        update mybatis.user set name=#{name},pwd=#{pwd} where id = #{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from mybatis.user where id=#{id}
+    </delete>
+</mapper>
+```
+
+7. UserController.java
+
+```java
+@RestController
+public class UserController {
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @GetMapping("/queryUserList")
+    public List<User> queryUserList(){
+        List<User> userList = userMapper.queryUserList();
+        for (User user : userList) {
+            System.out.println(user);
+        }
+        return userList;
+    }
+}
+```
+
+# 十、SpringSecurity
+
+用户身份认证：支持主流的认证方式，包括 HTTP 基本认证、HTTP 表单验证、HTTP 摘要认证、OpenID 和 LDAP 等。
+
+用户授权：提供了基于角色的访问控制和访问控制列表（Access Control List，ACL），可以对应用中的领域对象进行细粒度的控制。
+
+1. 添加Thymeleaf支持
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+</dependency>
+```
+
+2. 添加SpringSecurity支持
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.thymeleaf.extras</groupId>
+    <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-test</artifactId>
+    <scope>test</scope>
+</dependency>
+```
+
+3. /controller/RouterController
+
+```java
+@Controller
+public class RouterController {
+
+    @RequestMapping({"/", "/index"})
+    public String index(){
+        return "index";
+    }
+
+    @RequestMapping("/toLogin")
+    public String toLogin(){
+        return "views/login";
+    }
+
+    @RequestMapping("/level1/{id}")
+    public String level1(@PathVariable("id") int id){
+        return "views/level1/"+id;
+    }
+
+    @RequestMapping("/level2/{id}")
+    public String level2(@PathVariable("id") int id){
+        return "views/level2/"+id;
+    }
+
+    @RequestMapping("/level3/{id}")
+    public String level3(@PathVariable("id") int id){
+        return "views/level3/"+id;
+    }
+}
+```
+
+4. /config/SecurityConfig.java
+
+```java
+//开启WebSecurity
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    //AOP：拦截器
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        //定制请求的授权规则
+        //首页所有人可访问，功能页对应权限访问
+        http.authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/level1/**").hasRole("vip1")
+                .antMatchers("/level2/**").hasRole("vip2")
+                .antMatchers("/level3/**").hasRole("vip3");
+        //无权限默认跳转到登录页
+        http.formLogin()
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .loginPage("/toLogin")
+                .loginProcessingUrl("/login");//登录表单提交请求
+        //关闭csrf
+        http.csrf().disable();
+        //开启记住我功能：cookie，默认保存两周。
+        http.rememberMe().rememberMeParameter("remember");
+        //开启注销，注销成功跳转到登录页
+        http.logout().logoutSuccessUrl("/");
+    }
+
+    //认证
+    //密码编码：PasswordEncoder
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //开发时数据从数据库中读取
+        auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+                .withUser("serein").password(new BCryptPasswordEncoder().encode(("123456"))).roles("vip2","vip3")
+                .and()
+                .withUser("root").password(new BCryptPasswordEncoder().encode(("123456"))).roles("vip1","vip2","vip3")
+                .and()
+                .withUser("guest").password(new BCryptPasswordEncoder().encode(("123456"))).roles("vip1");
+    }
+}
+```
+
+5. 前端
+
+> 登录权限判定
+
+```html
+<!--登录注销-->
+<div class="right menu">
+
+    <!--如果未登录-->
+    <div sec:authorize="!isAuthenticated()">
+        <a class="item" th:href="@{/toLogin}">
+            <i class="address card icon"></i> 登录
+        </a>
+    </div>
+
+    <!--如果已登录-->
+    <div sec:authorize="isAuthenticated()">
+        <a class="item">
+            <i class="address card icon"></i>
+            用户名：<span sec:authentication="principal.username"></span>
+            角色：<span sec:authentication="principal.authorities"></span>
+        </a>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        <a class="item" th:href="@{/logout}">
+            <i class="sign-out  icon"></i> 注销
+        </a>
+    </div>
+</div>
+```
+
+> VIP不同等级对应的页面
+
+```html
+<!--菜单根据用户的角色动态的实现-->
+<div class="column"  sec:authorize="hasRole('vip1')">
+    <div class="ui raised segment">
+        <div class="ui">
+            <div class="content">
+                <h5 class="content">Level 1</h5>
+                <hr>
+                <div><a th:href="@{/level1/1}"><i class="bullhorn icon"></i> Level-1-1</a></div>
+                <div><a th:href="@{/level1/2}"><i class="bullhorn icon"></i> Level-1-2</a></div>
+                <div><a th:href="@{/level1/3}"><i class="bullhorn icon"></i> Level-1-3</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="column"  sec:authorize="hasRole('vip2')">
+    <div class="ui raised segment">
+        <div class="ui">
+            <div class="content">
+                <h5 class="content">Level 2</h5>
+                <hr>
+                <div><a th:href="@{/level2/1}"><i class="bullhorn icon"></i> Level-2-1</a></div>
+                <div><a th:href="@{/level2/2}"><i class="bullhorn icon"></i> Level-2-2</a></div>
+                <div><a th:href="@{/level2/3}"><i class="bullhorn icon"></i> Level-2-3</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="column"  sec:authorize="hasRole('vip3')">
+    <div class="ui raised segment">
+        <div class="ui">
+            <div class="content">
+                <h5 class="content">Level 3</h5>
+                <hr>
+                <div><a th:href="@{/level3/1}"><i class="bullhorn icon"></i> Level-3-1</a></div>
+                <div><a th:href="@{/level3/2}"><i class="bullhorn icon"></i> Level-3-2</a></div>
+                <div><a th:href="@{/level3/3}"><i class="bullhorn icon"></i> Level-3-3</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+> 定制登录页
+
+```html
+<div sec:authorize="!isAuthenticated()">
+    <a class="item" th:href="@{/toLogin}">
+        <i class="address card icon"></i> 登录
+    </a>
+</div>
+```
+
+> 登录表单
+
+```html
+<form th:action="@{/login}" method="post">
+   <div class="field">
+       <label>Username</label>
+       <div class="ui left icon input">
+           <input type="text" placeholder="Username" name="username">
+           <i class="user icon"></i>
+       </div>
+   </div>
+   <div class="field">
+       <label>Password</label>
+       <div class="ui left icon input">
+           <input type="password" name="password">
+           <i class="lock icon"></i>
+       </div>
+   </div>
+   <input type="submit" class="ui blue submit button"/>
+</form>
+```
+
+> 记住我
+
+```html
+<div class="field">
+    <input type="checkbox" name="remember"> 记住我
+</div>
+```
+

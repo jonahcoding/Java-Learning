@@ -6,6 +6,9 @@
     <file url="file://$PROJECT_DIR$/SpringBoot_02_Config/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SpringBoot_03_Web/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SpringBoot_03_Web/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SpringBoot_04_Data/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SpringBoot_05_MyBatis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SpringBoot_06_Security/src/main/java" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
