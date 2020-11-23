@@ -6,15 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="springboot_03_web" />
-        <module name="SpringBoot_07_Security" />
         <module name="SpringBoot_05_MyBatis" />
-        <module name="SpringBoot_06_Security" />
-        <module name="SpringBoot_04_Data" />
-        <module name="SpringBoot_01_HellowWorld" />
         <module name="Shiro_01_HelloWorld" />
-        <module name="Shiro_01_helloworld" />
+        <module name="SpringBoot_07_Security" />
+        <module name="springboot_05_mybatis" />
         <module name="springboot_02_config" />
+        <module name="springboot_01_helloworld" />
+        <module name="SpringBoot_04_Data" />
+        <module name="springboot_04_data" />
+        <module name="SpringBoot_01_HellowWorld" />
+        <module name="Shiro_01_helloworld" />
+        <module name="springboot_03_web" />
+        <module name="springboot_06_security" />
+        <module name="SpringBoot_06_Security" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -37,8 +41,12 @@
       <module name="SpringBoot_05_MyBatis" options="-parameters" />
       <module name="SpringBoot_06_Security" options="-parameters" />
       <module name="SpringBoot_07_Security" options="-parameters" />
+      <module name="springboot_01_helloworld" options="-parameters" />
       <module name="springboot_02_config" options="-parameters" />
       <module name="springboot_03_web" options="-parameters" />
+      <module name="springboot_04_data" options="-parameters" />
+      <module name="springboot_05_mybatis" options="-parameters" />
+      <module name="springboot_06_security" options="-parameters" />
     </option>
   </component>
 </project>

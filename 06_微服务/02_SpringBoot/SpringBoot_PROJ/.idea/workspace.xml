@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -464,152 +467,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec8a795a-e7a9-43b8-a987-8856f16e2ede" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/SpringBoot_04_Data_war_exploded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_04_Data/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_04_Data/src/main/java/com/serein/Springboot04DataApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_04_Data/src/main/java/com/serein/config/DruidConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_04_Data/src/main/java/com/serein/controller/JDBCController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_04_Data/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_04_Data/src/test/java/com/serein/Springboot04DataApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_05_MyBatis/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_05_MyBatis/src/main/java/com/serein/SpringBoot05MyBatisApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_05_MyBatis/src/main/java/com/serein/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_05_MyBatis/src/main/java/com/serein/mapper/UserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_05_MyBatis/src/main/java/com/serein/pojo/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_05_MyBatis/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_05_MyBatis/src/main/resources/mybatis/mapper/UserMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_05_MyBatis/src/test/java/com/serein/SpringBoot05MyBatisApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/java/com/serein/Springboot06SecurityApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/java/com/serein/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/java/com/serein/controller/RouterController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/static/serein/css/qinstyle.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/static/serein/js/jquery-3.1.1.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/static/serein/js/semantic.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/templates/views/level1/1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/templates/views/level1/2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/templates/views/level1/3.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/templates/views/level2/1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/templates/views/level2/2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/templates/views/level2/3.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/templates/views/level3/1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/templates/views/level3/2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/templates/views/level3/3.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/templates/views/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SpringBoot_06_Security/src/test/java/com/serein/controller/Springboot06SecurityApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03_Shiro/Shiro_PROJ/.idea/Shiro_PROJ.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03_Shiro/Shiro_PROJ/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03_Shiro/Shiro_PROJ/Shiro_02_SpringBoot/Shiro_02_SpringBoot.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03_Shiro/Shiro_PROJ/Shiro_02_SpringBoot/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03_Shiro/Shiro_PROJ/Shiro_02_SpringBoot/src/main/java/com/shinrin/Shiro02SpringBootApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03_Shiro/Shiro_PROJ/Shiro_02_SpringBoot/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../03_Shiro/Shiro_PROJ/Shiro_02_SpringBoot/src/test/java/com/shinrin/Shiro02SpringBootApplicationTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../03_SpringCloud/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../05_分析开源项目/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_01_HelloWorld/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_01_HelloWorld/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_01_HelloWorld/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_01_HelloWorld/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_01_HelloWorld/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_01_HelloWorld/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_01_HelloWorld/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_01_HelloWorld/src/main/java/com/shinrin/helloworld/HelloworldApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_01_HelloWorld/src/main/java/com/shinrin/helloworld/controller/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_01_HelloWorld/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_01_HelloWorld/src/test/java/com/shinrin/helloworld/HelloworldApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__com_fasterxml_classmate_1_5_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_11_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_11_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_11_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_11_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_11_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_11_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_4_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_1_2_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__jakarta_annotation_jakarta_annotation_api_1_3_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__jakarta_validation_jakarta_validation_api_2_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_2_3_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_10_17.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_10_17.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__net_minidev_accessors_smart_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__net_minidev_json_smart_2_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_13_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_13_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_39.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_39.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_assertj_assertj_core_3_16_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_glassfish_jakarta_el_3_0_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_hamcrest_hamcrest_2_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_1_6_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_4_1_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_6_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_6_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_6_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_6_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_6_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_6_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_mockito_mockito_core_3_3_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_mockito_mockito_junit_jupiter_3_3_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_objenesis_objenesis_2_6.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_ow2_asm_asm_5_0_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_projectlombok_lombok_1_18_16.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_30.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_30.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_3_5_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_3_5_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_boot_spring_boot_configuration_processor_2_3_5_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_3_5_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_3_5_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_3_5_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_3_5_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_3_5_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_validation_2_3_5_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_3_5_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_3_5_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_3_5_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_spring_aop_5_2_10_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_spring_beans_5_2_10_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_spring_context_5_2_10_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_spring_core_5_2_10_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_spring_expression_5_2_10_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_spring_jcl_5_2_10_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_spring_test_5_2_10_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_spring_web_5_2_10_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_springframework_spring_webmvc_5_2_10_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_7_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/libraries/Maven__org_yaml_snakeyaml_1_26.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/SpringBoot_02_Config.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/src/main/java/com/shinrin/Springboot02ConfigApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/src/main/java/com/shinrin/pojo/Dog.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/src/main/java/com/shinrin/pojo/Person.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/src/main/resources/application.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/src/main/resources/shinrin.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/src/test/java/com/shinrin/Springboot02ConfigApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/target/classes/META-INF/spring-configuration-metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/target/classes/application.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/target/classes/com/shinrin/Springboot02ConfigApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/target/classes/com/shinrin/pojo/Dog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/target/classes/com/shinrin/pojo/Person.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/target/classes/shinrin.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/SpringBoot_02_Config/target/test-classes/com/shinrin/Springboot02ConfigApplicationTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../SpringBoot_PROJ/helloworld.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringBoot_03_Web/target/classes/META-INF/springboot_03_web.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringBoot_03_Web/target/classes/com/shinrin/Springboot04WebApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringBoot_03_Web/target/classes/com/shinrin/controller/HelloController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringBoot_03_Web/target/classes/com/shinrin/controller/TestController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringBoot_03_Web/target/classes/templates/test1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringBoot_03_Web/target/classes/templates/test2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringBoot_03_Web/target/test-classes/com/shinrin/Springboot04WebApplicationTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../03_Shiro/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../03_Shiro/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../03_Shiro/Shiro_PROJ/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../03_Shiro/Shiro_PROJ/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../03_Shiro/Shiro_PROJ/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../03_Shiro/Shiro_PROJ/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../03_Shiro/Shiro_PROJ/.idea/misc.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -631,7 +508,7 @@
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="localRepository" value="E:\App\Maven\apache-maven-3.6.1\maven-repo" />
-        <option name="mavenHome" value="$PROJECT_DIR$/../../../../../../App/Maven/apache-maven-3.6.1" />
+        <option name="mavenHome" value="E:\App\Maven\apache-maven-3.6.1" />
         <option name="userSettingsFile" value="E:\App\Maven\apache-maven-3.6.1\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
@@ -652,6 +529,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -661,7 +539,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/SpringBoot_06_Security/src/main/resources/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -695,7 +573,7 @@
       <recent name="E:\Workspace\Git\Java-Learning\06_微服务\02_SpringBoot\SpringBoot_PROJ\SpringBoot_03_Config2\config" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Springboot06SecurityApplication">
+  <component name="RunManager" selected="Spring Boot.Springboot04DataApplication">
     <configuration name="SpringBoot05MyBatisApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SpringBoot_05_MyBatis" />
       <extension name="coverage">
@@ -729,8 +607,9 @@
       </method>
     </configuration>
     <configuration name="SpringBoot01HelloWorldApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="SpringBoot_01_HellowWorld" />
+      <module name="springboot_01_helloworld" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.shinrin.SpringBoot01HelloWorldApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -744,8 +623,9 @@
       </method>
     </configuration>
     <configuration name="SpringBoot05MyBatisApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="SpringBoot_05_MyBatis" />
+      <module name="springboot_05_mybatis" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.serein.SpringBoot05MyBatisApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -759,15 +639,17 @@
       </method>
     </configuration>
     <configuration name="Springboot04DataApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="SpringBoot_04_Data" />
+      <module name="springboot_04_data" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.serein.Springboot04DataApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Springboot06SecurityApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="SpringBoot_06_Security" />
+      <module name="springboot_06_security" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.serein.Springboot06SecurityApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -775,10 +657,10 @@
     <list>
       <item itemvalue="JUnit.Springboot04DataApplicationTests.contextLoads" />
       <item itemvalue="JUnit.SpringBoot05MyBatisApplicationTests.contextLoads" />
-      <item itemvalue="Spring Boot.Springboot04DataApplication" />
       <item itemvalue="Spring Boot.SpringBoot01HelloWorldApplication" />
       <item itemvalue="Spring Boot.SpringBoot02Config1Application" />
       <item itemvalue="Spring Boot.Springboot03WebApplication" />
+      <item itemvalue="Spring Boot.Springboot04DataApplication" />
       <item itemvalue="Spring Boot.SpringBoot05MyBatisApplication" />
       <item itemvalue="Spring Boot.Springboot06SecurityApplication" />
     </list>
@@ -788,6 +670,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -807,11 +690,13 @@
       <workItem from="1606026711813" duration="14332000" />
       <workItem from="1606045439748" duration="7617000" />
       <workItem from="1606055003195" duration="12000" />
+      <workItem from="1606100954987" duration="484000" />
+      <workItem from="1606101446888" duration="305000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -833,10 +718,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="498" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1606034744640" />
-    <state x="447" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606054847548">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="559" y="85" width="1092" height="781" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606101729271">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="447" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1606054847548" />
+    <state x="559" y="85" width="1092" height="781" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1606101729271" />
     <state x="957" y="118" key="#com.intellij.ide.util.MemberChooser" timestamp="1606047933531">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -865,38 +751,46 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1605373919669" />
-    <state width="723" height="203" key="GridCell.Tab.0.bottom" timestamp="1606054856656">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="916" height="279" key="GridCell.Tab.0.bottom" timestamp="1606101752389">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="723" height="203" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606054856656" />
-    <state width="723" height="203" key="GridCell.Tab.0.center" timestamp="1606054856656">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="916" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606101752389" />
+    <state width="916" height="279" key="GridCell.Tab.0.center" timestamp="1606101752389">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="723" height="203" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606054856656" />
-    <state width="723" height="203" key="GridCell.Tab.0.left" timestamp="1606054856655">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="916" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606101752389" />
+    <state width="916" height="279" key="GridCell.Tab.0.left" timestamp="1606101752389">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="723" height="203" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606054856655" />
-    <state width="723" height="203" key="GridCell.Tab.0.right" timestamp="1606054856656">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="916" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606101752389" />
+    <state width="916" height="279" key="GridCell.Tab.0.right" timestamp="1606101752389">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="723" height="203" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606054856656" />
-    <state width="723" height="203" key="GridCell.Tab.1.bottom" timestamp="1606054856656">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="916" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606101752389" />
+    <state width="916" height="279" key="GridCell.Tab.1.bottom" timestamp="1606101752389">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="723" height="203" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606054856656" />
-    <state width="723" height="203" key="GridCell.Tab.1.center" timestamp="1606054856656">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="916" height="279" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606101752389" />
+    <state width="916" height="279" key="GridCell.Tab.1.center" timestamp="1606101752389">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="723" height="203" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1606054856656" />
-    <state width="723" height="203" key="GridCell.Tab.1.left" timestamp="1606054856656">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="916" height="279" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606101752389" />
+    <state width="916" height="279" key="GridCell.Tab.1.left" timestamp="1606101752389">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="723" height="203" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1606054856656" />
-    <state width="723" height="203" key="GridCell.Tab.1.right" timestamp="1606054856656">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="916" height="279" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606101752389" />
+    <state width="916" height="279" key="GridCell.Tab.1.right" timestamp="1606101752389">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="723" height="203" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1606054856656" />
+    <state width="916" height="279" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606101752389" />
     <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1605352580561">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
