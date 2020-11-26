@@ -252,7 +252,7 @@ public class IntegerPackDemo {
 
 注：一个类同时实现两个接口并且两个接口定义了相同的默认方法，则该方法必须重写。
 
-#### 接口与抽象类的选择
+**接口与抽象类的选择**
 
 > 接口用来定义一组规范的方法，更改需求时只修改实现类。
 >
@@ -280,7 +280,7 @@ public class IntegerPackDemo {
 2. 对象实例存储在堆内存，对象引用存储在栈内存。
 3. 对象引用可指向0个或1个对象，1个对象可以有n个引用。
 
-#### 对象相等于引用相等
+#### 对象相等与引用相等
 
 对象是否相等比较对象的内容，引用是否相等比较指向的内存地址。
 
@@ -489,7 +489,7 @@ intern()的优点：执行速度快、直接使用==判断快去equals()方法�
 - finally：异常结构的一部分，必将执行的语句。
 - finalize：Object类的方法，垃圾收集器执行时调用被回收对象的此方法，可重写以提供对其他资源的回收，如关闭文件。JVM不保证一定调用此方法。（没什么鸟用）
 
-作用域public、protected、friendly和private
+#### 作用域public、protected、friendly和private
 
 | 作用域    | 当前类 | 同package | 子类 | 其他package |
 | --------- | ------ | --------- | ---- | ----------- |
@@ -498,17 +498,263 @@ intern()的优点：执行速度快、直接使用==判断快去equals()方法�
 | friendly  | √      | √         | ×    | ×           |
 | private   | √      | ×         | ×    | ×           |
 
-
+### 异常处理
 
 所有异常继承自java.lang包中的Throwable类。Throwable的子类：Exception（异常）和Error（错误）。
 
-Error
+#### Error
 
-程序无法处理的错误，表示代码运行时JVM（Java虚拟机）自身出现的问题。如Java虚拟机运行错误（Virtual MachineError）、类定义错误（NoClassDefFoundError）、OutOfMemoryError，JVM将终止线程。
+**程序无法处理的错误，表示代码运行时JVM（Java虚拟机）自身出现的问题。**如StackOverFlowError（栈溢出）、OutOfMemoryError（内存溢出），JVM将终止线程。
 
-Exception
+#### Exception
 
-程序本身可处理的异常。Exception类的子类RuntimeException，RuntimeException异常由JVM抛出。NullPointerException（要访问的变量没有引用任何对象时，抛出该异常）、ArithmeticException（算术运算异常，一个整数除以0时，抛出该异常）和 ArrayIndexOutOfBoundsException（下标越界异常）。 
+**程序本身可处理的异常。**Exception类的子类RuntimeException，RuntimeException异常由JVM抛出：NullPointerException（空指针）、ArithmeticException（算术运算异常）和 ArrayIndexOutOfBoundsException（下标越界异常）。 
+
+#### 异常处理
+
+- **try块**：用于捕获异常，可接多个catch；如无catch块时，必须接finally块。
+- **catch块**：用于处理try捕获到的异常。
+- **finally块**：无论异常处理与否都将执行的语句，当try或catch块中遇到return语句时，finally语句块将在方法返回前被执行。
+
+**finally块不会执行的四种情况**
+
+1. finally块第一句发生异常。
+2. 在finally块之前执行了System.exit(int)已退出程序。
+3. 程序所在的线程死亡。
+4. 关闭了CPU。
+
+注：当try块和finally块都有return语句时，在方法返回之前，finally语句的内容将被执行，并且finally语句的返回值会覆盖原始的返回值。
+
+#### Throwable结构
+
+Throewable
+
+- Error
+  - VirtulMachineError（栈溢出、内存溢出）
+  - AWTError（ Abstract Window Toolkit ：抽象窗口工具包）
+- Exception
+  - IOException（IOException文件读写异常、EOFException读写文件尾异常、FileNotFoundException文件未找到异常、SQLException数据库异常）：非运行时异常，也称检查异常，不处理将无法编译成功。
+  - RuntimeException（数学计算异常、空指针异常、数组索引越界异常、类文件未找到异常、类型转换异常）：运行时异常，异常不检查异常，由程序逻辑错误引起。
+
+### IO
+
+#### 获取键盘输入的两种方式
+
+**Scanner**
+
+```java
+Scanner input = new Scanner(System.in);
+String s = input.nextLine();
+input.close();
+```
+
+**BufferedReader**
+
+```java
+BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+String s = input.readLine();
+```
+
+#### IO流的分类
+
+- 按流向划分：输入流、输出流
+- 按操作单元划分：字节流、字符流
+- 按流的角色划分：节点流、处理流
+
+> InputStream/Reader：所有输入流的基类，前者是字节输入流，后者是字符输入流。
+>
+> OutputStream/Writer：所有输出流的基类，前者是字节输出流，后者是字符输出流。
+
+#### 文件读写与网络发送接受中，信息的最小存储单元都是字节，为何I/O流操作仍然区分为字节流和字符流？
+
+字符流是由Java虚拟机将字节转换得到的，但此过程耗费时间，未知编码时易产生乱码问题。因此：I/O流提供了直接操作字符的接口，以方便对字符流的操作。（处理音频、图像文件使用字节流，涉及字符时使用字符流）
+
+#### BIO、NIO、AIO有何区别？
+
+- BIO（Blocking I/O）：同步阻塞I/O模式，数据的读写阻塞在一个线程内等待完成，低负载低并发的应用。
+- NIO（New I/O）：Java1.4引入的同步非阻塞I/O模型，应用于高负载高并发环境。
+- AIO（Asynchronous I/O）：NIO2，Java7中引入的异步非阻塞IO模型，基于异步与回调机制实现。
+
+### 反射
+
+#### 反射机制
+
+Java反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取信息与动态调用对象方法的功能即为Java的反射机制。
+
+#### 静态编译与动态编译
+
+- 静态编译：编译时确定类型，绑定对象。
+- 动态编译：运行时确定类型，绑定对象。
+
+#### 反射机制的优缺点
+
+- 优点：运行期间类型的判断，动态加载类，提高代码灵活度。
+- 缺点：性能瓶颈，反射相当于一系列反射操作，需要通知JVM，性能弱于普通Java代码。
+
+#### 反射的应用
+
+模块化开发中，通过反射调用对应的字节码；动态代理模式设计模型、Spring、Hibernate框架等。
+
+- JDBC连接数据库时使用`Class.forName()`通过反射加载数据。
+- Spring框架：如XML配置模式，Spring通过XML配置模式装载Bean的过程。
+  - 将XML或Properties加载到内存中。
+  - Java类中解析XML或Properties中的内容，获取对应实体类的字节码字符串以及相关的属性信息。
+  - 使用反射机制，获取字符串对应的某个类的Class实例。
+  - 动态配置实例的属性。
+
+#### 测试
+
+**反射获取Class对象的三种方式**
+
+```java
+public class ReflectDemo {
+    public static void main(String[] args) throws ClassNotFoundException {
+        //方式一：对象名.getClass()，已有对象，反射无意义。
+        Student student = new Student();
+        Class studentClass1 = student.getClass();
+        System.out.println(studentClass1.getName());
+        //方式二：类名.getClass()，需要导包，过于依赖。
+        Class studentClass2 = Student.class;
+        System.out.println(studentClass1 == studentClass2);
+        //方式三：Class.forName("包名.类名")，一般使用此种方法。
+        Class studentClass3 = Class.forName("com.shinrin.Student");
+        System.out.println(studentClass2 == studentClass3);
+    }
+}
+```
+
+**反射访问并调用构造方法**
+
+```java
+public class ConstructorsDemo {
+    public static void main(String[] args) throws Exception {
+        //1.加载对象
+        Class studentClass = Class.forName("com.shinrin.Student");
+        //2.获取公有构造方法
+        Constructor[] constructors = studentClass.getConstructors();
+        for (Constructor constructor : constructors) {
+            System.out.println(constructor);
+        }
+        //3.获取所有构造方法（公有、默认、受保护、私有）
+        Constructor[] declaredConstructors = studentClass.getDeclaredConstructors();
+        for (Constructor declaredConstructor : declaredConstructors) {
+            System.out.println(declaredConstructor);
+        }
+        //4.获取公有、无参的构造方法
+        Constructor constructor = studentClass.getConstructor();
+        System.out.println(constructor);
+        //调用构造方法
+        Object object1 = constructor.newInstance();
+        System.out.println(object1);
+
+        //5.获取私有构造方法
+        Constructor declaredConstructor = studentClass.getDeclaredConstructor(char.class);
+        System.out.println(declaredConstructor);
+        //调用构造方法
+        declaredConstructor.setAccessible(true);//暴力访问
+        Object  object2 = declaredConstructor.newInstance('1');
+        System.out.println(object2);
+    }
+}
+```
+
+**反射访问并调用成员变量**
+
+```java
+public class FieldDemo {
+    public static void main(String[] args) throws Exception {
+        //1.获取Class
+        Class studentClass = Class.forName("com.shinrin.Student");
+        //2.获取所有公有的字段
+        Field[] fields = studentClass.getFields();
+        for (Field field:fields) {
+            System.out.println(field);
+        }
+        //3.获取所有字段
+        Field[] declaredFields = studentClass.getDeclaredFields();
+        for (Field field:declaredFields) {
+            System.out.println(field);
+        }
+        //4.获取字段并调用
+        Field name = studentClass.getField("name");
+        System.out.println(name);
+        //获取一个对象
+        Object o = studentClass.getConstructor().newInstance();
+        Student student = (Student) o;
+        name.set(o, "Teemo");
+        System.out.println("姓名验证：" + student.name);
+        //5.获取私有字段
+        Field id = studentClass.getDeclaredField("id");
+        System.out.println(id);
+        id.setAccessible(true);//暴力反射，解除私有限定
+        id.set(o, 1001);
+        System.out.println("验证ID：" + student.getID());
+    }
+}
+```
+
+**反射访问并调用成员方法**
+
+```java
+public class MethodDemo {
+    public static void main(String[] args) throws Exception {
+        // 1.获取对象
+        Class studentClass = Class.forName("com.shinrin.Student");
+        // 2.获取所有公有方法
+        Method[] methods = studentClass.getMethods();
+        for (Method method : methods) {
+            System.out.println(method);
+        }
+        Method[] declaredMethods = studentClass.getDeclaredMethods();
+        for (Method declaredMethod : declaredMethods) {
+            System.out.println(declaredMethod);
+        }
+        Method m = studentClass.getMethod("show1", String.class);
+        System.out.println(m);
+        // 实例化对象
+        Object o = studentClass.getConstructor().newInstance();
+        m.invoke(o, "HA");
+
+        m = clazz.getDeclaredMethod("show4", int.class);
+        System.out.println(m);
+        m.setAccessible(true); // 暴力解除私有限定
+        Object result = m.invoke(o, 20);//需要两个参数：要调用的对象（反射以获取）与实参
+        System.out.println("返回值：" + result);
+    }
+}
+```
+
+### 深拷贝与浅拷贝
+
+浅拷贝：基本数据类型值传递，引用数据类型引用传递，即为浅拷贝。
+
+深拷贝：基本数据类型值传递，引用数据类型创建新的对象并拷贝内容，即为深拷贝。
+
+> 浅拷贝中的两个引用指向同一个对象。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
